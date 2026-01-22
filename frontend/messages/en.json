@@ -1,0 +1,15 @@
+{
+    "Index": {
+        "title": "SignalCraft - Sound to Insight"
+    },
+    "Header": {
+        "nav": {
+            "about": "About",
+            "whyUs": "Why Us",
+            "guide": "Guide",
+            "cases": "Cases",
+            "news": "News",
+            "contact": "Contact"
+        }
+    }
+}

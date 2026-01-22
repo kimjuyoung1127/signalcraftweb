@@ -1,0 +1,15 @@
+{
+    "Index": {
+        "title": "SignalCraft - 소리를 데이터로, 데이터를 통찰로"
+    },
+    "Header": {
+        "nav": {
+            "about": "소개",
+            "whyUs": "기술",
+            "guide": "가이드",
+            "cases": "사례",
+            "news": "소식",
+            "contact": "문의하기"
+        }
+    }
+}
