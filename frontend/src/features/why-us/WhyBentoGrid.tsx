@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Activity, Cpu, Wifi, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 const features = [
     {

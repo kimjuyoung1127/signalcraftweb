@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 const cases = [
     {
@@ -47,39 +47,40 @@ export function CaseStories() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {cases.map((story, i) => (
-                        <motion.div
-                            key={story.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="group cursor-pointer min-h-[400px] flex flex-col"
-                        >
-                            {/* Image Placeholder */}
-                            <div className={`w-full h-64 rounded-2xl mb-6 overflow-hidden ${story.image} relative`}>
-                                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                                <div className="absolute bottom-4 left-4">
-                                    <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs text-white font-medium border border-white/20">
-                                        {story.industry}
-                                    </span>
+                        <Link key={story.id} href={`/cases/${story.id}`} className="block h-full">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="group cursor-pointer min-h-[400px] flex flex-col h-full"
+                            >
+                                {/* Image Placeholder */}
+                                <div className={`w-full h-64 rounded-2xl mb-6 overflow-hidden ${story.image} relative`}>
+                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                                    <div className="absolute bottom-4 left-4">
+                                        <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs text-white font-medium border border-white/20">
+                                            {story.industry}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Content */}
-                            <div className="flex-1 flex flex-col">
-                                <h3 className="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">
-                                    {story.client}
-                                </h3>
-                                <p className="text-foreground/80 mb-4 flex-1">
-                                    {story.title}
-                                </p>
-                                <div className="pt-4 border-t border-border mt-auto">
-                                    <p className="text-sm font-semibold text-blue-600">
-                                        Result: {story.result}
+                                {/* Content */}
+                                <div className="flex-1 flex flex-col">
+                                    <h3 className="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">
+                                        {story.client}
+                                    </h3>
+                                    <p className="text-foreground/80 mb-4 flex-1">
+                                        {story.title}
                                     </p>
+                                    <div className="pt-4 border-t border-border mt-auto">
+                                        <p className="text-sm font-semibold text-blue-600">
+                                            Result: {story.result}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
+                            </motion.div>
+                        </Link>
                     ))}
                 </div>
 

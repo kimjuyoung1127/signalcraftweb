@@ -6,6 +6,8 @@ import { Suspense } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 
+import { Link } from "@/i18n/routing";
+
 const AudioWaveform = dynamic(
     () => import("@/features/hero/components/AudioWaveform"),
     {
@@ -55,12 +57,14 @@ export function HeroSection() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
                 >
-                    <Button
-                        size="lg"
-                        className="rounded-full font-semibold transition-all hover:scale-105"
-                    >
-                        Start Diagnosis
-                    </Button>
+                    <Link href="/contact">
+                        <Button
+                            size="lg"
+                            className="rounded-full font-semibold transition-all hover:scale-105"
+                        >
+                            Start Diagnosis
+                        </Button>
+                    </Link>
                 </motion.div>
             </div>
         </section>
