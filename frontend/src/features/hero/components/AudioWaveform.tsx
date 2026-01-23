@@ -133,12 +133,14 @@ function ElegantWaves({ count = 6000 }) {
                     count={positions.length / 3}
                     array={positions}
                     itemSize={3}
+                    args={[positions, 3]}
                 />
                 <bufferAttribute
                     attach="attributes-aScale"
                     count={scales.length}
                     array={scales}
                     itemSize={1}
+                    args={[scales, 1]}
                 />
             </bufferGeometry>
             <shaderMaterial
