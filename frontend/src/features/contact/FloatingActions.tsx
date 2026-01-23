@@ -5,6 +5,22 @@ import { useTranslations } from "next-intl";
 import { MessageCircle, X, ChevronRight, Activity } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.2
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+};
+
 export function FloatingActions() {
     const [isOpen, setIsOpen] = useState(false);
     const t = useTranslations("Index"); // Using Index or a specific namespace
@@ -14,6 +30,9 @@ export function FloatingActions() {
             {/* FAB */}
             <div className="fixed bottom-6 right-6 z-50">
                 <motion.button
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsOpen(true)}
@@ -53,17 +72,24 @@ export function FloatingActions() {
                                     <h3 className="text-xl font-bold">Start Diagnosis</h3>
                                     <p className="text-sm text-muted-foreground">Select your equipment type</p>
                                 </div>
-                                <button
+                                <motion.button
+                                    whileHover={{ rotate: 90 }}
+                                    whileTap={{ scale: 0.9 }}
                                     onClick={() => setIsOpen(false)}
                                     className="p-2 hover:bg-accent rounded-full text-muted-foreground transition-colors"
                                 >
                                     <X className="w-5 h-5" />
-                                </button>
+                                </motion.button>
                             </div>
 
                             {/* Body (Form) */}
-                            <div className="flex-1 overflow-y-auto p-6 space-y-6">
-                                <div className="space-y-4">
+                            <motion.div
+                                className="flex-1 overflow-y-auto p-6 space-y-6"
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                                <motion.div className="space-y-4" variants={itemVariants}>
                                     <label className="block text-sm font-medium">Industry</label>
                                     <select className="w-full p-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-blue-500 outline-none">
                                         <option>Manufacturing</option>
@@ -71,9 +97,9 @@ export function FloatingActions() {
                                         <option>Logistics</option>
                                         <option>Automotive</option>
                                     </select>
-                                </div>
+                                </motion.div>
 
-                                <div className="space-y-4">
+                                <motion.div className="space-y-4" variants={itemVariants}>
                                     <label className="block text-sm font-medium">Equipment</label>
                                     <select className="w-full p-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-blue-500 outline-none">
                                         <option>Motor / Generator</option>
@@ -81,13 +107,13 @@ export function FloatingActions() {
                                         <option>Pump / Compressor</option>
                                         <option>Robot Arm</option>
                                     </select>
-                                </div>
+                                </motion.div>
 
-                                <div className="p-4 bg-muted/50 rounded-xl border border-dashed border-border text-center">
+                                <motion.div className="p-4 bg-muted/50 rounded-xl border border-dashed border-border text-center" variants={itemVariants}>
                                     <p className="text-sm text-muted-foreground mb-2">Upload Sound Sample (Optional)</p>
                                     <button className="text-blue-500 text-sm font-semibold hover:underline">Choose file...</button>
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
 
                             {/* Footer */}
                             <div className="p-6 border-t border-border bg-muted/10">
