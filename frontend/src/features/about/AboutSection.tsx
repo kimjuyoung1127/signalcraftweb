@@ -75,17 +75,69 @@ export function AboutSection() {
                     </motion.div>
                 </div>
 
-                {/* Trust Badges Marquee */}
-                <div className="mt-24 pt-12 border-t border-border/50">
-                    <p className="text-center text-sm font-medium text-muted-foreground mb-8">Trusted by Industry Leaders</p>
-                    <div className="flex justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                        {/* Mock Logos */}
-                        {['Samsung', 'LG Energy', 'Hyundai', 'SK On', 'Posco'].map(brand => (
-                            <div key={brand} className="text-xl font-bold">{brand}</div>
-                        ))}
+                {/* Trust Badges - Infinite Marquee */}
+                <div className="mt-20 pt-10 border-t border-gray-800 dark:border-white/10 overflow-hidden">
+                    <p className="text-center text-gray-500 dark:text-gray-400 mb-8 text-sm uppercase tracking-wider">
+                        Trusted by Industry Leaders
+                    </p>
+
+                    {/* Gradient Masks Removed */}
+                    {/* <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-background to-transparent" />
+                    <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-background to-transparent" /> */}
+
+                    <div className="flex overflow-hidden select-none w-full">
+                        <motion.div
+                            className="flex gap-16 items-center flex-nowrap pr-16 shrink-0"
+                            animate={{ x: "-100%" }}
+                            transition={{
+                                repeat: Infinity,
+                                ease: "linear",
+                                duration: 30,
+                            }}
+                        >
+                            {LOGO_LIST.map((company, index) => (
+                                <span
+                                    key={`l1-${index}`}
+                                    className="text-xl md:text-2xl font-bold text-gray-600 dark:text-gray-300 whitespace-nowrap"
+                                >
+                                    {company}
+                                </span>
+                            ))}
+                        </motion.div>
+                        <motion.div
+                            className="flex gap-16 items-center flex-nowrap pr-16 shrink-0"
+                            animate={{ x: "-100%" }}
+                            transition={{
+                                repeat: Infinity,
+                                ease: "linear",
+                                duration: 30,
+                            }}
+                        >
+                            {LOGO_LIST.map((company, index) => (
+                                <span
+                                    key={`l2-${index}`}
+                                    className="text-xl md:text-2xl font-bold text-gray-600 dark:text-gray-300 whitespace-nowrap"
+                                >
+                                    {company}
+                                </span>
+                            ))}
+                        </motion.div>
                     </div>
                 </div>
             </div>
-        </section>
+
+        </section >
     );
 }
+
+const LOGO_LIST = [
+    "Samsung Electronics",
+    "LG Energy Solution",
+    "POSCO",
+    "Hyundai Motor",
+    "Hanwha Aerospace",
+    "Doosan Enerbility",
+    "KAI",
+    "GS Caltex",
+    "HD Hyundai",
+];

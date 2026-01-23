@@ -85,30 +85,33 @@ export function Header() {
 
                 {/* Utilities */}
                 <div className="flex items-center gap-4">
-                    {/* Language Toggle */}
-                    <Link
-                        href={pathname}
-                        locale="en"
-                        className="text-sm font-bold p-2 text-foreground/80 hover:text-blue-500 transition-colors"
-                    >
-                        EN
-                    </Link>
-                    <span className="text-foreground/30">|</span>
-                    <Link
-                        href={pathname}
-                        locale="ko"
-                        className="text-sm font-bold p-2 text-foreground/80 hover:text-blue-500 transition-colors"
-                    >
-                        KO
-                    </Link>
+                    {/* Desktop Utilities */}
+                    <div className="hidden md:flex items-center gap-4">
+                        {/* Language Toggle */}
+                        <Link
+                            href={pathname}
+                            locale="en"
+                            className="text-sm font-bold p-2 text-foreground/80 hover:text-blue-500 transition-colors"
+                        >
+                            EN
+                        </Link>
+                        <span className="text-foreground/30">|</span>
+                        <Link
+                            href={pathname}
+                            locale="ko"
+                            className="text-sm font-bold p-2 text-foreground/80 hover:text-blue-500 transition-colors"
+                        >
+                            KO
+                        </Link>
 
-                    <button
-                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                        className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
-                    >
-                        <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                        <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 top-2" />
-                    </button>
+                        <button
+                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                            className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors relative w-9 h-9 flex items-center justify-center"
+                        >
+                            <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 absolute" />
+                            <Moon className="h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 absolute" />
+                        </button>
+                    </div>
 
                     {/* Mobile Menu Toggle */}
                     <button
@@ -127,7 +130,7 @@ export function Header() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-background border-b border-border"
+                        className="md:hidden bg-background border-b border-border overflow-hidden"
                     >
                         <div className="flex flex-col p-4 gap-4">
                             {navLinks.map((link) => (
@@ -140,6 +143,38 @@ export function Header() {
                                     {t(link.key)}
                                 </Link>
                             ))}
+
+                            <div className="h-px bg-border my-2" />
+
+                            {/* Mobile Utilities */}
+                            <div className="flex items-center justify-between p-2">
+                                <span className="text-sm font-medium text-muted-foreground">{t("language") || "Language"}</span>
+                                <div className="flex items-center gap-3">
+                                    <Link href={pathname} locale="en" className="font-bold hover:text-blue-500">EN</Link>
+                                    <span className="text-muted-foreground/30">|</span>
+                                    <Link href={pathname} locale="ko" className="font-bold hover:text-blue-500">KO</Link>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-between p-2">
+                                <span className="text-sm font-medium text-muted-foreground">Theme</span>
+                                <button
+                                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                    className="flex items-center gap-2"
+                                >
+                                    {theme === 'dark' ? (
+                                        <>
+                                            <Moon className="h-5 w-5" />
+                                            <span>Dark</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Sun className="h-5 w-5" />
+                                            <span>Light</span>
+                                        </>
+                                    )}
+                                </button>
+                            </div>
                         </div>
                     </motion.div>
                 )}
