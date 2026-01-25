@@ -11,5 +11,71 @@
             "news": "News",
             "contact": "Contact"
         }
+    },
+    "About": {
+        "hero": {
+            "title": "We Decode the <span class=\"text-blue-600\">Sound of Industry</span>",
+            "subtitle": "SignalCraft was founded on a simple belief: Every machine has a voice. By listening carefully, we can prevent failures before they happen."
+        },
+        "journey": {
+            "title": "Our Journey",
+            "milestones": {
+                "2023": {
+                    "year": "2023",
+                    "title": "Founded in Seoul",
+                    "desc": "Started as a research lab at KAIST."
+                },
+                "2024": {
+                    "year": "2024",
+                    "title": "Seed Funding",
+                    "desc": "Secured funding to build the initial diagnostic engine."
+                },
+                "2025": {
+                    "year": "2025",
+                    "title": "Series A & Global Expansion",
+                    "desc": "Deployed in factories worldwide with our proven diagnostic solution."
+                }
+            }
+        },
+        "values": {
+            "title": "Core Values",
+            "list": {
+                "precision": "<strong>Precision First:</strong> Data accuracy is our obsession.",
+                "edge": "<strong>Edge Native:</strong> We process where the data lives.",
+                "human": "<strong>Human Centric:</strong> AI should empower, not replace."
+            }
+        },
+        "team": {
+            "title": "Meet the Experts",
+            "members": {
+                "ceo": {
+                    "name": "Kim Seon-beom",
+                    "role": "CEO",
+                    "bio": "Pattern Analysis & Algorithm Design Expert.",
+                    "email": "sndercer@gmail.com"
+                },
+                "cto": {
+                    "name": "Kim Ju-young",
+                    "role": "Developer",
+                    "bio": "Full Stack Developer leading digital solutions.",
+                    "email": "gmdqn2tp@gmail.com"
+                },
+                "hw": {
+                    "name": "Kim Min-gyo",
+                    "role": "Sensor & Hardware",
+                    "bio": "Specialist in sensor integration and hardware development."
+                },
+                "researcher": {
+                    "name": "Lee Hee-jin",
+                    "role": "Researcher",
+                    "bio": "Expert in acoustic pattern recognition."
+                },
+                "hr": {
+                    "name": "Lee Dam",
+                    "role": "HR & Support",
+                    "bio": "Managing organizational culture and business operations."
+                }
+            }
+        }
     }
 }
