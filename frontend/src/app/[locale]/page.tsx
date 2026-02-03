@@ -4,6 +4,7 @@ import { WhyBentoGrid } from "@/features/why-us/WhyBentoGrid";
 import { GuideSection } from "@/features/guide/GuideSection";
 import { CaseStories } from "@/features/case-studies/CaseStories";
 import { NewsSection } from "@/features/news/NewsSection";
+import { FAQSection } from "@/features/faq/FAQSection";
 import { ContactSection } from "@/features/contact/ContactSection";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <GuideSection />
       <CaseStories />
       <NewsSection />
+      <FAQSection />
       <ContactSection />
     </div>
   );

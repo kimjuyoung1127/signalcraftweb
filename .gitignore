@@ -1,0 +1,6 @@
+my-video/
+video-audiogram/
+video-helloworld/
+node_modules/
+.DS_Store
+*.log

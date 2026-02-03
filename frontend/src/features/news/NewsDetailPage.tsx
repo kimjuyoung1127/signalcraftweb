@@ -2,123 +2,156 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Search, Tag } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-
-const allNews = [
-    {
-        id: 1,
-        tag: "Press",
-        date: "2024.03.15",
-        title: "SignalCraft raises Series A to expand Edge AI solutions",
-        excerpt: "We are thrilled to announce our latest funding round led by Major Tech Ventures to accelerate our smart factory innovations...",
-    },
-    {
-        id: 2,
-        tag: "Technology",
-        date: "2024.02.28",
-        title: "Introducing 'Acoustic Net 2.0'",
-        excerpt: "Our new model runs on low-power microcontrollers while delivering 99.9% accuracy in bearing fault detection...",
-    },
-    {
-        id: 3,
-        tag: "Case Study",
-        date: "2024.01.10",
-        title: "How K-Automotive reduced production stops by 40%",
-        excerpt: "A deep dive into our partnership with Korea's leading auto parts manufacturer and the results achieved in just 3 months...",
-    },
-    {
-        id: 4,
-        tag: "Event",
-        date: "2024.01.05",
-        title: "Join us at Smart Factory Expo 2024",
-        excerpt: "SignalCraft will be showcasing its live demo at Booth A-123. Come and see the sound of efficiency...",
-    },
-    {
-        id: 5,
-        tag: "Technology",
-        date: "2023.12.20",
-        title: "Understanding FFT vs Wavelet Transform in Industrial Audio",
-        excerpt: "A technical deep dive into how we preprocess audio signals for maximum anomaly detection accuracy...",
-    },
-];
+import Image from "next/image";
 
 export function NewsDetailPage() {
+    const t = useTranslations("News");
+
+    const allNews = [
+        {
+            id: 1,
+            key: "item1",
+            tagKey: "press",
+            date: "2025.12.15",
+            image: "/KOIIA.jpg",
+        },
+        {
+            id: 2,
+            key: "item2",
+            tagKey: "tech",
+            date: "2024.02.28",
+        },
+        {
+            id: 3,
+            key: "item3",
+            tagKey: "event",
+            date: "2024.01.12",
+        },
+        {
+            id: 4,
+            key: "item4",
+            tagKey: "press",
+            date: "2024.01.05",
+        },
+        {
+            id: 5,
+            key: "item5",
+            tagKey: "tech",
+            date: "2023.12.20",
+        },
+    ];
+
+    const filters = ['all', 'press', 'tech', 'case', 'event'];
+
     return (
-        <div className="pt-24 pb-24">
+        <div className="pt-24 pb-24 bg-background">
             <section className="container mx-auto px-4 mb-16">
-                <h1 className="text-5xl font-bold mb-6 text-center">Newsroom</h1>
-                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-                    Latest updates, press releases, and technical insights from the SignalCraft team.
-                </p>
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-5xl md:text-6xl font-bold mb-6 text-center font-display tracking-tight"
+                >
+                    {t("title_page")}
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="text-xl text-muted-foreground text-center max-w-2xl mx-auto mb-12 break-keep"
+                >
+                    {t("description_page")}
+                </motion.p>
 
                 {/* Search & Filter Bar */}
                 <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-4 mb-16">
                     <div className="relative flex-1">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
                         <input
                             type="text"
-                            placeholder="Search articles..."
-                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder={t("search_placeholder")}
+                            className="w-full pl-12 pr-4 py-4 rounded-2xl border border-white/10 bg-muted/30 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                         />
                     </div>
-                    <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
-                        {['All', 'Press', 'Technology', 'Case Study', 'Event'].map((filter) => (
+                    <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+                        {filters.map((filter) => (
                             <button
                                 key={filter}
-                                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors border ${filter === 'All' ? 'bg-foreground text-background border-foreground' : 'bg-background hover:bg-muted border-border'}`}
+                                className={`px-6 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all border ${filter === 'all'
+                                        ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/20'
+                                        : 'bg-muted/50 hover:bg-muted border-white/5 text-muted-foreground'
+                                    }`}
                             >
-                                {filter}
+                                {t(`filters.${filter}`)}
                             </button>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section className="container mx-auto px-4 max-w-5xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+            <section className="container mx-auto px-4 max-w-6xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                     {allNews.map((item, i) => (
                         <motion.article
                             key={item.id}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.05 }}
-                            className="flex flex-col group"
+                            transition={{ delay: i * 0.1 }}
+                            className="flex flex-col group h-full"
                         >
-                            <Link href={`/news/${item.id}`} className="block overflow-hidden rounded-2xl mb-4">
-                                <div className="aspect-[16/9] bg-muted relative">
-                                    <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 transition-transform duration-500 group-hover:scale-105" />
-                                    <div className="absolute top-4 left-4">
-                                        <span className="bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold border border-border flex items-center gap-1">
-                                            <Tag className="w-3 h-3" /> {item.tag}
-                                        </span>
-                                    </div>
+                            <Link href={`/news/${item.id}`} className="block overflow-hidden rounded-3xl mb-6 relative border border-white/10 aspect-[16/9]">
+                                {item.image ? (
+                                    <Image
+                                        src={item.image}
+                                        alt={t(`items.${item.key}.title`)}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 bg-muted flex items-center justify-center group-hover:bg-muted/80 transition-colors" />
+                                )}
+                                <div className="absolute top-4 left-4 z-10">
+                                    <span className="bg-background/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold border border-white/10 flex items-center gap-1.5 shadow-xl">
+                                        <Tag className="w-3.5 h-3.5 text-blue-500" />
+                                        {t(`filters.${item.tagKey}`)}
+                                    </span>
                                 </div>
                             </Link>
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+
+                            <div className="flex items-center gap-3 text-sm font-medium text-muted-foreground mb-4">
                                 <Calendar className="w-4 h-4" />
                                 {item.date}
                             </div>
+
                             <Link href={`/news/${item.id}`}>
-                                <h2 className="text-2xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
-                                    {item.title}
+                                <h2 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-blue-500 transition-colors font-display leading-tight break-keep">
+                                    {t(`items.${item.key}.title`)}
                                 </h2>
                             </Link>
-                            <p className="text-muted-foreground mb-4 line-clamp-2">
-                                {item.excerpt}
+
+                            <p className="text-muted-foreground text-lg mb-6 line-clamp-2 break-keep leading-relaxed flex-1">
+                                {t(`items.${item.key}.excerpt`)}
                             </p>
+
                             <div className="mt-auto">
-                                <Link href={`/news/${item.id}`} className="text-blue-600 font-semibold flex items-center text-sm hover:translate-x-1 transition-transform w-fit">
-                                    Read Article <ArrowRight className="w-4 h-4 ml-1" />
+                                <Link
+                                    href={`/news/${item.id}`}
+                                    className="text-blue-600 font-bold flex items-center text-sm uppercase tracking-wider group-hover:gap-3 gap-2 transition-all"
+                                >
+                                    {t("readMore")} <ArrowRight className="w-4 h-4" />
                                 </Link>
                             </div>
                         </motion.article>
                     ))}
                 </div>
 
-                <div className="mt-16 text-center">
-                    <Button variant="outline" size="lg">Load More Articles</Button>
+                <div className="mt-24 text-center">
+                    <Button variant="outline" size="lg" className="rounded-full px-12 h-14 font-bold border-white/10 hover:bg-white/5">
+                        {t("load_more")}
+                    </Button>
                 </div>
             </section>
         </div>

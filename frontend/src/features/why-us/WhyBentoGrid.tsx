@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, Cpu, Wifi, ArrowRight } from "lucide-react";
+import { Activity, Cpu, Wifi, ArrowRight, Layers } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 
@@ -9,28 +9,35 @@ const features = [
     {
         key: "precision",
         icon: Activity,
-        colSpan: "md:col-span-1",
+        colSpan: "md:col-span-2 md:row-span-2",
         bg: "bg-blue-500/10",
         iconColor: "text-blue-500",
     },
     {
         key: "edge",
         icon: Cpu,
-        colSpan: "md:col-span-2",
+        colSpan: "md:col-span-1 md:row-span-1",
         bg: "bg-purple-500/10",
         iconColor: "text-purple-500",
     },
     {
         key: "nonInvasive",
         icon: Wifi,
-        colSpan: "md:col-span-3",
+        colSpan: "md:col-span-1 md:row-span-1",
         bg: "bg-emerald-500/10",
         iconColor: "text-emerald-500",
+    },
+    {
+        key: "scalability",
+        icon: Layers,
+        colSpan: "md:col-span-3 md:row-span-1",
+        bg: "bg-orange-500/10",
+        iconColor: "text-orange-500",
     },
 ];
 
 export function WhyBentoGrid() {
-    const t = useTranslations("Index"); // Using Index namespace for now or fallback
+    const t = useTranslations("WhyUs");
 
     return (
         <section id="why-us" className="py-24 bg-background relative overflow-hidden">
@@ -45,7 +52,7 @@ export function WhyBentoGrid() {
                         viewport={{ once: true }}
                         className="text-4xl font-bold tracking-tight mb-4"
                     >
-                        Why SignalCraft?
+                        {t("title")}
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -54,11 +61,11 @@ export function WhyBentoGrid() {
                         transition={{ delay: 0.1 }}
                         className="text-muted-foreground text-lg"
                     >
-                        We combine advanced acoustics with Edge AI to deliver the most reliable predictive maintenance solution.
+                        {t("description")}
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[280px]">
                     {features.map((feature, index) => (
                         <BentoCard key={feature.key} feature={feature} index={index} />
                     ))}
@@ -69,6 +76,7 @@ export function WhyBentoGrid() {
 }
 
 function BentoCard({ feature, index }: { feature: any; index: number }) {
+    const t = useTranslations("WhyUs");
     const Icon = feature.icon;
 
     return (
@@ -79,32 +87,28 @@ function BentoCard({ feature, index }: { feature: any; index: number }) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className={`w-full h-full group relative rounded-3xl border border-border bg-card p-8 flex flex-col justify-between overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300`}
+                className={`w-full h-full group relative rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-md p-8 md:p-10 flex flex-col justify-between overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300`}
             >
                 {/* Dynamic Background */}
                 <div className={`absolute inset-0 ${feature.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                 {/* Icon 3D Effect */}
                 <div className="relative z-10">
-                    <div className={`w-14 h-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className={`w-7 h-7 ${feature.iconColor}`} />
+                    <div className={`w-16 h-16 rounded-2xl ${feature.bg} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 ring-1 ring-white/10`}>
+                        <Icon className={`w-8 h-8 ${feature.iconColor}`} />
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-3 text-card-foreground">
-                        {feature.key === "precision" && "Acoustic Precision"}
-                        {feature.key === "edge" && "On-Device Edge AI"}
-                        {feature.key === "nonInvasive" && "Zero-Downtime Installation"}
+                    <h3 className="text-3xl font-bold mb-4 text-white font-display tracking-tight break-keep">
+                        {t(`features.${feature.key}.title`)}
                     </h3>
-                    <p className="text-muted-foreground mb-6">
-                        {feature.key === "precision" && "Detects micro-fractures in bearings using ultrasonic analysis beyond human hearing range."}
-                        {feature.key === "edge" && "Real-time processing without cloud latency. Secure, fast, and bandwidth-efficient."}
-                        {feature.key === "nonInvasive" && "Magnetic mounting system allows installation in seconds without stopping the production line."}
+                    <p className="text-gray-400 text-lg leading-relaxed break-keep">
+                        {t(`features.${feature.key}.description`)}
                     </p>
                 </div>
 
                 {/* Hover Action */}
                 <div className="relative z-10 flex items-center text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    Learn more <ArrowRight className="ml-2 w-4 h-4" />
+                    {t("learnMore")} <ArrowRight className="ml-2 w-4 h-4" />
                 </div>
 
                 {/* Decorational Circle */}

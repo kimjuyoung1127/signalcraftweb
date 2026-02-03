@@ -106,11 +106,18 @@ export function Header() {
 
                         <button
                             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                            className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors relative w-9 h-9 flex items-center justify-center"
+                            className="p-2 mr-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors relative w-9 h-9 flex items-center justify-center"
                         >
                             <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 absolute" />
                             <Moon className="h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 absolute" />
                         </button>
+
+                        <Link
+                            href="#contact"
+                            className="px-5 py-2 bg-blue-600 text-white rounded-full text-sm font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-95 whitespace-nowrap"
+                        >
+                            {t("contact")}
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Toggle */}

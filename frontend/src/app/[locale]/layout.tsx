@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, Geist_Mono, Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import "@/app/globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -10,9 +11,20 @@ import { FloatingActions } from "@/features/contact/FloatingActions";
 import { notFound } from 'next/navigation';
 import { routing } from "@/i18n/routing";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+});
+
+const pretendard = localFont({
+  src: "../../../node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2",
+  display: "swap",
+  variable: "--font-pretendard",
 });
 
 const geistMono = Geist_Mono({
@@ -50,7 +62,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground transition-colors duration-300 overflow-x-hidden`}
+        className={`${outfit.variable} ${spaceGrotesk.variable} ${pretendard.variable} ${geistMono.variable} ${locale === 'ko' ? 'font-pretendard' : 'font-outfit'} antialiased bg-background text-foreground transition-colors duration-300 overflow-x-hidden break-keep`}
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider

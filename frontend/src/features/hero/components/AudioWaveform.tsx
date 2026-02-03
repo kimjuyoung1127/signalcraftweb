@@ -37,8 +37,8 @@ const vertexShader = `
     vec4 viewPosition = viewMatrix * modelPosition;
     gl_Position = projectionMatrix * viewPosition;
     
-    // 입자 크기: 너무 작지 않게 키우고, 원근감 적용
-    gl_PointSize = (100.0 * aScale) * (1.0 / -viewPosition.z);
+    // 입자 크기: 가시성을 위해 더 키움
+    gl_PointSize = (150.0 * aScale) * (1.0 / -viewPosition.z);
     
     // 색상 밝기를 위해 높이값 전달
     vElevation = elevation;
@@ -64,12 +64,12 @@ const fragmentShader = `
     vec3 colorBright = vec3(0.4, 0.9, 1.0); // 밝은 아쿠아
 
     // 파도의 높이에 따라 색상 믹스 (높은 곳일수록 밝게 빛남)
-    vec3 mixedColor = mix(colorDeep, colorBright, vElevation * 0.5 + 0.5);
+    vec3 mixedColor = mix(colorDeep, colorBright, vElevation * 0.7 + 0.5);
     
     // 상호작용 시 전체적으로 더 밝게(White) 틴트
-    mixedColor = mix(mixedColor, vec3(1.0), uHover * 0.3);
+    mixedColor = mix(mixedColor, vec3(1.0), uHover * 0.5);
 
-    gl_FragColor = vec4(mixedColor, strength * 0.8); // 투명도 0.8
+    gl_FragColor = vec4(mixedColor, strength * 0.9); // 투명도 0.9로 상향
   }
 `;
 
@@ -158,8 +158,8 @@ function ElegantWaves({ count = 6000 }) {
 
 export default function SmoothWaveCanvas() {
     return (
-        // 배경: 완전 블랙이 아닌, 깊은 밤하늘 같은 그라데이션 적용
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-slate-900 to-black">
+        // 배경 투명화하여 HeroSection 배경과 자연스럽게 매치
+        <div className="absolute inset-0 w-full h-full bg-transparent">
             <Canvas camera={{ position: [0, 4, 10], fov: 50 }} dpr={[1, 2]}>
                 {/* Fog를 짙은 남색으로 설정하여 입자가 자연스럽게 사라지게 함 */}
                 <fog attach="fog" args={["#0f172a", 5, 20]} />

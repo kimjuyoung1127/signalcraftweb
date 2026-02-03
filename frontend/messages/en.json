@@ -1,6 +1,16 @@
 {
     "Index": {
-        "title": "SignalCraft - Sound to Insight"
+        "title": "Detect Mechanical Failures\nBefore They Happen",
+        "subtitle": "Reduce unplanned downtime by 85% with AI-powered acoustic monitoring.\nSimple installation, immediate results for smart factories.",
+        "cta": "Start Free Diagnosis",
+        "loading": "Initializing Visualizer..."
+    },
+    "Hero": {
+        "stats": {
+            "downtime": "Downtime Reduction",
+            "accuracy": "Anomaly Detection",
+            "monitoring": "24/7 Monitoring"
+        }
     },
     "Header": {
         "nav": {
@@ -9,7 +19,190 @@
             "guide": "Guide",
             "cases": "Cases",
             "news": "News",
-            "contact": "Contact"
+            "contact": "Contact",
+            "language": "Language"
+        }
+    },
+    "News": {
+        "title": "Latest Updates",
+        "title_page": "Newsroom",
+        "description": "Stay tuned with SignalCraft's journey.",
+        "description_page": "Latest updates, press releases, and technical insights from the SignalCraft team.",
+        "search_placeholder": "Search articles...",
+        "load_more": "Load More Articles",
+        "filters": {
+            "all": "All",
+            "press": "Press",
+            "tech": "Technology",
+            "case": "Case Study",
+            "event": "Event"
+        },
+        "viewAll": "View Newsroom",
+        "readMore": "Read More",
+        "items": {
+            "item1": {
+                "tag": "Milestone",
+                "title": "Selected for KOIIA AC Batch 1",
+                "excerpt": "SignalCraft has been selected for the 1st batch of the TIPS-linked Accelerator program by the Korea Industrial Intelligence Association (KOIIA)."
+            },
+            "item2": {
+                "tag": "Technology",
+                "title": "Acoustic Edge AI v2.0 Released",
+                "excerpt": "New version improves anomaly detection accuracy by 45% in noisy environments."
+            },
+            "item3": {
+                "tag": "Event",
+                "title": "Global Manufacturing Summit 2024",
+                "excerpt": "Showcasing our real-time diagnosis solutions at the industry's largest event."
+            },
+            "item4": {
+                "tag": "Press",
+                "title": "SignalCraft raises Series A to expand Edge AI solutions",
+                "excerpt": "We are thrilled to announce our latest funding round led by Major Tech Ventures to accelerate our smart factory innovations."
+            },
+            "item5": {
+                "tag": "Technology",
+                "title": "Understanding FFT vs Wavelet Transform",
+                "excerpt": "A technical deep dive into how we preprocess audio signals for maximum anomaly detection accuracy."
+            }
+        }
+    },
+    "About": {
+        "mission": "Our Mission",
+        "vision": "Listening to the {heartbeat}{br}of Industry",
+        "heartbeat": "Heartbeat",
+        "description": "SignalCraft transforms the chaotic noise of industrial machinery into clear, actionable insights. By combining advanced ultrasonic sensors with edge computing, we detect anomalies weeks before they cause failure.",
+        "stats": {
+            "factories": "Partner Factories",
+            "accuracy": "Diagnosis Accuracy",
+            "data": "Data Points/Day"
+        },
+        "trustedBy": "Trusted by Industry Leaders"
+    },
+    "WhyUs": {
+        "title": "Why SignalCraft?",
+        "description": "The most reliable predictive maintenance solution, trusted by global industry leaders.",
+        "learnMore": "Learn more",
+        "features": {
+            "precision": {
+                "title": "Detect Failures Weeks Early",
+                "description": "From micro-fractures in bearings to abnormal wear in gearboxes, we analyze ultrasonic frequencies beyond human hearing to detect signs of failure 2-4 weeks in advance. This prevents massive equipment costs and unplanned shutdowns."
+            },
+            "edge": {
+                "title": "Self-Contained Edge AI",
+                "description": "Secure, real-time analysis without cloud dependency. Your data stays safe within your facility."
+            },
+            "nonInvasive": {
+                "title": "Zero-Downtime Setup",
+                "description": "Deploy in seconds with non-invasive magnetic sensors. No production stops required."
+            },
+            "scalability": {
+                "title": "Seamless Scalability",
+                "description": "Easily expand from a single machine to an entire plant via wireless networks. Integrates perfectly with existing ERP/MES systems."
+            }
+        },
+        "detail": {
+            "title": "The Technological Edge",
+            "subtitle": "Discover the innovation that sets SignalCraft apart from traditional monitoring.",
+            "beyondTitle": "Beyond Human Hearing",
+            "beyondDesc": "Mechanical friction creates ultrasonic waves (20kHz+) long before visible vibration damages occur. SignalCraft's sensors capture this early warning signal, giving you weeks of lead time instead of hours.",
+            "edgeTitle": "Real-time Edge Processing",
+            "edgeDesc": "We don't just send raw data to the cloud. Our proprietary neural engine runs directly on the gateway, filtering out background noise and extracting key insights. This ensures ultra-low latency and maximum data security.",
+            "specs": {
+                "title": "Technical Specifications",
+                "range": "Frequency Range",
+                "rate": "Sampling Rate",
+                "conn": "Connectivity",
+                "battery": "Battery Life"
+            }
+        }
+    },
+    "Guide": {
+        "title": "Installation in Minutes",
+        "description": "Zero downtime. Zero complex wiring. Just plug, play, and predict.",
+        "steps": {
+            "attach": {
+                "title": "1. Attach Sensor",
+                "description": "Simply attach the magnetic acoustic sensor to your equipment. No shutdown required."
+            },
+            "connect": {
+                "title": "2. Auto-Connect",
+                "description": "The Edge Gateway automatically pairs and begins secure data transmission immediately."
+            },
+            "insight": {
+                "title": "3. Real-time Insight",
+                "description": "Access the dashboard to see live acoustic fingerprints and receive anomaly alerts."
+            }
+        },
+        "viewFull": "View Full Installation Guide"
+    },
+    "Cases": {
+        "title": "Proven Impact",
+        "description": "See how industry leaders secure their operations.",
+        "viewAll": "View All Cases",
+        "result": "Result",
+        "stories": {
+            "case1": {
+                "client": "H-Mart Logistics",
+                "industry": "Logistics Automation",
+                "title": "Preventing Conveyor Motor Failure",
+                "result": "Reduced downtime by 85%"
+            },
+            "case2": {
+                "client": "P-Chemical",
+                "industry": "Petrochemical Processing",
+                "title": "Leak Detection in High-Pressure Valves",
+                "result": "Saved $2.5M in potential damages"
+            },
+            "case3": {
+                "client": "T-Energy",
+                "industry": "Wind Power Generation",
+                "title": "Turbine Gearbox Diagnostics",
+                "result": "Extended asset life by 3 years"
+            }
+        }
+    },
+    "Contact": {
+        "title": "Prevent failures before they happen.",
+        "description": "Join 50+ smart factories saving millions in downtime costs. Start your free acoustic diagnosis today.",
+        "cta": "Get Started Now",
+        "sales": "Contact Sales"
+    },
+    "Footer": {
+        "sitemap": "Sitemap",
+        "contact": "Contact",
+        "mission": "Sound to Insight.",
+        "description": "Revolutionizing smart factory monitoring with AI audio analysis.",
+        "links": {
+            "about": "About",
+            "technology": "Technology",
+            "cases": "Cases",
+            "news": "News",
+            "guide": "Installation Guide"
+        },
+        "contactUs": "Contact Us",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+    },
+    "FAQ": {
+        "title": "Frequently Asked Questions",
+        "questions": {
+            "installation": {
+                "q": "Do I need to stop production to install?",
+                "a": "No. Our magnetic sensors attach to the exterior of your equipment in seconds. No drilling or wiring is required, allowing for zero-downtime deployment."
+            },
+            "accuracy": {
+                "q": "How accurate is the diagnostic AI?",
+                "a": "SignalCraft maintains 99% + accuracy. Our models specifically filter for high-frequency acoustic signatures of failure, ignoring common background factory noise."
+            },
+            "security": {
+                "q": "Is my factory data secure?",
+                "a": "Yes. All audio analysis is performed on-site at the edge. Only processed diagnostic results are sent to the dashboard, ensuring raw audio never leaves your facility."
+            },
+            "environment": {
+                "q": "Does it work in high-noise environments?",
+                "a": "Absolutely. By focusing on ultrasonic frequencies physically separate from common industrial noise, we detect machine health regardless of ambient sound levels."
+            }
         }
     }
 }
