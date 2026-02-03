@@ -67,18 +67,6 @@
             }
         }
     },
-    "About": {
-        "mission": "Our Mission",
-        "vision": "Listening to the {heartbeat}{br}of Industry",
-        "heartbeat": "Heartbeat",
-        "description": "SignalCraft transforms the chaotic noise of industrial machinery into clear, actionable insights. By combining advanced ultrasonic sensors with edge computing, we detect anomalies weeks before they cause failure.",
-        "stats": {
-            "factories": "Partner Factories",
-            "accuracy": "Diagnosis Accuracy",
-            "data": "Data Points/Day"
-        },
-        "trustedBy": "Trusted by Industry Leaders"
-    },
     "WhyUs": {
         "title": "Why SignalCraft?",
         "description": "The most reliable predictive maintenance solution, trusted by global industry leaders.",
@@ -206,6 +194,16 @@
         }
     },
     "About": {
+        "mission": "Our Mission",
+        "vision": "Listening to the {heartbeat}{br}of Industry",
+        "heartbeat": "Heartbeat",
+        "description": "SignalCraft transforms the chaotic noise of industrial machinery into clear, actionable insights. By combining advanced ultrasonic sensors with edge computing, we detect anomalies weeks before they cause failure.",
+        "stats": {
+            "factories": "Partner Factories",
+            "accuracy": "Diagnosis Accuracy",
+            "data": "Data Points/Day"
+        },
+        "trustedBy": "Trusted by Industry Leaders",
         "hero": {
             "title": "We Decode the <span class=\"text-blue-600\">Sound of Industry</span>",
             "subtitle": "SignalCraft was founded on a simple belief: Every machine has a voice. By listening carefully, we can prevent failures before they happen."
