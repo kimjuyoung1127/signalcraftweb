@@ -24,25 +24,25 @@ export function AboutDetailPage() {
     return (
         <div className="pt-16 pb-16">
             {/* Hero Section */}
-            <section className="container mx-auto px-4 mb-16 text-center">
+            <section className="container mx-auto px-4 mb-12 md:mb-16 text-center">
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-5xl font-bold mb-6"
+                    className="text-3xl md:text-5xl font-bold mb-6 break-keep"
                     dangerouslySetInnerHTML={{ __html: t.raw("hero.title") }}
                 />
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="text-xl text-muted-foreground max-w-3xl mx-auto"
+                    className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto break-keep"
                 >
                     {t("hero.subtitle")}
                 </motion.p>
             </section>
 
             {/* History / Values */}
-            <section className="bg-muted/30 py-16 mb-16">
+            <section className="bg-muted/30 py-10 md:py-16 mb-12 md:mb-16">
                 <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <div>
                         <h2 className="text-3xl font-bold mb-6">{t("journey.title")}</h2>

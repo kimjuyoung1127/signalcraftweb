@@ -65,7 +65,7 @@ export function WhyBentoGrid() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[280px]">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min md:auto-rows-[280px]">
                     {features.map((feature, index) => (
                         <BentoCard key={feature.key} feature={feature} index={index} />
                     ))}
@@ -87,28 +87,28 @@ function BentoCard({ feature, index }: { feature: any; index: number }) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className={`w-full h-full group relative rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-md p-8 md:p-10 flex flex-col justify-between overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300`}
+                className={`w-full min-h-full group relative rounded-[1.5rem] md:rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-md p-6 md:p-10 flex flex-col justify-between overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300`}
             >
                 {/* Dynamic Background */}
                 <div className={`absolute inset-0 ${feature.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                 {/* Icon 3D Effect */}
                 <div className="relative z-10">
-                    <div className={`w-16 h-16 rounded-2xl ${feature.bg} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 ring-1 ring-white/10`}>
-                        <Icon className={`w-8 h-8 ${feature.iconColor}`} />
+                    <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl ${feature.bg} flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-300 ring-1 ring-white/10`}>
+                        <Icon className={`w-6 h-6 md:w-8 md:h-8 ${feature.iconColor}`} />
                     </div>
 
-                    <h3 className="text-3xl font-bold mb-4 text-white font-display tracking-tight break-keep">
+                    <h3 className="text-xl md:text-3xl font-bold mb-3 md:mb-4 text-white font-display tracking-tight break-keep">
                         {t(`features.${feature.key}.title`)}
                     </h3>
-                    <p className="text-gray-400 text-lg leading-relaxed break-keep">
+                    <p className="text-gray-400 text-sm md:text-lg leading-relaxed break-keep mb-8 md:mb-0">
                         {t(`features.${feature.key}.description`)}
                     </p>
                 </div>
 
                 {/* Hover Action */}
-                <div className="relative z-10 flex items-center text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    {t("learnMore")} <ArrowRight className="ml-2 w-4 h-4" />
+                <div className="relative z-10 flex items-center text-xs md:text-sm font-medium text-primary opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 transform translate-y-0 md:translate-y-2 md:group-hover:translate-y-0 mt-4 md:mt-0">
+                    {t("learnMore")} <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
                 </div>
 
                 {/* Decorational Circle */}

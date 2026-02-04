@@ -15,22 +15,22 @@ export function WhyUsDetailPage() {
     ];
 
     return (
-        <div className="pt-32 pb-24 bg-background">
+        <div className="pt-20 md:pt-32 pb-16 md:pb-24 bg-background">
             {/* Hero Section */}
-            <section className="container mx-auto px-4 mb-24">
+            <section className="container mx-auto px-4 mb-16 md:mb-24">
                 <div className="text-center max-w-4xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/5 border border-blue-500/10 text-blue-500 text-sm font-bold mb-8"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/5 border border-blue-500/10 text-blue-500 text-xs md:text-sm font-bold mb-6 md:mb-8"
                     >
-                        <Zap className="w-4 h-4" /> Why SignalCraft
+                        <Zap className="w-3 md:w-4 h-3 md:h-4" /> Why SignalCraft
                     </motion.div>
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-7xl font-bold mb-8 font-display tracking-tight leading-tight"
+                        className="text-4xl md:text-7xl font-bold mb-6 md:mb-8 font-display tracking-tight leading-tight break-keep"
                     >
                         {t("detail.title")}
                     </motion.h1>
@@ -38,7 +38,7 @@ export function WhyUsDetailPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-xl md:text-2xl text-muted-foreground leading-relaxed break-keep"
+                        className="text-lg md:text-2xl text-muted-foreground leading-relaxed break-keep"
                     >
                         {t("detail.subtitle")}
                     </motion.p>

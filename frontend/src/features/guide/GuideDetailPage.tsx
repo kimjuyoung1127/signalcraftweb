@@ -5,16 +5,16 @@ import { BookOpen, Code, FileText, Terminal, Video } from "lucide-react";
 
 export function GuideDetailPage() {
     return (
-        <div className="pt-24 pb-24">
-            <section className="container mx-auto px-4 mb-20 text-center">
+        <div className="pt-16 md:pt-24 pb-16 md:pb-24">
+            <section className="container mx-auto px-4 mb-12 md:mb-20 text-center">
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-5xl font-bold mb-6"
+                    className="text-3xl md:text-5xl font-bold mb-6 break-keep"
                 >
                     Implementation <span className="text-blue-600">Guide</span>
                 </motion.h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto break-keep">
                     Everything you need to integrate SignalCraft into your existing infrastructure.
                     From hardware setup to API references.
                 </p>

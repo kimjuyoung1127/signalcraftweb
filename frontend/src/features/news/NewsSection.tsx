@@ -29,12 +29,12 @@ export function NewsSection() {
     ];
 
     return (
-        <section id="news" className="py-24 bg-background">
+        <section id="news" className="py-16 md:py-24 bg-background">
             <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4">
                     <div>
-                        <h2 className="text-3xl font-bold mb-2 font-display">{t("title")}</h2>
-                        <p className="text-muted-foreground">{t("description")}</p>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2 font-display">{t("title")}</h2>
+                        <p className="text-sm md:text-base text-muted-foreground">{t("description")}</p>
                     </div>
                     <Link href="/news" className="hidden md:flex items-center text-sm font-semibold hover:text-blue-500 transition-colors">
                         {t("viewAll")} <ArrowRight className="ml-1 w-4 h-4" />

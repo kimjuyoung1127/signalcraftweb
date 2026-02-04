@@ -39,7 +39,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
                 {/* Audio Waveform Canvas */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-60 pointer-events-none">
+                <div className="absolute inset-0 flex items-center justify-center opacity-60 pointer-events-none -translate-y-60 md:translate-y-0">
                     <AudioWaveform />
                 </div>
             </div>

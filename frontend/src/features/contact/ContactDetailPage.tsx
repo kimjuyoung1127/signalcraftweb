@@ -6,21 +6,21 @@ import { Mail, MapPin, Phone } from "lucide-react";
 
 export function ContactDetailPage() {
     return (
-        <div className="pt-24 pb-24">
-            <section className="container mx-auto px-4 mb-20 text-center">
+        <div className="pt-16 md:pt-24 pb-16 md:pb-24">
+            <section className="container mx-auto px-4 mb-12 md:mb-20 text-center">
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-5xl font-bold mb-6"
+                    className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 break-keep"
                 >
                     Get in <span className="text-blue-600">Touch</span>
                 </motion.h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto break-keep">
                     Ready to modernize your factory? Our experts are here to help you get started with a free consultation.
                 </p>
             </section>
 
-            <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
                 {/* Contact Info */}
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}

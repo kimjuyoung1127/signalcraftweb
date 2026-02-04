@@ -13,21 +13,21 @@ export function AboutSection() {
     ];
 
     return (
-        <section id="about" className="py-24 bg-background">
+        <section id="about" className="py-16 md:py-24 bg-background">
             <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row gap-16 items-center">
+                <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center">
                     {/* Text Content */}
-                    <div className="flex-1 space-y-8">
+                    <div className="flex-1 space-y-6 md:space-y-8">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <h2 className="text-secondary-foreground font-semibold tracking-wider uppercase mb-2">{t("mission")}</h2>
-                            <h3 className="text-4xl md:text-5xl font-bold leading-tight text-foreground break-keep font-display">
+                            <h2 className="text-secondary-foreground font-semibold tracking-wider uppercase mb-2 text-sm">{t("mission")}</h2>
+                            <h3 className="text-3xl md:text-5xl font-bold leading-tight text-foreground break-keep font-display">
                                 {t.rich("vision", {
                                     heartbeat: (chunks) => <span className="text-blue-600 font-display">{chunks}</span>,
-                                    br: () => <br />
+                                    br: () => <br className="hidden md:block" />
                                 })}
                             </h3>
                         </motion.div>
@@ -37,13 +37,13 @@ export function AboutSection() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-lg text-muted-foreground leading-relaxed break-keep"
+                            className="text-base md:text-lg text-muted-foreground leading-relaxed break-keep"
                         >
                             {t("description")}
                         </motion.p>
 
                         {/* Stats */}
-                        <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 pt-8 border-t border-border">
                             {stats.map((stat, i) => (
                                 <motion.div
                                     key={stat.key}
@@ -51,8 +51,9 @@ export function AboutSection() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.2 + i * 0.1 }}
+                                    className="flex md:flex-col items-center md:items-start gap-4 md:gap-1"
                                 >
-                                    <div className="text-3xl font-bold text-foreground mb-1 font-display">{stat.value}</div>
+                                    <div className="text-3xl font-bold text-foreground font-display min-w-[80px] md:min-w-0">{stat.value}</div>
                                     <div className="text-sm text-muted-foreground">{t(`stats.${stat.key}`)}</div>
                                 </motion.div>
                             ))}
@@ -66,7 +67,7 @@ export function AboutSection() {
                         viewport={{ once: true }}
                         className="flex-1 w-full"
                     >
-                        <div className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-black/40 border border-white/10 group shadow-2xl">
+                        <div className="relative aspect-[4/3] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-black/40 border border-white/10 group shadow-2xl">
                             {/* Backdrop VFX */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 to-purple-600/10 group-hover:opacity-50 transition-opacity" />
 
@@ -76,12 +77,12 @@ export function AboutSection() {
                                 frameBorder='0'
                                 width='100%'
                                 height='100%'
-                                className="relative z-10 w-full h-full scale-[1.02]"
+                                className="absolute inset-0 w-[150%] h-[150%] -left-[12%] -top-[25%] scale-[0.9] z-10 origin-center"
                                 loading="lazy"
                             ></iframe>
 
                             {/* Overlay protection for scrolling */}
-                            <div className="absolute inset-0 z-20 pointer-events-none ring-1 ring-inset ring-white/10 rounded-[2.5rem]" />
+                            <div className="absolute inset-0 z-20 pointer-events-none ring-1 ring-inset ring-white/10 rounded-[1.5rem] md:rounded-[2.5rem]" />
                         </div>
                     </motion.div>
                 </div>
