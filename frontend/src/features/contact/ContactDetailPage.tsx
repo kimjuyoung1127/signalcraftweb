@@ -142,111 +142,125 @@ export function ContactDetailPage() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-card border border-border p-8 rounded-3xl shadow-sm"
+                    className="bg-card border border-border p-8 rounded-3xl shadow-sm relative overflow-hidden"
                 >
                     <h3 className="text-2xl font-bold mb-6">{t("form.title")}</h3>
 
-                    <AnimatePresence mode="wait">
-                        {status === "success" ? (
-                            <motion.div
-                                key="success"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                className="flex flex-col items-center justify-center py-12 text-center"
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">{t("form.firstName")}</label>
+                                <input
+                                    required
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                    placeholder={t("form.placeholder.firstName")}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">{t("form.lastName")}</label>
+                                <input
+                                    required
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                    placeholder={t("form.placeholder.lastName")}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">{t("form.email")}</label>
+                            <input
+                                required
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                type="email"
+                                className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                placeholder={t("form.placeholder.email")}
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">{t("form.reason")}</label>
+                            <select
+                                required
+                                name="reason"
+                                value={formData.reason}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             >
-                                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 mb-6">
-                                    <CheckCircle2 className="w-10 h-10" />
-                                </div>
-                                <h4 className="text-2xl font-bold mb-2">Message Sent!</h4>
-                                <p className="text-muted-foreground mb-8">We'll get back to you as soon as possible.</p>
-                                <Button onClick={() => setStatus("idle")}>Send Another Message</Button>
-                            </motion.div>
-                        ) : (
-                            <form key="form" onSubmit={handleSubmit} className="space-y-6">
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium">{t("form.firstName")}</label>
-                                        <input
-                                            required
-                                            name="firstName"
-                                            value={formData.firstName}
-                                            onChange={handleChange}
-                                            type="text"
-                                            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                            placeholder={t("form.placeholder.firstName")}
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium">{t("form.lastName")}</label>
-                                        <input
-                                            required
-                                            name="lastName"
-                                            value={formData.lastName}
-                                            onChange={handleChange}
-                                            type="text"
-                                            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                            placeholder={t("form.placeholder.lastName")}
-                                        />
-                                    </div>
-                                </div>
+                                <option value="">Select a reason</option>
+                                <option>{t("form.placeholder.reasons.demo")}</option>
+                                <option>{t("form.placeholder.reasons.sales")}</option>
+                                <option>{t("form.placeholder.reasons.support")}</option>
+                                <option>{t("form.placeholder.reasons.partner")}</option>
+                            </select>
+                        </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">{t("form.email")}</label>
-                                    <input
-                                        required
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        type="email"
-                                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                        placeholder={t("form.placeholder.email")}
-                                    />
-                                </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">{t("form.message")}</label>
+                            <textarea
+                                required
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[150px]"
+                                placeholder={t("form.placeholder.message")}
+                            ></textarea>
+                        </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">{t("form.reason")}</label>
-                                    <select
-                                        required
-                                        name="reason"
-                                        value={formData.reason}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                    >
-                                        <option value="">Select a reason</option>
-                                        <option>{t("form.placeholder.reasons.demo")}</option>
-                                        <option>{t("form.placeholder.reasons.sales")}</option>
-                                        <option>{t("form.placeholder.reasons.support")}</option>
-                                        <option>{t("form.placeholder.reasons.partner")}</option>
-                                    </select>
-                                </div>
+                        <Button
+                            disabled={status === "loading"}
+                            className="w-full py-6 text-lg flex items-center justify-center gap-2"
+                        >
+                            {status === "loading" && <Loader2 className="w-5 h-5 animate-spin" />}
+                            {t("form.submit")}
+                        </Button>
+                    </form>
 
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">{t("form.message")}</label>
-                                    <textarea
-                                        required
-                                        name="message"
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[150px]"
-                                        placeholder={t("form.placeholder.message")}
-                                    ></textarea>
-                                </div>
-
-                                {status === "error" && (
-                                    <div className="flex items-center gap-2 p-4 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-lg text-sm">
-                                        <AlertCircle className="w-4 h-4" />
-                                        Failed to send message. Please try again.
-                                    </div>
-                                )}
-
-                                <Button
-                                    disabled={status === "loading"}
-                                    className="w-full py-6 text-lg flex items-center justify-center gap-2"
+                    {/* Feedback Modal Overlay */}
+                    <AnimatePresence>
+                        {status !== "idle" && status !== "loading" && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="absolute inset-0 z-50 flex items-center justify-center p-6 bg-background/80 backdrop-blur-sm"
+                            >
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    className="bg-card border border-border p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center"
                                 >
-                                    {status === "loading" && <Loader2 className="w-5 h-5 animate-spin" />}
-                                    {t("form.submit")}
-                                </Button>
-                            </form>
+                                    {status === "success" ? (
+                                        <>
+                                            <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 mx-auto mb-6">
+                                                <CheckCircle2 className="w-12 h-12" />
+                                            </div>
+                                            <h4 className="text-2xl font-bold mb-2">Message Sent!</h4>
+                                            <p className="text-muted-foreground mb-8">We'll get back to you as soon as possible via email.</p>
+                                            <Button className="w-full" onClick={() => setStatus("idle")}>Close</Button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className="w-20 h-20 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-600 mx-auto mb-6">
+                                                <AlertCircle className="w-12 h-12" />
+                                            </div>
+                                            <h4 className="text-2xl font-bold mb-2">Delivery Failed</h4>
+                                            <p className="text-muted-foreground mb-8">Something went wrong. Please check your connection or try again later.</p>
+                                            <Button variant="outline" className="w-full" onClick={() => setStatus("idle")}>Try Again</Button>
+                                        </>
+                                    )}
+                                </motion.div>
+                            </motion.div>
                         )}
                     </AnimatePresence>
                 </motion.div>
