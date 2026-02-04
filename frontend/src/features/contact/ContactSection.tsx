@@ -57,7 +57,9 @@ export function ContactSection() {
                         </div>
 
                         <h2 className="text-6xl md:text-8xl font-black mb-10 tracking-tighter font-display leading-[0.9] text-white break-keep italic">
-                            {t("title")}
+                            {t.rich("title", {
+                                span: (chunks) => <span className="text-blue-500">{chunks}</span>
+                            })}
                         </h2>
                         <p className="text-xl md:text-2xl text-gray-400 mb-16 max-w-2xl mx-auto leading-relaxed break-keep font-medium">
                             {t("description")}

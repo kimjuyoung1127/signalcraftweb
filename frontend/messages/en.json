@@ -151,10 +151,62 @@
         }
     },
     "Contact": {
-        "title": "Prevent failures before they happen.",
+        "title": "Get in <span>Touch</span>",
         "description": "Join 50+ smart factories saving millions in downtime costs. Start your free acoustic diagnosis today.",
         "cta": "Get Started Now",
-        "sales": "Contact Sales"
+        "sales": "Contact Sales",
+        "info": {
+            "title": "Contact Information",
+            "address": {
+                "label": "Headquarters",
+                "value": "3F, 25-11, Seongji-gil, Mapo-gu\nSeoul, Republic of Korea"
+            },
+            "email": {
+                "label": "Email Us",
+                "value": "sndercer@gmail.com"
+            },
+            "phone": {
+                "label": "Call Us",
+                "value": "+82 10-8533-6898",
+                "sub": "Mon-Fri from 9am to 6pm KST"
+            },
+            "ceo": {
+                "label": "CEO",
+                "value": "Kim Seon-beom"
+            }
+        },
+        "form": {
+            "title": "Send us a Message",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email Address",
+            "reason": "Reason for Contact",
+            "message": "Message",
+            "submit": "Send Message",
+            "placeholder": {
+                "firstName": "John",
+                "lastName": "Doe",
+                "email": "john@company.com",
+                "message": "Tell us about your project or needs...",
+                "reasons": {
+                    "demo": "Request Demo",
+                    "sales": "Sales Inquiry",
+                    "support": "Technical Support",
+                    "partner": "Partnership"
+                }
+            }
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "q1": {
+                "q": "Can I test before buying?",
+                "a": "Yes! We offer a 2-week pilot program for qualified enterprise clients."
+            },
+            "q2": {
+                "q": "Does it work offline?",
+                "a": "Our Edge AI models run locally on the device, so you don't need constant internet connection for detection."
+            }
+        }
     },
     "Footer": {
         "sitemap": "Sitemap",

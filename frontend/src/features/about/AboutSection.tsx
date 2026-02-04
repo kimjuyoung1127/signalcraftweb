@@ -13,7 +13,7 @@ export function AboutSection() {
     ];
 
     return (
-        <section id="about" className="py-16 md:py-24 bg-background">
+        <section id="about" className="pt-32 md:pt-48 pb-16 md:pb-24 bg-background">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center">
                     {/* Text Content */}
@@ -147,4 +147,10 @@ const LOGO_LIST = [
     "KAI",
     "GS Caltex",
     "HD Hyundai",
+    "KLT",
+    "Jeonnam Bioindustry Foundation",
+    "Odle Odle Inc.",
+    "NullbyteWorks",
+    "Underwater",
+    "Korea Maritime & Ocean University",
 ];

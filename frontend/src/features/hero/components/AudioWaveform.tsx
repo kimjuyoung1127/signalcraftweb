@@ -97,7 +97,7 @@ function ElegantWaves({ count = 6000 }) {
             positions[i * 3 + 2] = (row / rows) * 10 - 5;
 
             // 크기 랜덤 (반짝이는 효과)
-            scales[i] = Math.random() * 0.5 + 0.5;
+            scales[i] = Math.random() * 1 + 0.5;
         }
         return { positions, scales };
     }, [count]);

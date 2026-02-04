@@ -1,22 +1,64 @@
 "use client";
 
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-import { motion } from "framer-motion";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, MapPin, Phone, User, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
 export function ContactDetailPage() {
+    const t = useTranslations("Contact");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        reason: "",
+        message: ""
+    });
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus("loading");
+
+        try {
+            const response = await fetch("/api/ContactDetailPage", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                setStatus("success");
+                setFormData({ firstName: "", lastName: "", email: "", reason: "", message: "" });
+            } else {
+                setStatus("error");
+            }
+        } catch (error) {
+            console.error("Form submission error:", error);
+            setStatus("error");
+        }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
     return (
         <div className="pt-16 md:pt-24 pb-16 md:pb-24">
             <section className="container mx-auto px-4 mb-12 md:mb-20 text-center">
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 break-keep"
+                    className="text-4xl md:text-6xl font-bold mb-4 md:mb-6 break-keep"
                 >
-                    Get in <span className="text-blue-600">Touch</span>
+                    {t.rich("title", {
+                        span: (chunks) => <span className="text-blue-600">{chunks}</span>
+                    })}
                 </motion.h1>
                 <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto break-keep">
-                    Ready to modernize your factory? Our experts are here to help you get started with a free consultation.
+                    {t("description")}
                 </p>
             </section>
 
@@ -28,15 +70,15 @@ export function ContactDetailPage() {
                     className="space-y-12"
                 >
                     <div>
-                        <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+                        <h3 className="text-2xl font-bold mb-6">{t("info.title")}</h3>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
                                 <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600">
                                     <MapPin className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold mb-1">Headquarters</h4>
-                                    <p className="text-muted-foreground">123 Teheran-ro, Gangnam-gu<br />Seoul, South Korea 06234</p>
+                                    <h4 className="font-semibold mb-1">{t("info.address.label")}</h4>
+                                    <p className="text-muted-foreground whitespace-pre-line">{t("info.address.value")}</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
@@ -44,9 +86,8 @@ export function ContactDetailPage() {
                                     <Mail className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold mb-1">Email Us</h4>
-                                    <p className="text-muted-foreground">contact@signalcraft.io</p>
-                                    <p className="text-muted-foreground">support@signalcraft.io</p>
+                                    <h4 className="font-semibold mb-1">{t("info.email.label")}</h4>
+                                    <p className="text-muted-foreground">{t("info.email.value")}</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
@@ -54,33 +95,42 @@ export function ContactDetailPage() {
                                     <Phone className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold mb-1">Call Us</h4>
-                                    <p className="text-muted-foreground">+82 2-1234-5678</p>
-                                    <p className="text-sm text-muted-foreground mt-1">Mon-Fri from 9am to 6pm KST</p>
+                                    <h4 className="font-semibold mb-1">{t("info.phone.label")}</h4>
+                                    <p className="text-muted-foreground">{t("info.phone.value")}</p>
+                                    <p className="text-sm text-muted-foreground mt-1">{t("info.phone.sub")}</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600">
+                                    <User className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold mb-1">{t("info.ceo.label")}</h4>
+                                    <p className="text-muted-foreground">{t("info.ceo.value")}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="bg-muted/50 p-8 rounded-2xl border border-border">
-                        <h3 className="text-xl font-bold mb-4">Frequently Asked Questions</h3>
+                        <h3 className="text-xl font-bold mb-4">{t("faq.title")}</h3>
                         <div className="space-y-4">
                             <details className="group">
                                 <summary className="font-medium cursor-pointer list-none flex justify-between items-center">
-                                    Can I test before buying?
+                                    {t("faq.q1.q")}
                                     <span className="transition group-open:rotate-180">▼</span>
                                 </summary>
                                 <p className="text-muted-foreground text-sm mt-2 pl-4 border-l-2 border-blue-500">
-                                    Yes! We offer a 2-week pilot program for qualified enterprise clients.
+                                    {t("faq.q1.a")}
                                 </p>
                             </details>
                             <details className="group">
                                 <summary className="font-medium cursor-pointer list-none flex justify-between items-center">
-                                    Does it work offline?
+                                    {t("faq.q2.q")}
                                     <span className="transition group-open:rotate-180">▼</span>
                                 </summary>
                                 <p className="text-muted-foreground text-sm mt-2 pl-4 border-l-2 border-blue-500">
-                                    Our Edge AI models run locally on the device, so you don't need constant internet connection for detection.
+                                    {t("faq.q2.a")}
                                 </p>
                             </details>
                         </div>
@@ -94,41 +144,111 @@ export function ContactDetailPage() {
                     transition={{ delay: 0.2 }}
                     className="bg-card border border-border p-8 rounded-3xl shadow-sm"
                 >
-                    <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
-                    <form className="space-y-6">
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">First Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="John" />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Last Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Doe" />
-                            </div>
-                        </div>
+                    <h3 className="text-2xl font-bold mb-6">{t("form.title")}</h3>
 
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium">Email Address</label>
-                            <input type="email" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="john@company.com" />
-                        </div>
+                    <AnimatePresence mode="wait">
+                        {status === "success" ? (
+                            <motion.div
+                                key="success"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="flex flex-col items-center justify-center py-12 text-center"
+                            >
+                                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 mb-6">
+                                    <CheckCircle2 className="w-10 h-10" />
+                                </div>
+                                <h4 className="text-2xl font-bold mb-2">Message Sent!</h4>
+                                <p className="text-muted-foreground mb-8">We'll get back to you as soon as possible.</p>
+                                <Button onClick={() => setStatus("idle")}>Send Another Message</Button>
+                            </motion.div>
+                        ) : (
+                            <form key="form" onSubmit={handleSubmit} className="space-y-6">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">{t("form.firstName")}</label>
+                                        <input
+                                            required
+                                            name="firstName"
+                                            value={formData.firstName}
+                                            onChange={handleChange}
+                                            type="text"
+                                            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                            placeholder={t("form.placeholder.firstName")}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">{t("form.lastName")}</label>
+                                        <input
+                                            required
+                                            name="lastName"
+                                            value={formData.lastName}
+                                            onChange={handleChange}
+                                            type="text"
+                                            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                            placeholder={t("form.placeholder.lastName")}
+                                        />
+                                    </div>
+                                </div>
 
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium">Reason for Contact</label>
-                            <select className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <option>Request Demo</option>
-                                <option>Sales Inquiry</option>
-                                <option>Technical Support</option>
-                                <option>Partnership</option>
-                            </select>
-                        </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">{t("form.email")}</label>
+                                    <input
+                                        required
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        type="email"
+                                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                        placeholder={t("form.placeholder.email")}
+                                    />
+                                </div>
 
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium">Message</label>
-                            <textarea className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[150px]" placeholder="Tell us about your project or needs..."></textarea>
-                        </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">{t("form.reason")}</label>
+                                    <select
+                                        required
+                                        name="reason"
+                                        value={formData.reason}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                    >
+                                        <option value="">Select a reason</option>
+                                        <option>{t("form.placeholder.reasons.demo")}</option>
+                                        <option>{t("form.placeholder.reasons.sales")}</option>
+                                        <option>{t("form.placeholder.reasons.support")}</option>
+                                        <option>{t("form.placeholder.reasons.partner")}</option>
+                                    </select>
+                                </div>
 
-                        <Button className="w-full py-6 text-lg">Send Message</Button>
-                    </form>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">{t("form.message")}</label>
+                                    <textarea
+                                        required
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[150px]"
+                                        placeholder={t("form.placeholder.message")}
+                                    ></textarea>
+                                </div>
+
+                                {status === "error" && (
+                                    <div className="flex items-center gap-2 p-4 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-lg text-sm">
+                                        <AlertCircle className="w-4 h-4" />
+                                        Failed to send message. Please try again.
+                                    </div>
+                                )}
+
+                                <Button
+                                    disabled={status === "loading"}
+                                    className="w-full py-6 text-lg flex items-center justify-center gap-2"
+                                >
+                                    {status === "loading" && <Loader2 className="w-5 h-5 animate-spin" />}
+                                    {t("form.submit")}
+                                </Button>
+                            </form>
+                        )}
+                    </AnimatePresence>
                 </motion.div>
             </div>
         </div>

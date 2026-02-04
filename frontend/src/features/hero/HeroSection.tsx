@@ -30,7 +30,7 @@ export function HeroSection() {
     const t = useTranslations("Index");
 
     return (
-        <section className="relative min-h-screen flex items-center pt-20 pb-32 overflow-hidden bg-[#050505]">
+        <section className="relative min-h-screen flex items-center pt-20 pb-48 overflow-hidden bg-[#050505]">
             {/* Background VFX */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] animate-pulse"></div>

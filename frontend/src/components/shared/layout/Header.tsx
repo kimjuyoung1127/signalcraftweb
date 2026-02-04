@@ -1,15 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { AnimatePresence, motion } from "framer-motion";
 
 export function Header() {
     const t = useTranslations("Header.nav");
-    const { theme, setTheme } = useTheme();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
@@ -58,7 +56,7 @@ export function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${isScrolled
-                ? "bg-white/10 dark:bg-black/20 backdrop-blur-md border-white/20 dark:border-white/10 shadow-sm"
+                ? "bg-white/10 backdrop-blur-md border-white/20 shadow-sm"
                 : "bg-transparent border-transparent"
                 }`}
         >
@@ -104,13 +102,6 @@ export function Header() {
                             KO
                         </Link>
 
-                        <button
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                            className="p-2 mr-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors relative w-9 h-9 flex items-center justify-center"
-                        >
-                            <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 absolute" />
-                            <Moon className="h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 absolute" />
-                        </button>
 
                         <Link
                             href="#contact"
@@ -163,25 +154,6 @@ export function Header() {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between p-2">
-                                <span className="text-sm font-medium text-muted-foreground">Theme</span>
-                                <button
-                                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                    className="flex items-center gap-2"
-                                >
-                                    {theme === 'dark' ? (
-                                        <>
-                                            <Moon className="h-5 w-5" />
-                                            <span>Dark</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Sun className="h-5 w-5" />
-                                            <span>Light</span>
-                                        </>
-                                    )}
-                                </button>
-                            </div>
                         </div>
                     </motion.div>
                 )}

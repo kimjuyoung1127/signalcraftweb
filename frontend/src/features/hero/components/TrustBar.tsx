@@ -4,15 +4,12 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 const LOGO_LIST = [
-    "Samsung Electronics",
-    "LG Energy Solution",
-    "POSCO",
-    "Hyundai Motor",
-    "Hanwha Aerospace",
-    "Doosan Enerbility",
-    "KAI",
-    "GS Caltex",
-    "HD Hyundai",
+    "KLT",
+    "Jeonnam Bioindustry Foundation",
+    "Odle Odle Inc.",
+    "NullbyteWorks",
+    "Underwater",
+    "Korea Maritime & Ocean University",
 ];
 
 export function TrustBar() {
@@ -21,9 +18,19 @@ export function TrustBar() {
     return (
         <div className="w-full py-8 border-y border-white/5 bg-black/20 backdrop-blur-sm">
             <div className="container mx-auto px-4">
-                <p className="text-center text-xs uppercase tracking-[0.2em] text-gray-500 mb-8 font-medium">
-                    {t("trustedBy")}
-                </p>
+                <div className="flex flex-col items-center mb-8">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        className="px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/5 text-[10px] md:text-xs font-bold text-blue-400 mb-4 inline-flex items-center gap-1.5"
+                    >
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                        Social Venture Certified
+                    </motion.div>
+                    <p className="text-center text-xs uppercase tracking-[0.2em] text-gray-500 font-medium">
+                        {t("trustedBy")}
+                    </p>
+                </div>
 
                 <div className="relative flex overflow-hidden select-none">
                     <motion.div

@@ -3,6 +3,7 @@ import { Link } from "@/i18n/routing";
 
 export function Footer() {
     const t = useTranslations("Footer");
+    const tContact = useTranslations("Contact");
 
     return (
         <footer className="bg-background border-t border-border py-8 md:py-12">
@@ -33,8 +34,8 @@ export function Footer() {
                     <h3 className="font-semibold mb-4 text-foreground">{t("contact")}</h3>
                     <ul className="space-y-3 md:space-y-2 text-sm text-muted-foreground">
                         <li><Link href="/contact" className="hover:text-foreground transition-colors py-1 inline-block">{t("contactUs")}</Link></li>
-                        <li className="py-1">contact@signalcraft.ai</li>
-                        <li className="py-1">Seoul, Korea</li>
+                        <li className="py-1">{tContact("info.email.value")}</li>
+                        <li className="py-1 whitespace-pre-line text-xs">{tContact("info.address.value")}</li>
                     </ul>
                 </div>
             </div>
