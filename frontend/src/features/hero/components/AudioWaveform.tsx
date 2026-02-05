@@ -10,6 +10,8 @@ import * as THREE from "three";
 const vertexShader = `
   uniform float uTime;
   uniform float uHover; 
+  uniform float uAmplitude;
+  uniform float uPointSize;
   
   attribute float aScale;
   attribute float aRandom;
@@ -20,7 +22,7 @@ const vertexShader = `
   void main() {
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
     
-    // [Mod] Smooth, Undulating Motion (기존의 부드러운 넘실거림으로 복귀)
+    // [Mod] Smooth, Undulating Motion
     
     // Wave 1: Large smooth wave
     float wave1 = sin(modelPosition.x * 0.3 + uTime * 0.6);
@@ -29,7 +31,7 @@ const vertexShader = `
     float wave2 = sin(modelPosition.x * 0.4 + modelPosition.z * 0.3 + uTime * 0.9);
     
     // Interaction: Amplitude increases
-    float amplitude = 0.5 + (uHover * 0.7); 
+    float amplitude = uAmplitude + (uHover * 0.7); 
     
     float elevation = (wave1 + wave2) * amplitude;
     
@@ -40,10 +42,10 @@ const vertexShader = `
     
     // Particle Size
     // Front particles = Larger, Back = Smaller
-    gl_PointSize = (400.0 * aScale) * (1.0 / -viewPosition.z);
+    gl_PointSize = (uPointSize * aScale) * (1.0 / -viewPosition.z);
     
     vElevation = elevation;
-    vViewZ = -viewPosition.z; // Camera is at positive Z, looking at 0. So -viewPosition.z is distance.
+    vViewZ = -viewPosition.z; 
   }
 `;
 
@@ -129,18 +131,30 @@ function ElegantWaves({ count = 8000 }) {
         return { positions, scales, randoms };
     }, [count]);
 
+    const [hovered, setHover] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
     const uniforms = useMemo(
         () => ({
             uTime: { value: 0 },
             uHover: { value: 0 },
+            uAmplitude: { value: 0.5 },
+            uPointSize: { value: 400.0 },
         }),
         []
     );
 
-    const [hovered, setHover] = useState(false);
-
     useFrame((state) => {
         uniforms.uTime.value = state.clock.getElapsedTime();
+
+        // Responsive adjustment (only once or periodically)
+        const mobile = state.size.width < 768;
+        if (mobile !== isMobile) {
+            setIsMobile(mobile);
+        }
+
+        uniforms.uAmplitude.value = mobile ? 0.8 : 0.5;
+        uniforms.uPointSize.value = mobile ? 800.0 : 400.0;
 
         const targetHover = hovered ? 1 : 0;
         hoverValue.current = THREE.MathUtils.lerp(hoverValue.current, targetHover, 0.05);
