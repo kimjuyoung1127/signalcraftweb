@@ -281,78 +281,70 @@
         }
     },
     "About": {
-        "mission": "우리의 미션",
-        "vision": "산업의 소리를 듣습니다",
-        "description": "시그널크래프트는 첨단 초음파 센서와 엣지 컴퓨팅을 결합하여 산업 현장의 소음을 분석하고, 고장이 발생하기 전에 이상 징후를 감지합니다.",
-        "stats": {
-            "factories": "파트너사",
-            "accuracy": "진단 정확도",
-            "data": "수집 데이터"
-        },
-        "trustedBy": "업계 리더들의 신뢰",
+        "mission": "OUR MISSION",
+        "vision": "<heartbeat>기계의 심장소리</heartbeat>를 통해 <br /> 비즈니스의 미래를 듣습니다.",
+        "description": "시그널크래프트는 산업현장의 소리와 진동 데이터를 인공지능으로 분석하여 기계의 미세한 결함을 사전에 탐지하는 Predictive Maintenance(예지 보전) 솔루션의 표준을 만들어갑니다.",
         "hero": {
-            "title": "산업의 <span class=\"text-blue-600\">소리를 해석합니다</span>",
-            "subtitle": "시그널크래프트는 '모든 기계는 목소리를 가지고 있다'는 믿음에서 시작했습니다. 기계의 소리에 귀 기울여 고장을 미리 예방합니다."
+            "title": "SignalCraft",
+            "subtitle": "우리는 들리지 않는 신호를 보며 사고를 미연에 방지합니다."
         },
         "journey": {
-            "title": "우리의 여정",
+            "title": "Acoustic Journey",
             "milestones": {
                 "2023": {
                     "year": "2023",
-                    "title": "서울 설립",
-                    "desc": "KAIST 연구실에서 시작된 혁신."
+                    "title": "시그널크래프트 설립",
+                    "desc": "음향 분석 기반 AI 엔진 프로토타입 개발 완료"
                 },
                 "2024": {
-                    "year": "2024",
-                    "title": "시드 투자 유치",
-                    "desc": "초기 진단 엔진 개발을 위한 자금 확보."
+                    "year": "준비 중 입니다 ",
+                    "title": "준비 중 입니다",
+                    "desc": "준비 중 입니다 "
                 },
                 "2025": {
-                    "year": "2025",
-                    "title": "글로벌 확장",
-                    "desc": "검증된 진단 솔루션으로 전 세계 공장 도입."
+                    "year": "준비 중 입니다 ",
+                    "title": "준비 중 입니다",
+                    "desc": "준비 중 입니다 "
                 }
             }
         },
         "values": {
-            "title": "핵심 가치",
+            "title": "Core Values",
             "list": {
-                "precision": "<strong>정확성 우선:</strong> 데이터의 정확도는 우리의 집착입니다.",
-                "edge": "<strong>에지 네이티브:</strong> 데이터가 발생하는 곳에서 즉시 처리합니다.",
-                "human": "<strong>사람 중심:</strong> AI는 사람을 대체하는 것이 아니라 돕는 도구입니다."
+                "precision": "<strong>정밀함:</strong> 보이지 않는 0.1%의 오차도 놓치지 않는 완벽주의.",
+                "edge": "<strong>엣지:</strong> 현장에서 즉시 연산되는 저지연 지능형 솔루션.",
+                "human": "<strong>인간 중심:</strong> 엔지니어의 안전을 최우선으로 생각하는 기술."
             }
         },
         "team": {
-            "title": "함께하는 전문가들",
+            "title": "The Craftsmen",
+            "preparing": "준비 중입니다",
             "members": {
                 "ceo": {
-                    "name": "김선범",
-                    "role": "대표 (CEO)",
-                    "bio": "패턴 분석 및 알고리즘 설계 전문가.",
-                    "email": "sndercer@gmail.com"
+                    "name": "준비 중입니다 ",
+                    "role": "준비 중입니다 ",
+                    "bio": "준비 중입니다 ",
+                    "email": "준비 중입니다 "
                 },
                 "cto": {
-                    "name": "김주영",
-                    "role": "개발자",
-                    "bio": "디지털 솔루션을 이끄는 풀스택 개발자.",
-                    "email": "gmdqn2tp@gmail.com"
+                    "name": "준비 중입니다 ",
+                    "role": "준비 중입니다 ",
+                    "bio": "준비 중입니다 ",
+                    "email": "준비 중입니다 "
                 },
                 "hw": {
-                    "name": "김민교",
-                    "role": "센서 및 하드웨어",
-                    "bio": "센서 통합 및 하드웨어 개발 전문가."
-                },
-                "researcher": {
-                    "name": "이희진",
-                    "role": "연구원",
-                    "bio": "음향 패턴 인식 전문 연구원."
-                },
-                "hr": {
-                    "name": "이담",
-                    "role": "인사 및 지원",
-                    "bio": "조직 문화 및 사업 운영 관리."
+                    "name": "준비 중입니다 ",
+                    "role": "준비 중입니다 ",
+                    "bio": "준비 중입니다 ",
+                    "email": "준비 중입니다 "
                 }
             }
-        }
+        },
+        "stats": {
+            "factories": "협력 공장",
+            "accuracy": "탐지 정확도",
+            "data": "분석 데이터건수"
+        },
+        "trustedBy": "글로벌 파트너"
     }
 }

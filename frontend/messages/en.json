@@ -281,79 +281,88 @@
         }
     },
     "About": {
-        "mission": "Our Mission",
-        "vision": "Listening to the {heartbeat}{br}of Industry",
-        "heartbeat": "Heartbeat",
-        "description": "SignalCraft transforms the chaotic noise of industrial machinery into clear, actionable insights. By combining advanced ultrasonic sensors with edge computing, we detect anomalies weeks before they cause failure.",
-        "stats": {
-            "factories": "Partner Factories",
-            "accuracy": "Diagnosis Accuracy",
-            "data": "Data Points/Day"
-        },
-        "trustedBy": "Trusted by Industry Leaders",
+        "mission": "OUR MISSION",
+        "vision": "We listen to the future of business <br /> through the <heartbeat>heartbeat of machines</heartbeat>.",
+        "description": "SignalCraft is setting the standard for Predictive Maintenance solutions by analyzing sound and vibration data from industrial sites using artificial intelligence to detect minute machine faults in advance.",
         "hero": {
-            "title": "We Decode the <span class=\"text-blue-600\">Sound of Industry</span>",
-            "subtitle": "SignalCraft was founded on a simple belief: Every machine has a voice. By listening carefully, we can prevent failures before they happen."
+            "title": "Until the silent machine <br /> starts to speak",
+            "subtitle": "We read the invisible flows, see the unheard signals, and prevent accidents before they happen."
         },
         "journey": {
-            "title": "Our Journey",
+            "title": "Acoustic Journey",
             "milestones": {
                 "2023": {
                     "year": "2023",
-                    "title": "Founded in Seoul",
-                    "desc": "Started as a research lab at KAIST."
+                    "title": "SignalCraft Founded",
+                    "desc": "Completed prototype development of 'MAGI', an acoustic analysis-based AI engine."
                 },
                 "2024": {
                     "year": "2024",
-                    "title": "Seed Funding",
-                    "desc": "Secured funding to build the initial diagnostic engine."
+                    "title": "Series A Funding",
+                    "desc": "Deployed solutions to over 50 large manufacturing plants globally."
                 },
                 "2025": {
                     "year": "2025",
-                    "title": "Series A & Global Expansion",
-                    "desc": "Deployed in factories worldwide with our proven diagnostic solution."
+                    "title": "Global Expansion",
+                    "desc": "Established branches in North America and Southeast Asia, launched next-gen multi-modal sensors."
+                }
+            }
+        },
+        "magi": {
+            "title": "MAGI Engine",
+            "subtitle": "The Core of SignalCraft: Ultra-precision Multi-sensory Analysis",
+            "features": {
+                "electric": {
+                    "title": "Power Quality Analysis",
+                    "desc": "Calculates component wear in % by analyzing fine electrical noise."
+                },
+                "sound": {
+                    "title": "Acoustic Analysis",
+                    "desc": "AI monitors ultrasonic ranges in real-time that are beyond human hearing."
+                },
+                "vibration": {
+                    "title": "3-Axis Vibration Analysis",
+                    "desc": "Captures mechanical imbalances and bearing defects without error within 0.01mm."
                 }
             }
         },
         "values": {
             "title": "Core Values",
             "list": {
-                "precision": "<strong>Precision First:</strong> Data accuracy is our obsession.",
-                "edge": "<strong>Edge Native:</strong> We process where the data lives.",
-                "human": "<strong>Human Centric:</strong> AI should empower, not replace."
+                "precision": "<strong>Precision:</strong> Perfectionists who never miss a 0.1% error.",
+                "edge": "<strong>Edge:</strong> Low-latency intelligent solutions computed instantly on-site.",
+                "human": "<strong>Human-Centric:</strong> Technology that prioritizes the safety of engineers."
             }
         },
         "team": {
-            "title": "Meet the Experts",
+            "title": "The Craftsmen",
+            "preparing": "Coming soon",
             "members": {
                 "ceo": {
-                    "name": "Kim Seon-beom",
-                    "role": "CEO",
-                    "bio": "Pattern Analysis & Algorithm Design Expert.",
-                    "email": "sndercer@gmail.com"
+                    "name": "Alex Kim",
+                    "role": "Chief Executive Officer",
+                    "bio": "MIT graduate, over 15 years expert in IoT security and industrial AI.",
+                    "email": "ceo@signalcraft.kr"
                 },
                 "cto": {
-                    "name": "Kim Ju-young",
-                    "role": "Developer",
-                    "bio": "Full Stack Developer leading digital solutions.",
-                    "email": "gmdqn2tp@gmail.com"
+                    "name": "Sarah Park",
+                    "role": "Chief Technology Officer",
+                    "bio": "Ph.D. from KAIST, authority in acoustic recognition algorithm design.",
+                    "email": "cto@signalcraft.kr"
                 },
                 "hw": {
-                    "name": "Kim Min-gyo",
-                    "role": "Sensor & Hardware",
-                    "bio": "Specialist in sensor integration and hardware development."
-                },
-                "researcher": {
-                    "name": "Lee Hee-jin",
-                    "role": "Researcher",
-                    "bio": "Expert in acoustic pattern recognition."
-                },
-                "hr": {
-                    "name": "Lee Dam",
-                    "role": "HR & Support",
-                    "bio": "Managing organizational culture and business operations."
+                    "name": "David Lee",
+                    "role": "Hardware Lead",
+                    "bio": "10 years experience in cutting-edge industrial sensor hardware design.",
+                    "email": "hw@signalcraft.kr"
                 }
             }
-        }
+        },
+        "stats": {
+            "factories": "Partners",
+            "accuracy": "Detection Accuracy",
+            "data": "Data Analyzed"
+        },
+        "trustedBy": "Global Partners"
     }
 }
