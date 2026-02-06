@@ -282,10 +282,10 @@
     },
     "About": {
         "mission": "OUR MISSION",
-        "vision": "We listen to the future of business <br /> through the <heartbeat>heartbeat of machines</heartbeat>.",
+        "vision": "We listen to the future of business through the <heartbeat>heartbeat of machines</heartbeat>.",
         "description": "SignalCraft is setting the standard for Predictive Maintenance solutions by analyzing sound and vibration data from industrial sites using artificial intelligence to detect minute machine faults in advance.",
         "hero": {
-            "title": "Until the silent machine <br /> starts to speak",
+            "title": "Until the silent machine starts to speak",
             "subtitle": "We read the invisible flows, see the unheard signals, and prevent accidents before they happen."
         },
         "journey": {
@@ -297,16 +297,21 @@
                     "desc": "Completed prototype development of an acoustic analysis-based AI engine."
                 },
                 "2026": {
-                    "year": "Selected for KOIIA Batch 1",
-                    "title": "KOIIA Program Selection",
-                    "desc": "Selected for the startup accelerator program by the Korea Industry Intelligence Association."
+                    "year": "2026",
+                    "title": "National Industrial Cluster Network",
+                    "desc": "Established partnerships and completed technical validation across major industrial hubs in Seoul, Jeonnam, and Busan."
                 },
                 "2027": {
-                    "year": "Coming Soon",
-                    "title": "Coming Soon",
-                    "desc": "Preparing for the next big milestone."
+                    "year": "2027",
+                    "title": "Global Standard",
+                    "desc": "Becoming the global standard for industrial AI diagnostic solutions."
                 }
             }
+        },
+        "global": {
+            "title": "National Partner Network",
+            "subtitle": "SignalCraft's ecosystem connecting major domestic industrial hubs.",
+            "description": "From data intelligence in Seoul to manufacturing sites in Jeonnam and Busan, we protect Korea's industrial infrastructure."
         },
         "magi": {
             "title": "MAGI Engine",

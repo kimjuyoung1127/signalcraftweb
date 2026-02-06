@@ -126,6 +126,153 @@ export function AboutDetailPage() {
                 </div>
             </section>
 
+            {/* global section */}
+            <section className="py-32 overflow-hidden bg-black/20">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-20">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            className="text-blue-500 font-black tracking-tighter uppercase mb-4 text-xl italic"
+                        >
+                            {t("global.title")}
+                        </motion.h2>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-4xl md:text-6xl font-bold tracking-tight mb-6"
+                        >
+                            {t("global.subtitle")}
+                        </motion.p>
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-xl text-gray-400 max-w-2xl mx-auto"
+                        >
+                            {t("global.description")}
+                        </motion.p>
+                    </div>
+
+                    {/* Authentic Korea Map Visualization */}
+                    <div className="relative aspect-[2/3] md:aspect-[3/4] max-w-2xl mx-auto mb-20 group overflow-hidden rounded-3xl">
+                        {/* Map Background (Authentic Korea SVG) */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <img
+                                src="/korea-map.svg"
+                                alt="Republic of Korea Map"
+                                className="w-full h-full object-contain opacity-80 grayscale brightness-90 invert filter"
+                            />
+                        </div>
+
+                        {/* Interactive Nodes (Korea Hubs) */}
+                        <div className="absolute inset-0 z-10">
+                            {/* Seoul Hub (Innovation) - Approx 32%, 18% */}
+                            <div className="absolute top-[20%] left-[33%] group/node">
+                                <div className="relative">
+                                    <div className="w-5 h-5 rounded-full bg-blue-500 animate-ping absolute inset-0" />
+                                    <div className="w-5 h-5 rounded-full bg-blue-500 relative z-10 border-2 border-white shadow-[0_0_20px_rgba(59,130,246,0.6)]" />
+
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-56 opacity-0 group-hover/node:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover/node:translate-y-0 text-left">
+                                        <div className="bg-black/90 backdrop-blur-2xl p-5 rounded-2xl border border-white/20 shadow-2xl">
+                                            <p className="text-blue-500 font-black text-[10px] uppercase tracking-widest mb-2">Seoul Hub</p>
+                                            <p className="text-lg font-bold">Innovation Center</p>
+                                            <p className="text-xs text-gray-400 mt-1 mb-3">Data Intelligence & Global Bridge</p>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                <span className="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full border border-blue-500/30">HQ / KOIIA</span>
+                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full">Global Ops</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Yongin Node (infinior) - Southeast of Seoul */}
+                            <div className="absolute top-[25%] left-[36%] group/node">
+                                <div className="relative">
+                                    <div className="w-4 h-4 rounded-full bg-orange-500 animate-pulse absolute inset-0 opacity-50" />
+                                    <div className="w-4 h-4 rounded-full bg-orange-500 relative z-10 border-2 border-white shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
+
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-52 opacity-0 group-hover/node:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover/node:translate-y-0 text-left">
+                                        <div className="bg-black/90 backdrop-blur-2xl p-5 rounded-2xl border border-white/20 shadow-2xl">
+                                            <p className="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-2">Yongin Hub</p>
+                                            <p className="text-lg font-bold">infinior HQ</p>
+                                            <p className="text-xs text-gray-400 mt-1 mb-3">AI Solution & Embedded Tech (Giheung)</p>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                <span className="text-[10px] bg-orange-500/20 text-orange-300 px-2 py-0.5 rounded-full border border-orange-500/30">infinior</span>
+                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full">AI R&D</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Jeonnam Node (Manufacturing/Bio) - Approx 25%, 75% */}
+                            <div className="absolute top-[65%] left-[30%] group/node">
+                                <div className="relative">
+                                    <div className="w-4 h-4 rounded-full bg-emerald-500 animate-pulse absolute inset-0 opacity-50" />
+                                    <div className="w-4 h-4 rounded-full bg-emerald-500 relative z-10 border-2 border-white shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
+
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-52 opacity-0 group-hover/node:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover/node:translate-y-0 text-left">
+                                        <div className="bg-black/90 backdrop-blur-2xl p-5 rounded-2xl border border-white/20 shadow-2xl">
+                                            <p className="text-emerald-500 font-black text-[10px] uppercase tracking-widest mb-2">Jeonnam Hub</p>
+                                            <p className="text-lg font-bold">Bio & Chemical</p>
+                                            <p className="text-xs text-gray-400 mt-1 mb-3">Process Monitoring & Safety</p>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">JBF</span>
+                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full">Partners</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Busan Node (Heavy Tech) - Approx 62%, 78% */}
+                            <div className="absolute top-[60%] left-[76%] group/node">
+                                <div className="relative">
+                                    <div className="w-4 h-4 rounded-full bg-purple-500 animate-pulse absolute inset-0 opacity-50" />
+                                    <div className="w-4 h-4 rounded-full bg-purple-500 relative z-10 border-2 border-white shadow-[0_0_15px_rgba(168,85,247,0.5)]" />
+
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-52 opacity-0 group-hover/node:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover/node:translate-y-0 text-left">
+                                        <div className="bg-black/90 backdrop-blur-2xl p-5 rounded-2xl border border-white/20 shadow-2xl">
+                                            <p className="text-purple-500 font-black text-[10px] uppercase tracking-widest mb-2">Busan Hub</p>
+                                            <p className="text-lg font-bold">Heavy Industry</p>
+                                            <p className="text-xs text-gray-400 mt-1 mb-3">Maritime & Industrial Infra</p>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                <span className="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30">KLT / KMOU</span>
+                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full">Underwater</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Partner Grid - Responsive & Dynamic */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6">
+                        {[
+                            "KLT", "전남바이오진흥원", "Odle Odle Inc.",
+                            "NullbyteWorks", "Underwater", "infinior",
+                            "한국해양대학교"
+                        ].map((partner, i) => (
+                            <motion.div
+                                key={partner}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.05 }}
+                                className="p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-blue-500/30 transition-all flex items-center justify-center text-center group"
+                            >
+                                <span className="text-sm font-medium text-gray-500 group-hover:text-blue-400 transition-colors uppercase tracking-tight">
+                                    {partner}
+                                </span>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Team Section */}
             <section className="py-32 container mx-auto px-4">
                 <div className="text-center mb-24">

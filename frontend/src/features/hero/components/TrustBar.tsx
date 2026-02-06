@@ -9,6 +9,7 @@ const LOGO_LIST = [
     "Odle Odle Inc.",
     "NullbyteWorks",
     "Underwater",
+    "infinior",
     "Korea Maritime & Ocean University",
 ];
 
