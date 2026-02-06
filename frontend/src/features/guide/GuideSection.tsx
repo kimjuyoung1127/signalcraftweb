@@ -22,6 +22,12 @@ export function GuideSection() {
             bg: "bg-blue-500/10",
         },
         {
+            icon: CheckCircle2,
+            key: "appInstall",
+            color: "text-green-500",
+            bg: "bg-green-500/10",
+        },
+        {
             icon: BarChart3,
             key: "insight",
             color: "text-purple-500",
@@ -51,7 +57,7 @@ export function GuideSection() {
                     </motion.div>
                 </div>
 
-                <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                     {/* Animated Tech Connector (Desktop) */}
                     <div className="hidden md:block absolute top-[60px] left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent -z-10" />
 

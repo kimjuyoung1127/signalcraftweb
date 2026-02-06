@@ -106,7 +106,7 @@
         }
     },
     "Guide": {
-        "title": "Installation in Minutes",
+        "title": "Installation in 5 Minutes",
         "description": "Zero downtime. Zero complex wiring. Just plug, play, and predict.",
         "steps": {
             "attach": {
@@ -117,12 +117,47 @@
                 "title": "2. Auto-Connect",
                 "description": "The Edge Gateway automatically pairs and begins secure data transmission immediately."
             },
+            "appInstall": {
+                "title": "3. App & Device Setup",
+                "description": "Our engineer visits to map your Device ID and helps you install the management app."
+            },
             "insight": {
-                "title": "3. Real-time Insight",
+                "title": "4. Real-time Insight",
                 "description": "Access the dashboard to see live acoustic fingerprints and receive anomaly alerts."
             }
         },
-        "viewFull": "View Full Installation Guide"
+        "viewFull": "View Detailed Guide",
+        "detail": {
+            "title": "Detailed Installation Guide",
+            "subtitle": "From hardware setup to mobile app integration, here's how to get started.",
+            "hardware": {
+                "title": "Hardware Installation",
+                "step1": "Attach the magnetic sensor to the flattest part of the compressor or motor.",
+                "step2": "Plug in the Edge Gateway and wait for the Wi-Fi icon to turn green.",
+                "step3": "The status LED will blink once data is being transmitted successfully."
+            },
+            "app": {
+                "title": "App Installation & Setup",
+                "description": "Our field engineer will register your Device ID to the system and guide you through the mobile app installation.",
+                "features": {
+                    "monitoring": "Remote Monitoring",
+                    "notifications": "Instant Anomaly Alerts",
+                    "reports": "Daily/Weekly Reports"
+                },
+                "secured": "On-site Secured Access",
+                "mapping": "Engineer mapping Device ID to system"
+            },
+            "placeholder": {
+                "video": "Installation video coming soon",
+                "image": "Installation guide images coming soon",
+                "tutorials": "Tutorials"
+            },
+            "support": {
+                "title": "Need help with installation?",
+                "description": "Our support team is available 24/7 to guide you through the process.",
+                "cta": "Contact Support"
+            }
+        }
     },
     "Cases": {
         "title": "Proven Impact",
