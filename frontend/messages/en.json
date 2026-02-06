@@ -291,20 +291,20 @@
         "journey": {
             "title": "Acoustic Journey",
             "milestones": {
-                "2023": {
-                    "year": "2023",
-                    "title": "SignalCraft Founded",
-                    "desc": "Completed prototype development of 'MAGI', an acoustic analysis-based AI engine."
-                },
-                "2024": {
-                    "year": "2024",
-                    "title": "Series A Funding",
-                    "desc": "Deployed solutions to over 50 large manufacturing plants globally."
-                },
                 "2025": {
                     "year": "2025",
-                    "title": "Global Expansion",
-                    "desc": "Established branches in North America and Southeast Asia, launched next-gen multi-modal sensors."
+                    "title": "SignalCraft Founded",
+                    "desc": "Completed prototype development of an acoustic analysis-based AI engine."
+                },
+                "2026": {
+                    "year": "Selected for KOIIA Batch 1",
+                    "title": "KOIIA Program Selection",
+                    "desc": "Selected for the startup accelerator program by the Korea Industry Intelligence Association."
+                },
+                "2027": {
+                    "year": "Coming Soon",
+                    "title": "Coming Soon",
+                    "desc": "Preparing for the next big milestone."
                 }
             }
         },

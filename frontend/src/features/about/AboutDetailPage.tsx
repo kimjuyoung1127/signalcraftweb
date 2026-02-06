@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { useRef } from "react";
 
 const TEAM_KEYS = ['ceo', 'cto', 'hw'];
-const MILESTONE_KEYS = ['2023', '2024', '2025'];
+const MILESTONE_KEYS = ['2025', '2026', '2027'];
 
 function ImagePlaceholder({ label }: { label: string }) {
     return (
