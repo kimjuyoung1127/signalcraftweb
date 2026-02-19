@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Geist_Mono, Space_Grotesk } from "next/font/google";
-import localFont from "next/font/local";
+import { Outfit, Geist_Mono, Space_Grotesk, Noto_Sans_KR } from "next/font/google";
 import "@/app/globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -21,10 +20,10 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
-const pretendard = localFont({
-  src: "../../../node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2",
+const koreanSans = Noto_Sans_KR({
   display: "swap",
   variable: "--font-pretendard",
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
@@ -62,7 +61,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${outfit.variable} ${spaceGrotesk.variable} ${pretendard.variable} ${geistMono.variable} ${locale === 'ko' ? 'font-pretendard' : 'font-outfit'} antialiased bg-background text-foreground transition-colors duration-300 overflow-x-hidden break-keep`}
+        className={`${outfit.variable} ${spaceGrotesk.variable} ${koreanSans.variable} ${geistMono.variable} ${locale === 'ko' ? 'font-pretendard' : 'font-outfit'} antialiased bg-background text-foreground transition-colors duration-300 overflow-x-hidden break-keep`}
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider

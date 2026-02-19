@@ -282,7 +282,7 @@
     },
     "About": {
         "mission": "OUR MISSION",
-        "vision": "<heartbeat>기계의 심장소리</heartbeat>를 통해 <br /> 비즈니스의 미래를 듣습니다.",
+        "vision": "<heartbeat>기계의 심장소리</heartbeat>를 통해 비즈니스의 미래를 듣습니다.",
         "description": "시그널크래프트는 산업현장의 소리와 진동 데이터를 인공지능으로 분석하여 기계의 미세한 결함을 사전에 탐지하는 Predictive Maintenance(예지 보전) 솔루션의 표준을 만들어갑니다.",
         "hero": {
             "title": "SignalCraft",
