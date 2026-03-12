@@ -73,7 +73,7 @@ export function WhyBentoGrid() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min md:auto-rows-[280px]">
+                <div className="grid grid-cols-1 gap-x-6 gap-y-7 auto-rows-min md:grid-cols-3 md:gap-x-7 md:gap-y-8 md:auto-rows-[292px] lg:gap-x-8 lg:gap-y-10">
                     {features.map((feature, index) => (
                         <BentoCard key={feature.key} feature={feature} index={index} />
                     ))}
