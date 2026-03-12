@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useSpring, useTransform, animate } from "framer-motion";
+import { animate } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 
@@ -47,20 +47,20 @@ export function HeroStats() {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-16 mt-20 md:mt-24 w-full max-w-4xl border-t border-white/5 pt-12">
             <Counter
-                value={85}
-                suffix="%"
+                value={24}
+                suffix="h"
                 label={t("downtime")}
                 delay={0.6}
             />
             <Counter
-                value={99.9}
-                suffix="%"
+                value={10}
+                suffix="s"
                 label={t("accuracy")}
                 delay={0.8}
             />
             <Counter
-                value={24}
-                suffix="/7"
+                value={1}
+                suffix="/day"
                 label={t("monitoring")}
                 delay={1.0}
             />

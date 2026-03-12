@@ -1,123 +1,168 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, BarChart, Clock, Factory } from "lucide-react";
-import Image from "next/image";
+import { useLocale } from "next-intl";
+import { ArrowRight } from "lucide-react";
+import { Link } from "@/i18n/routing";
+import { caseStudies } from "@/content/cases";
+import { getLocalizedText } from "@/content/news";
 
-const cases = [
-    {
-        id: 1,
-        client: "H-Mart Logistics",
-        industry: "Logistics",
-        title: "Preventing Conveyor Motor Failure",
-        description: "H-Mart Logistics faced frequent downtime due to unexpected motor failures in their sorting facility. SignalCraft deployed acoustic sensors to monitor 500+ motors.",
-        result: "Reduced downtime by 85% and saved $1.2M annually.",
-        metrics: [
-            { label: "ROI", value: "320%" },
-            { label: "Downtime", value: "-85%" },
-            { label: "Savings", value: "$1.2M" }
-        ],
-        image: "bg-blue-900",
-    },
-    {
-        id: 2,
-        client: "P-Chemical",
-        industry: "Petrochemical",
-        title: "Leak Detection in High-Pressure Valves",
-        description: "Early detection of gas leaks is critical for safety. Our AI analyzed ultrasonic frequencies to detect minute leaks that manual inspections missed.",
-        result: "Prevented 3 potential hazardous incidents.",
-        metrics: [
-            { label: "Safety Incidents", value: "0" },
-            { label: "Detection Time", value: "<1s" },
-            { label: "Coverage", value: "100%" }
-        ],
-        image: "bg-purple-900",
-    },
-    {
-        id: 3,
-        client: "T-Energy",
-        industry: "Wind Power",
-        title: "Turbine Gearbox Diagnostics",
-        description: "Offshore wind turbines are expensive to maintain. We implemented predictive maintenance to schedule repairs only when necessary.",
-        result: "Extended asset life by 3 years and optimized maintenance schedules.",
-        metrics: [
-            { label: "Asset Life", value: "+3 yrs" },
-            { label: "Maintenance", value: "-40%" },
-            { label: "Uptime", value: "99.9%" }
-        ],
-        image: "bg-emerald-900",
-    },
-];
+const casesPageUi = {
+  ko: {
+    title: "Proven Impact",
+    description:
+      "실제 현장에서 어떤 문제를 먼저 잡을 수 있는지, 시나리오별로 정리했습니다.",
+    stackLabel: "적용 포인트",
+    detailAction: "자세히 보기",
+  },
+  en: {
+    title: "Proven Impact",
+    description:
+      "Real-world scenarios that show where SignalCraft makes a difference first.",
+    stackLabel: "Stack",
+    detailAction: "Read the full scenario",
+  },
+};
 
 export function CasesDetailPage() {
-    return (
-        <div className="pt-16 md:pt-24 pb-16 md:pb-24">
-            <section className="container mx-auto px-4 mb-12 md:mb-20 text-center">
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-3xl md:text-5xl font-bold mb-6 break-keep"
-                >
-                    Success <span className="text-blue-600">Stories</span>
-                </motion.h1>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto break-keep">
-                    See how Global 500 companies are transforming their maintenance operations with SignalCraft.
-                </p>
-            </section>
+  const locale = useLocale();
+  const ui = locale === "ko" ? casesPageUi.ko : casesPageUi.en;
 
-            <section className="container mx-auto px-4 space-y-16 md:space-y-24">
-                {cases.map((story, i) => (
-                    <motion.div
-                        key={story.id}
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        className={`flex flex-col ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-8 md:gap-12 items-center`}
+  return (
+    <div className="bg-background pb-16 pt-16 md:pb-24 md:pt-24">
+      <section className="container mx-auto px-4 text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="font-display text-3xl font-bold tracking-tight md:text-6xl"
+        >
+          {ui.title}
+        </motion.h1>
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-muted-foreground md:text-xl">
+          {ui.description}
+        </p>
+      </section>
+
+      <section className="container mx-auto mt-10 space-y-8 px-4 md:mt-14">
+        {caseStudies.map((story, index) => (
+          <motion.article
+            key={story.id}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ delay: index * 0.07 }}
+            className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-sm"
+          >
+            <div className="grid gap-0 lg:grid-cols-[420px_minmax(0,1fr)]">
+              <div
+                className={`relative overflow-hidden bg-gradient-to-br ${story.accent.gradient} p-6 md:p-8`}
+              >
+                <div
+                  className={`absolute -right-16 -top-16 h-44 w-44 rounded-full blur-3xl ${story.accent.glow}`}
+                />
+                <div className="relative z-10">
+                  <span
+                    className={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${story.accent.badge}`}
+                  >
+                    {getLocalizedText(story.status, locale)}
+                  </span>
+                  <h2 className="mt-5 font-display text-2xl font-bold leading-snug text-white md:text-3xl">
+                    {getLocalizedText(story.title, locale)}
+                  </h2>
+                  <p className="mt-3 text-sm font-semibold text-white/80">
+                    {getLocalizedText(story.client, locale)}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-white/65 md:text-base">
+                    {getLocalizedText(story.summary, locale)}
+                  </p>
+
+                  <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                    {story.metrics.map((metric) => (
+                      <div
+                        key={metric.label.ko}
+                        className="rounded-2xl border border-white/10 bg-black/20 px-4 py-4"
+                      >
+                        <div className="text-lg font-bold text-white">
+                          {getLocalizedText(metric.value, locale)}
+                        </div>
+                        <div className="mt-1 text-xs text-white/60">
+                          {getLocalizedText(metric.label, locale)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col p-6 md:p-8">
+                <div className="flex flex-wrap items-center gap-3 text-sm">
+                  <span className="rounded-full border border-white/10 bg-background/70 px-3 py-1 font-semibold text-muted-foreground">
+                    {getLocalizedText(story.industry, locale)}
+                  </span>
+                  <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 font-semibold text-blue-400">
+                    {getLocalizedText(story.result, locale)}
+                  </span>
+                </div>
+
+                <div className="mt-6 grid gap-6 md:grid-cols-2">
+                  {story.sections.map((section) => (
+                    <div
+                      key={section.heading.ko}
+                      className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5"
                     >
-                        {/* Image Side */}
-                        <div className="w-full md:w-1/2">
-                            <div className={`aspect-video rounded-2xl md:rounded-3xl ${story.image} bg-opacity-10 relative overflow-hidden shadow-2xl`}>
-                                <div className="absolute inset-0 bg-gradient-to-br from-black/0 to-black/40" />
-                                <div className="absolute top-4 left-4 md:top-6 md:left-6 bg-white/10 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-white/20 text-white text-xs md:text-sm font-semibold">
-                                    {story.client}
-                                </div>
-                                {/* Placeholder Visuals */}
-                                <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                                    <Factory className="w-16 h-16 md:w-24 md:h-24 text-white" />
-                                </div>
-                            </div>
-                        </div>
+                      <h3 className="font-display text-xl font-bold">
+                        {getLocalizedText(section.heading, locale)}
+                      </h3>
+                      {section.paragraphs?.map((paragraph) => (
+                        <p
+                          key={paragraph.ko}
+                          className="mt-3 text-sm leading-6 text-muted-foreground"
+                        >
+                          {getLocalizedText(paragraph, locale)}
+                        </p>
+                      ))}
+                      {section.bullets?.length ? (
+                        <ul className="mt-4 grid gap-2 text-sm leading-6 text-muted-foreground">
+                          {section.bullets.map((bullet) => (
+                            <li key={bullet.ko} className="flex items-start gap-2">
+                              <span className="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500" />
+                              <span>{getLocalizedText(bullet, locale)}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
 
-                        {/* Content Side */}
-                        <div className="w-full md:w-1/2 space-y-4 md:space-y-6">
-                            <div className="text-blue-600 font-bold uppercase tracking-wider text-[10px] md:text-sm flex items-center gap-2">
-                                <span className="w-6 md:w-8 h-[2px] bg-blue-600 inline-block"></span>
-                                {story.industry}
-                            </div>
-                            <h2 className="text-2xl md:text-3xl font-bold leading-tight break-keep">{story.title}</h2>
-                            <p className="text-base md:text-lg text-muted-foreground leading-relaxed break-keep">
-                                {story.description}
-                            </p>
+                <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+                  <p className="text-sm font-semibold text-foreground">{ui.stackLabel}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {story.stack.map((item) => (
+                      <span
+                        key={item.ko}
+                        className="rounded-full border border-white/10 bg-background/60 px-3 py-2 text-xs font-medium text-muted-foreground"
+                      >
+                        {getLocalizedText(item, locale)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 py-4 md:py-6 border-y border-border">
-                                {story.metrics.map((metric, idx) => (
-                                    <div key={idx} className="flex flex-col">
-                                        <div className="text-xl md:text-2xl font-bold text-foreground">{metric.value}</div>
-                                        <div className="text-[10px] md:text-xs text-muted-foreground uppercase">{metric.label}</div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div>
-                                <p className="font-semibold text-blue-600 mb-4">{story.result}</p>
-                                <button className="flex items-center font-bold hover:gap-2 transition-all">
-                                    Read Full Case Study <ArrowUpRight className="ml-2 w-5 h-5" />
-                                </button>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
-            </section>
-        </div>
-    );
+                <div className="mt-6">
+                  <Link
+                    href={`/cases/${story.slug}`}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-blue-500 transition-colors hover:text-blue-400"
+                  >
+                    {ui.detailAction}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </section>
+    </div>
+  );
 }

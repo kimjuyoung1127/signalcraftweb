@@ -5,7 +5,15 @@ import { Activity, Cpu, Wifi, ArrowRight, Layers } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 
-const features = [
+type FeatureCard = {
+    key: string;
+    icon: typeof Activity;
+    colSpan: string;
+    bg: string;
+    iconColor: string;
+};
+
+const features: FeatureCard[] = [
     {
         key: "precision",
         icon: Activity,
@@ -75,7 +83,7 @@ export function WhyBentoGrid() {
     );
 }
 
-function BentoCard({ feature, index }: { feature: any; index: number }) {
+function BentoCard({ feature, index }: { feature: FeatureCard; index: number }) {
     const t = useTranslations("WhyUs");
     const Icon = feature.icon;
 

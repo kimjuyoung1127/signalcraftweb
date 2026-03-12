@@ -1,138 +1,172 @@
+import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { getCaseStudyBySlug } from "@/content/cases";
+import { getLocalizedText } from "@/content/news";
 
-// Mock Data
-const cases = [
-    {
-        id: "1",
-        client: "H-Mart Logistics",
-        industry: "Logistics Automation",
-        title: "Preventing Conveyor Motor Failure",
-        result: "Reduced downtime by 85%",
-        content: `
-            In large-scale logistics centers, conveyor belt motors are critical assets. 
-            A sudden failure can halt the entire sorting line, leading to significant delays and revenue loss.
-            
-            SignalCraft installed its non-invasive acoustic sensors on 50 key motors. 
-            Within two weeks, the AI detected an abnormal frequency pattern in Motor #42, indicating early-stage bearing wear.
-            
-            Maintenance teams were alerted immediately and replaced the bearing during a scheduled break, preventing a potential 4-hour unplanned outage.
-        `,
-        stats: [
-            { label: "Downtime Prevented", value: "4 Hours" },
-            { label: "Cost Saving", value: "$45,000" },
-            { label: "Detection Time", value: "< 0.1s" }
-        ]
+const detailUi = {
+    ko: {
+        back: "사례 목록으로 돌아가기",
+        challenge: "시나리오 해설",
+        stack: "적용 포인트",
+        contactTitle: "현장 적용 가능성을 함께 검토해 보세요",
+        contactBody:
+            "설비 환경, 파일럿 범위, 운영 팀이 받아볼 알림 흐름까지 현재 상황에 맞춰 설명해 드립니다.",
+        contactAction: "문의하기",
+        moreCases: "다른 시나리오 보기",
     },
-    {
-        id: "2",
-        client: "P-Chemical",
-        industry: "Petrochemical Processing",
-        title: "Leak Detection in High-Pressure Valves",
-        result: "Saved $2.5M in potential damages",
-        content: `
-            High-pressure valves in petrochemical plants are prone to micro-leaks that are invisible to the naked eye and inaudible to human ears.
-            These leaks can be hazardous and costly.
-            
-            SignalCraft's ultrasonic analysis identified a high-frequency hiss from Valve V-209 that deviated from the standard operating profile.
-            Verification confirmed a seal breach. Early intervention prevented a hazardous chemical spill and ensured compliance with safety regulations.
-        `,
-        stats: [
-            { label: "Risk Mitigated", value: "Critical" },
-            { label: "Asset Protected", value: "$2.5M" },
-            { label: "Compliance", value: "100%" }
-        ]
+    en: {
+        back: "Back to scenarios",
+        challenge: "Scenario walkthrough",
+        stack: "Application points",
+        contactTitle: "Explore how this could fit your site",
+        contactBody:
+            "We can walk through deployment fit, pilot scope, and the alert flow your operations team would receive.",
+        contactAction: "Contact us",
+        moreCases: "Explore more scenarios",
     },
-    {
-        id: "3",
-        client: "T-Energy",
-        industry: "Wind Power Generation",
-        title: "Turbine Gearbox Diagnostics",
-        result: "Extended asset life by 3 years",
-        content: `
-            Wind turbine gearboxes operate under extreme stress. Traditional vibration monitoring often misses subtle initial faults.
-            
-            By analyzing the acoustic signature of the gearbox, SignalCraft identified gear mesh misalignment months before it would cause vibration alarms.
-            Remote adjustments were made to the control parameters, reducing stress on the gearbox and extending its estimated operational life by 3 years.
-        `,
-        stats: [
-            { label: "Life Extension", value: "3 Years" },
-            { label: "ROI", value: "1200%" },
-            { label: "Maintenance", value: "Predictive" }
-        ]
-    },
-];
+};
 
-export default async function CaseDetailPage({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
-    const caseStudy = cases.find((c) => c.id === id);
+export default async function CaseDetailPage({
+    params,
+}: {
+    params: Promise<{ locale: string; id: string }>;
+}) {
+    const { locale, id } = await params;
+    const ui = locale === "ko" ? detailUi.ko : detailUi.en;
+    const caseStudy = getCaseStudyBySlug(id);
 
     if (!caseStudy) {
-        return (
-            <div className="min-h-screen pt-32 pb-20 container mx-auto px-4 text-center">
-                <h1 className="text-4xl font-bold mb-4">Case Not Found</h1>
-                <Link href="/cases" className="text-blue-500 hover:underline">Return to Cases</Link>
-            </div>
-        );
+        notFound();
     }
 
     return (
-        <div className="min-h-screen pt-32 pb-20">
-            <div className="container mx-auto px-4 max-w-4xl">
-                {/* Back Button */}
-                <Link href="/cases" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors">
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Back to Cases
+        <div className="min-h-screen bg-background pb-20 pt-24">
+            <div className="container mx-auto max-w-5xl px-4">
+                <Link
+                    href="/cases"
+                    className="inline-flex items-center text-sm font-semibold text-muted-foreground transition-colors hover:text-blue-500"
+                >
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    {ui.back}
                 </Link>
 
-                {/* Header */}
-                <div className="mb-12">
-                    <span className="px-3 py-1 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium border border-blue-500/20">
-                        {caseStudy.industry}
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold mt-6 mb-4">{caseStudy.client}: {caseStudy.title}</h1>
-                    <p className="text-2xl text-muted-foreground">{caseStudy.result}</p>
-                </div>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                    {caseStudy.stats.map((stat, index) => (
-                        <div key={index} className="p-6 bg-card border border-border rounded-2xl">
-                            <div className="text-sm text-muted-foreground mb-1">{stat.label}</div>
-                            <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                <header className="mt-8 overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-sm">
+                    <div
+                        className={`relative overflow-hidden bg-gradient-to-br ${caseStudy.accent.gradient} p-8 md:p-10`}
+                    >
+                        <div
+                            className={`absolute -right-20 -top-20 h-52 w-52 rounded-full blur-3xl ${caseStudy.accent.glow}`}
+                        />
+                        <div className="relative z-10 max-w-3xl">
+                            <span
+                                className={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${caseStudy.accent.badge}`}
+                            >
+                                {getLocalizedText(caseStudy.status, locale)}
+                            </span>
+                            <p className="mt-4 text-sm font-semibold text-white/75">
+                                {getLocalizedText(caseStudy.client, locale)}
+                            </p>
+                            <h1 className="mt-3 font-display text-3xl font-bold leading-tight text-white md:text-5xl">
+                                {getLocalizedText(caseStudy.title, locale)}
+                            </h1>
+                            <p className="mt-4 text-base leading-7 text-white/75 md:text-lg">
+                                {getLocalizedText(caseStudy.summary, locale)}
+                            </p>
                         </div>
-                    ))}
-                </div>
-
-                {/* Content */}
-                <div className="prose prose-lg dark:prose-invert max-w-none">
-                    <h2 className="text-2xl font-bold mb-4">The Challenge & Solution</h2>
-                    <div className="whitespace-pre-line text-lg leading-relaxed text-muted-foreground">
-                        {caseStudy.content}
                     </div>
 
-                    <h3 className="text-xl font-bold mt-12 mb-6">Key Technologies Used</h3>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none p-0">
-                        {["Acoustic Signature Analysis", "Edge AI Processing", "Real-time Anomaly Detection", "Predictive maintenance Dashboard"].map((tech, i) => (
-                            <li key={i} className="flex items-center p-4 bg-secondary/50 rounded-xl">
-                                <CheckCircle2 className="w-5 h-5 mr-3 text-blue-500" />
-                                {tech}
-                            </li>
+                    <div className="grid gap-4 p-6 md:grid-cols-3 md:p-8">
+                        {caseStudy.metrics.map((metric) => (
+                            <div
+                                key={metric.label.ko}
+                                className="rounded-[1.5rem] border border-white/10 bg-background/60 p-5"
+                            >
+                                <div className="text-sm text-muted-foreground">
+                                    {getLocalizedText(metric.label, locale)}
+                                </div>
+                                <div className="mt-2 text-xl font-bold text-foreground">
+                                    {getLocalizedText(metric.value, locale)}
+                                </div>
+                            </div>
                         ))}
-                    </ul>
-                </div>
+                    </div>
+                </header>
 
-                {/* CTA */}
-                <div className="mt-20 p-10 bg-gradient-to-br from-blue-900/50 to-purple-900/50 rounded-3xl text-center border border-white/10">
-                    <h3 className="text-2xl font-bold mb-4">Ready to optimize your operations?</h3>
-                    <div className="flex justify-center gap-4">
-                        <Link href="/contact" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-colors">
-                            Request Demo
+                <section className="mt-10 rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8">
+                    <h2 className="font-display text-2xl font-bold md:text-3xl">
+                        {ui.challenge}
+                    </h2>
+                    <div className="mt-6 grid gap-6 md:grid-cols-2">
+                        {caseStudy.sections.map((section) => (
+                            <div
+                                key={section.heading.ko}
+                                className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5"
+                            >
+                                <h3 className="font-display text-xl font-bold">
+                                    {getLocalizedText(section.heading, locale)}
+                                </h3>
+                                {section.paragraphs?.map((paragraph) => (
+                                    <p
+                                        key={paragraph.ko}
+                                        className="mt-3 text-sm leading-6 text-muted-foreground md:text-base"
+                                    >
+                                        {getLocalizedText(paragraph, locale)}
+                                    </p>
+                                ))}
+                                {section.bullets?.length ? (
+                                    <ul className="mt-4 grid gap-3">
+                                        {section.bullets.map((bullet) => (
+                                            <li
+                                                key={bullet.ko}
+                                                className="flex items-start gap-3 text-sm leading-6 text-muted-foreground md:text-base"
+                                            >
+                                                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-500" />
+                                                <span>{getLocalizedText(bullet, locale)}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : null}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+                        <h3 className="text-sm font-semibold text-foreground">{ui.stack}</h3>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                            {caseStudy.stack.map((item) => (
+                                <span
+                                    key={item.ko}
+                                    className="rounded-full border border-white/10 bg-background/70 px-3 py-2 text-xs font-medium text-muted-foreground"
+                                >
+                                    {getLocalizedText(item, locale)}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="mt-10 rounded-[2rem] border border-blue-500/20 bg-blue-500/5 p-6 text-center md:p-8">
+                    <h3 className="font-display text-2xl font-bold">{ui.contactTitle}</h3>
+                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
+                        {ui.contactBody}
+                    </p>
+                    <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+                        >
+                            {ui.contactAction}
                         </Link>
-                        <Link href="/cases" className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-semibold transition-colors">
-                            View More Cases
+                        <Link
+                            href="/cases"
+                            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold transition-colors hover:bg-white/10"
+                        >
+                            {ui.moreCases}
+                            <ArrowRight className="h-4 w-4" />
                         </Link>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     );

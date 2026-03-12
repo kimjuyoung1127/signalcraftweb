@@ -1,320 +1,344 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Linkedin, Mail, Zap, AudioLines, Activity, ShieldCheck, ChevronRight, Globe } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
+import { Activity, ArrowRight, AudioLines, Globe, ShieldCheck, Zap } from "lucide-react";
+import Image from "next/image";
+import { Link } from "@/i18n/routing";
 
-const TEAM_KEYS = ['ceo', 'cto', 'hw'];
-const MILESTONE_KEYS = ['2025', '2026', '2027'];
+const MILESTONE_KEYS = ["2025", "2026", "2027"] as const;
 
-function ImagePlaceholder({ label }: { label: string }) {
-    return (
-        <div className="aspect-[4/5] bg-white/5 border border-white/10 rounded-2xl flex flex-col items-center justify-center gap-4 group-hover:bg-white/10 transition-all relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent" />
-            <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                <ChevronRight className="w-6 h-6 text-blue-500 rotate-45" />
-            </div>
-            <span className="text-sm font-medium text-gray-500 uppercase tracking-widest">{label}</span>
-            {/* Decorative waves */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-        </div>
-    );
-}
+const aboutUi = {
+  ko: {
+    momentumEyebrow: "회사 모멘텀",
+    momentumTitle: "지금 SignalCraft는 이런 일들을 하고 있습니다",
+    momentumBody:
+      "프로그램 선정, 전시 무대 피칭, 전국 파트너 확대까지 — 최근 주요 활동을 한눈에 확인하세요.",
+    momentumCards: [
+      {
+        title: "부산 프로그램 서류합격",
+        body: "부산기술창업투자원 ‘2026 부비콘 빌드 육성사업’ 서면평가를 통과하며 부산 산업 현장과의 접점을 넓히고 있습니다.",
+        href: "/news/busan-build-pass",
+      },
+      {
+        title: "AW 2026 인터뷰 · IR 피칭",
+        body: "AW 2026 AI Factory Stage에서 직접 무대에 오르고, 인터뷰 영상을 통해 제품 방향을 공개했습니다.",
+        href: "/news/founder-interview-aw-2026",
+      },
+      {
+        title: "전국 산업 네트워크 확장",
+        body: "서울, 전남, 부산 거점을 잇는 파트너십으로 파일럿과 협업 기회를 빠르게 만들고 있습니다.",
+        href: "/contact",
+      },
+    ],
+    capabilitiesTitle: "SignalCraft가 하는 일",
+    capabilities: [
+      {
+        title: "Zero-config learning",
+        body: "설치 후 하루 동안 평소 소음과 진동을 익혀 기기마다 기준을 자동으로 잡아둡니다.",
+      },
+      {
+        title: "Edge AI deployment",
+        body: "임계값을 따로 세팅할 필요 없이, 현장 데이터를 읽어 상태를 판단하고 알림으로 알려줍니다.",
+      },
+      {
+        title: "Operator-ready workflow",
+        body: "데이터를 모으는 것에서 끝나지 않고, 어디를 먼저 점검할지, 언제 움직일지를 함께 알려줍니다.",
+      },
+    ],
+    finalTitle: "현장과 함께 자라는 기술 회사입니다",
+    finalBody:
+      "공장 소리를 운영팀이 바로 쓸 수 있는 신호로 바꿉니다. 뉴스룸이나 문의 페이지에서 더 알아보세요.",
+    newsAction: "뉴스룸 보기",
+    contactAction: "문의하기",
+    partnerLabel: "현장 파트너",
+    learnMore: "자세히 보기",
+  },
+  en: {
+    momentumEyebrow: "Company Momentum",
+    momentumTitle: "Here’s what SignalCraft has been up to",
+    momentumBody:
+      "Program selections, a trade-show stage pitch, and a growing partner network — see how we’re moving forward.",
+    momentumCards: [
+      {
+        title: "Busan program screening pass",
+        body: "We passed the document screening for the 2026 B-Beacon Build program run by the Busan Tech Startup Investment Agency.",
+        href: "/news/busan-build-pass",
+      },
+      {
+        title: "AW 2026 interview and stage pitch",
+        body: "We took the AI Factory Stage at AW 2026 and released an interview showing where the product is heading.",
+        href: "/news/founder-interview-aw-2026",
+      },
+      {
+        title: "Growing the industrial network",
+        body: "Partnerships across Seoul, Jeonnam, and Busan are opening doors for pilots and collaboration.",
+        href: "/contact",
+      },
+    ],
+    capabilitiesTitle: "What SignalCraft does",
+    capabilities: [
+      {
+        title: "Zero-config learning",
+        body: "After installation, it spends a day learning each machine’s normal vibration and noise — then sets its own baseline.",
+      },
+      {
+        title: "Edge AI deployment",
+        body: "No threshold tuning needed. It reads on-site data, judges equipment state, and sends alerts automatically.",
+      },
+      {
+        title: "Operator-ready workflow",
+        body: "It goes beyond data collection — it tells you what to check first and when to act.",
+      },
+    ],
+    finalTitle: "A technology company that grows with the field",
+    finalBody:
+      "We turn factory sounds into signals operations teams can use. Check the newsroom or reach out to learn more.",
+    newsAction: "Visit the newsroom",
+    contactAction: "Contact SignalCraft",
+    partnerLabel: "Field partners",
+    learnMore: "Learn more",
+  },
+};
+
+const capabilityIcons = [AudioLines, ShieldCheck, Activity];
 
 export function AboutDetailPage() {
-    const t = useTranslations("About");
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
+  const locale = useLocale();
+  const t = useTranslations("About");
+  const ui = locale === "ko" ? aboutUi.ko : aboutUi.en;
 
-    const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-    const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.9]);
-
-    return (
-        <div ref={containerRef} className="bg-[#050505] text-white selection:bg-blue-500/30">
-            {/* Cinematic Hero Section */}
-            <section className="relative h-screen flex items-center justify-center overflow-hidden">
-                <motion.div
-                    style={{ opacity: heroOpacity, scale: heroScale }}
-                    className="container mx-auto px-4 z-10 text-center"
-                >
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold tracking-widest uppercase mb-8 inline-block"
-                    >
-                        {t("mission")}
-                    </motion.span>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-5xl md:text-8xl font-black mb-12 leading-[1.1] tracking-tighter"
-                        dangerouslySetInnerHTML={{ __html: t.raw("hero.title") }}
-                    />
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                        className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed"
-                    >
-                        {t("hero.subtitle")}
-                    </motion.p>
-                </motion.div>
-
-                {/* Animated Background VFX */}
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
-                    <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-[#050505] to-transparent" />
-                </div>
-
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-                    <div className="w-px h-12 bg-gradient-to-b from-blue-500 to-transparent" />
-                </div>
-            </section>
-
-
-
-            {/* Interactive Journey Timeline */}
-            <section className="py-32 bg-white/5 border-y border-white/10">
-                <div className="container mx-auto px-4">
-                    <h2 className="text-6xl font-black mb-24 tracking-tighter text-center">{t("journey.title")}</h2>
-
-                    <div className="max-w-4xl mx-auto relative">
-                        {/* Center Line */}
-                        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 via-purple-500 to-transparent hidden md:block" />
-
-                        <div className="space-y-32">
-                            {MILESTONE_KEYS.map((year, i) => (
-                                <motion.div
-                                    key={year}
-                                    initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    className={`flex flex-col md:flex-row gap-12 items-center ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-                                >
-                                    <div className="flex-1 text-center md:text-right">
-                                        {i % 2 === 0 ? (
-                                            <>
-                                                <span className="text-6xl font-black text-white/10 mb-2 block">{year}</span>
-                                                <h3 className="text-3xl font-bold mb-4">{t(`journey.milestones.${year}.title`)}</h3>
-                                                <p className="text-gray-400">{t(`journey.milestones.${year}.desc`)}</p>
-                                            </>
-                                        ) : null}
-                                    </div>
-
-                                    <div className="relative z-10">
-                                        <div className="w-6 h-6 rounded-full bg-blue-500 ring-8 ring-blue-500/20" />
-                                    </div>
-
-                                    <div className="flex-1 text-center md:text-left">
-                                        {i % 2 !== 0 ? (
-                                            <>
-                                                <span className="text-6xl font-black text-white/10 mb-2 block">{year}</span>
-                                                <h3 className="text-3xl font-bold mb-4">{t(`journey.milestones.${year}.title`)}</h3>
-                                                <p className="text-gray-400">{t(`journey.milestones.${year}.desc`)}</p>
-                                            </>
-                                        ) : null}
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* global section */}
-            <section className="py-32 overflow-hidden bg-black/20">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-20">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="text-blue-500 font-black tracking-tighter uppercase mb-4 text-xl italic"
-                        >
-                            {t("global.title")}
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-6xl font-bold tracking-tight mb-6"
-                        >
-                            {t("global.subtitle")}
-                        </motion.p>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            className="text-xl text-gray-400 max-w-2xl mx-auto"
-                        >
-                            {t("global.description")}
-                        </motion.p>
-                    </div>
-
-                    {/* Authentic Korea Map Visualization */}
-                    <div className="relative aspect-[2/3] md:aspect-[3/4] max-w-2xl mx-auto mb-20 group overflow-hidden rounded-3xl">
-                        {/* Map Background (Authentic Korea SVG) */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <img
-                                src="/korea-map.svg"
-                                alt="Republic of Korea Map"
-                                className="w-full h-full object-contain opacity-80 grayscale brightness-90 invert filter"
-                            />
-                        </div>
-
-                        {/* Interactive Nodes (Korea Hubs) */}
-                        <div className="absolute inset-0 z-10">
-                            {/* Seoul Hub (Innovation) - Approx 32%, 18% */}
-                            <div className="absolute top-[20%] left-[33%] group/node">
-                                <div className="relative">
-                                    <div className="w-5 h-5 rounded-full bg-blue-500 animate-ping absolute inset-0" />
-                                    <div className="w-5 h-5 rounded-full bg-blue-500 relative z-10 border-2 border-white shadow-[0_0_20px_rgba(59,130,246,0.6)]" />
-
-                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-56 opacity-0 group-hover/node:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover/node:translate-y-0 text-left">
-                                        <div className="bg-black/90 backdrop-blur-2xl p-5 rounded-2xl border border-white/20 shadow-2xl">
-                                            <p className="text-blue-500 font-black text-[10px] uppercase tracking-widest mb-2">Seoul Hub</p>
-                                            <p className="text-lg font-bold">Innovation Center</p>
-                                            <p className="text-xs text-gray-400 mt-1 mb-3">Data Intelligence & Global Bridge</p>
-                                            <div className="flex flex-wrap gap-1.5">
-                                                <span className="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full border border-blue-500/30">HQ / KOIIA</span>
-                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full">Global Ops</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Yongin Node (infinior) - Southeast of Seoul */}
-                            <div className="absolute top-[25%] left-[36%] group/node">
-                                <div className="relative">
-                                    <div className="w-4 h-4 rounded-full bg-orange-500 animate-pulse absolute inset-0 opacity-50" />
-                                    <div className="w-4 h-4 rounded-full bg-orange-500 relative z-10 border-2 border-white shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
-
-                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-52 opacity-0 group-hover/node:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover/node:translate-y-0 text-left">
-                                        <div className="bg-black/90 backdrop-blur-2xl p-5 rounded-2xl border border-white/20 shadow-2xl">
-                                            <p className="text-orange-500 font-black text-[10px] uppercase tracking-widest mb-2">Yongin Hub</p>
-                                            <p className="text-lg font-bold">infinior HQ</p>
-                                            <p className="text-xs text-gray-400 mt-1 mb-3">AI Solution & Embedded Tech (Giheung)</p>
-                                            <div className="flex flex-wrap gap-1.5">
-                                                <span className="text-[10px] bg-orange-500/20 text-orange-300 px-2 py-0.5 rounded-full border border-orange-500/30">infinior</span>
-                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full">AI R&D</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Jeonnam Node (Manufacturing/Bio) - Approx 25%, 75% */}
-                            <div className="absolute top-[65%] left-[30%] group/node">
-                                <div className="relative">
-                                    <div className="w-4 h-4 rounded-full bg-emerald-500 animate-pulse absolute inset-0 opacity-50" />
-                                    <div className="w-4 h-4 rounded-full bg-emerald-500 relative z-10 border-2 border-white shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
-
-                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-52 opacity-0 group-hover/node:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover/node:translate-y-0 text-left">
-                                        <div className="bg-black/90 backdrop-blur-2xl p-5 rounded-2xl border border-white/20 shadow-2xl">
-                                            <p className="text-emerald-500 font-black text-[10px] uppercase tracking-widest mb-2">Jeonnam Hub</p>
-                                            <p className="text-lg font-bold">Bio & Chemical</p>
-                                            <p className="text-xs text-gray-400 mt-1 mb-3">Process Monitoring & Safety</p>
-                                            <div className="flex flex-wrap gap-1.5">
-                                                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">JBF</span>
-                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full">Partners</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Busan Node (Heavy Tech) - Approx 62%, 78% */}
-                            <div className="absolute top-[60%] left-[76%] group/node">
-                                <div className="relative">
-                                    <div className="w-4 h-4 rounded-full bg-purple-500 animate-pulse absolute inset-0 opacity-50" />
-                                    <div className="w-4 h-4 rounded-full bg-purple-500 relative z-10 border-2 border-white shadow-[0_0_15px_rgba(168,85,247,0.5)]" />
-
-                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-52 opacity-0 group-hover/node:opacity-100 transition-all pointer-events-none transform translate-y-2 group-hover/node:translate-y-0 text-left">
-                                        <div className="bg-black/90 backdrop-blur-2xl p-5 rounded-2xl border border-white/20 shadow-2xl">
-                                            <p className="text-purple-500 font-black text-[10px] uppercase tracking-widest mb-2">Busan Hub</p>
-                                            <p className="text-lg font-bold">Heavy Industry</p>
-                                            <p className="text-xs text-gray-400 mt-1 mb-3">Maritime & Industrial Infra</p>
-                                            <div className="flex flex-wrap gap-1.5">
-                                                <span className="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30">KLT / KMOU</span>
-                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full">Underwater</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Partner Grid - Responsive & Dynamic */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6">
-                        {[
-                            "KLT", "전남바이오진흥원", "Odle Odle Inc.",
-                            "NullbyteWorks", "Underwater", "infinior",
-                            "한국해양대학교"
-                        ].map((partner, i) => (
-                            <motion.div
-                                key={partner}
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.05 }}
-                                className="p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-blue-500/30 transition-all flex items-center justify-center text-center group"
-                            >
-                                <span className="text-sm font-medium text-gray-500 group-hover:text-blue-400 transition-colors uppercase tracking-tight">
-                                    {partner}
-                                </span>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Team Section */}
-            <section className="py-32 container mx-auto px-4">
-                <div className="text-center mb-24">
-                    <h2 className="text-5xl font-black tracking-tighter mb-6">{t("team.title")}</h2>
-                    <p className="text-xl text-gray-400">Pioneering the future of acoustic intelligence.</p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    {TEAM_KEYS.map((key, i) => (
-                        <motion.div
-                            key={key}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
-                            className="group p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:border-blue-500/30 transition-all"
-                        >
-                            <ImagePlaceholder label={t("team.preparing")} />
-                            <div className="mt-8">
-                                <h3 className="text-2xl font-bold mb-2">{t(`team.members.${key}.name`)}</h3>
-                                <p className="text-blue-500 font-bold mb-4">{t(`team.members.${key}.role`)}</p>
-                                <p className="text-gray-400 mb-8 font-light leading-relaxed">{t(`team.members.${key}.bio`)}</p>
-
-                                <div className="flex gap-4">
-                                    <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-colors">
-                                        <Linkedin className="w-4 h-4" />
-                                    </button>
-                                    <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-colors">
-                                        <Mail className="w-4 h-4" />
-                                    </button>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </section>
-
-            {/* Global Reach / Reach Out */}
-            <section className="py-32 container mx-auto px-4 text-center border-t border-white/10">
-                <Globe className="w-20 h-20 text-blue-500/30 mx-auto mb-8 animate-pulse" />
-                <h2 className="text-4xl font-bold mb-4">Protecting Global Infrastructure</h2>
-                <p className="text-gray-400 max-w-xl mx-auto mb-12">From Seoul to San Francisco, SignalCraft is the voice of industrial reliability.</p>
-            </section>
+  return (
+    <div className="overflow-hidden bg-[#050505] text-white selection:bg-blue-500/30">
+      <section className="relative flex min-h-[82vh] items-center justify-center overflow-hidden px-4 pb-20 pt-24 text-center md:min-h-screen">
+        <div className="absolute inset-0">
+          <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[110px] md:h-[820px] md:w-[820px]" />
+          <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#050505] to-transparent" />
         </div>
-    );
+
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative z-10 mx-auto max-w-4xl"
+        >
+          <span className="inline-flex rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-blue-400 md:text-sm">
+            {t("mission")}
+          </span>
+          <h1
+            className="mt-6 font-display text-4xl font-black leading-[1.05] tracking-tight md:mt-8 md:text-7xl"
+            dangerouslySetInnerHTML={{ __html: t.raw("hero.title") }}
+          />
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-gray-300 md:mt-6 md:text-2xl md:leading-9">
+            {t("hero.subtitle")}
+          </p>
+        </motion.div>
+      </section>
+
+      <section className="border-y border-white/10 bg-white/5 py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center font-display text-4xl font-black tracking-tight md:text-6xl">
+            {t("journey.title")}
+          </h2>
+          <div className="mx-auto mt-14 max-w-4xl space-y-8 md:mt-20 md:space-y-10">
+            {MILESTONE_KEYS.map((year, index) => (
+              <motion.div
+                key={year}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ delay: index * 0.08 }}
+                className="rounded-[2rem] border border-white/10 bg-black/20 p-6 md:p-8"
+              >
+                <div className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
+                  {year}
+                </div>
+                <h3 className="mt-3 font-display text-2xl font-bold md:text-3xl">
+                  {t(`journey.milestones.${year}.title`)}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-gray-400 md:text-base">
+                  {t(`journey.milestones.${year}.desc`)}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="overflow-hidden py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-400">
+              {t("global.title")}
+            </p>
+            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-6xl">
+              {t("global.subtitle")}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-gray-400 md:text-xl">
+              {t("global.description")}
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-2xl overflow-hidden rounded-[2rem] border border-white/10 bg-black/20 p-6 md:aspect-[3/4]">
+              <div className="absolute inset-0 flex items-center justify-center px-6">
+                <Image
+                  src="/korea-map.svg"
+                  alt="Republic of Korea map"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 900px"
+                  className="object-contain opacity-80 invert"
+                />
+              </div>
+              <div className="absolute left-[33%] top-[22%] h-4 w-4 rounded-full bg-blue-500 ring-8 ring-blue-500/20" />
+              <div className="absolute left-[37%] top-[27%] h-3.5 w-3.5 rounded-full bg-orange-400 ring-8 ring-orange-400/15" />
+              <div className="absolute left-[30%] top-[65%] h-3.5 w-3.5 rounded-full bg-emerald-400 ring-8 ring-emerald-400/15" />
+              <div className="absolute left-[76%] top-[61%] h-3.5 w-3.5 rounded-full bg-purple-400 ring-8 ring-purple-400/15" />
+            </div>
+
+            <div className="grid gap-4">
+              {[
+                {
+                  title: "Seoul",
+                  body:
+                    locale === "ko"
+                      ? "데이터 지능, 사업개발, 파트너 연계의 중심 거점"
+                      : "Core base for data intelligence, business development, and partner coordination",
+                },
+                {
+                  title: "Jeonnam",
+                  body:
+                    locale === "ko"
+                      ? "공정·설비 안전 시나리오를 확장하는 산업 현장 접점"
+                      : "Industrial access point for expanding process and safety scenarios",
+                },
+                {
+                  title: "Busan",
+                  body:
+                    locale === "ko"
+                      ? "중공업·해양·제조 인프라와 연결되는 현장 네트워크"
+                      : "Field network connected to heavy industry, maritime, and manufacturing infrastructure",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
+                >
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
+                    {ui.partnerLabel}
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-bold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-gray-400 md:text-base">
+                    {item.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-white/5 py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-400">
+              {ui.momentumEyebrow}
+            </p>
+            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
+              {ui.momentumTitle}
+            </h2>
+            <p className="mt-4 text-base leading-7 text-gray-400 md:text-lg">
+              {ui.momentumBody}
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {ui.momentumCards.map((card, index) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ delay: index * 0.08 }}
+                className="flex h-full flex-col rounded-[1.8rem] border border-white/10 bg-black/20 p-6"
+              >
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400">
+                  <Zap className="h-5 w-5" />
+                </div>
+                <h3 className="mt-5 font-display text-2xl font-bold">{card.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-6 text-gray-400 md:text-base">
+                  {card.body}
+                </p>
+                <Link
+                  href={card.href}
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue-400 transition-colors hover:text-blue-300"
+                >
+                  {ui.learnMore}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center font-display text-3xl font-bold tracking-tight md:text-5xl">
+            {ui.capabilitiesTitle}
+          </h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {ui.capabilities.map((capability, index) => {
+              const Icon = capabilityIcons[index];
+              return (
+                <motion.div
+                  key={capability.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ delay: index * 0.08 }}
+                  className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] p-6"
+                >
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-5 font-display text-2xl font-bold">
+                    {capability.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-gray-400 md:text-base">
+                    {capability.body}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 py-20 text-center md:py-28">
+        <div className="container mx-auto px-4">
+          <Globe className="mx-auto h-16 w-16 text-blue-500/40 md:h-20 md:w-20" />
+          <h2 className="mt-6 font-display text-3xl font-bold md:text-5xl">
+            {ui.finalTitle}
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-gray-400 md:text-lg">
+            {ui.finalBody}
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link
+              href="/news"
+              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+            >
+              {ui.newsAction}
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold transition-colors hover:bg-white/10"
+            >
+              {ui.contactAction}
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

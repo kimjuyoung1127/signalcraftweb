@@ -5,7 +5,7 @@ export default function PrivacyPage() {
                 <h1>Privacy Policy</h1>
                 <p>Last updated: January 2026</p>
                 <p>
-                    SignalCraft ("we", "our", or "us") respects your privacy and is committed to protecting it through our compliance with this policy.
+                    SignalCraft (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) respects your privacy and is committed to protecting it through our compliance with this policy.
                 </p>
                 <h2>1. Information We Collect</h2>
                 <p>We collect information about you when you visit our website, use our services, or communicate with us.</p>

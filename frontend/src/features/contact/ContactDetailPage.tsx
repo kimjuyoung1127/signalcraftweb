@@ -246,7 +246,7 @@ export function ContactDetailPage() {
                                                 <CheckCircle2 className="w-12 h-12" />
                                             </div>
                                             <h4 className="text-2xl font-bold mb-2">Message Sent!</h4>
-                                            <p className="text-muted-foreground mb-8">We'll get back to you as soon as possible via email.</p>
+                                            <p className="text-muted-foreground mb-8">We&apos;ll get back to you as soon as possible via email.</p>
                                             <Button className="w-full" onClick={() => setStatus("idle")}>Close</Button>
                                         </>
                                     ) : (

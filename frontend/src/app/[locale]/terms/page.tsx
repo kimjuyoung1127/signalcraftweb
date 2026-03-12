@@ -5,14 +5,14 @@ export default function TermsPage() {
                 <h1>Terms of Service</h1>
                 <p>Last updated: January 2026</p>
                 <p>
-                    Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the SignalCraft website.
+                    Please read these Terms of Service (&quot;Terms&quot;, &quot;Terms of Service&quot;) carefully before using the SignalCraft website.
                 </p>
                 <h2>1. Acceptance of Terms</h2>
                 <p>By accessing or using the Service you agree to be bound by these Terms.</p>
                 <h2>2. Use License</h2>
-                <p>Permission is granted to temporarily download one copy of the materials (information or software) on SignalCraft's website for personal, non-commercial transitory viewing only.</p>
+                <p>Permission is granted to temporarily download one copy of the materials (information or software) on SignalCraft&apos;s website for personal, non-commercial transitory viewing only.</p>
                 <h2>3. Disclaimer</h2>
-                <p>The materials on SignalCraft's website are provided on an 'as is' basis.</p>
+                <p>The materials on SignalCraft&apos;s website are provided on an &apos;as is&apos; basis.</p>
             </div>
         </div>
     );

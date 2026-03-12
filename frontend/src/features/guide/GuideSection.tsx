@@ -36,28 +36,28 @@ export function GuideSection() {
     ];
 
     return (
-        <section id="guide" className="py-32 bg-[#050505] relative overflow-hidden">
+        <section id="guide" className="relative overflow-hidden bg-[#050505] py-20 md:py-32">
             {/* Soft Background Accents */}
-            <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-600/5 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[160px]" />
+            <div className="absolute left-0 top-1/2 h-72 w-72 rounded-full bg-blue-600/5 blur-[100px] md:h-96 md:w-96 md:blur-[120px]" />
+            <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-purple-600/5 blur-[120px] md:h-[500px] md:w-[500px] md:blur-[160px]" />
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-20">
+                <div className="mx-auto mb-14 max-w-3xl text-center md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter font-display italic text-white uppercase">
+                        <h2 className="mb-5 font-display text-3xl font-black uppercase tracking-tighter text-white md:mb-6 md:text-5xl">
                             {t("title")}
                         </h2>
-                        <p className="text-xl text-gray-400 leading-relaxed break-keep font-medium">
+                        <p className="text-base font-medium leading-7 text-gray-400 break-keep md:text-xl md:leading-relaxed">
                             {t("description")}
                         </p>
                     </motion.div>
                 </div>
 
-                <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div className="relative grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-4">
                     {/* Animated Tech Connector (Desktop) */}
                     <div className="hidden md:block absolute top-[60px] left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent -z-10" />
 
@@ -75,7 +75,7 @@ export function GuideSection() {
                                 {/* Icon Container with 3D Float */}
                                 <div className="relative mb-10">
                                     <div className={`absolute inset-0 ${step.bg} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full scale-150`} />
-                                    <div className="w-32 h-32 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center relative z-10 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 backdrop-blur-xl shadow-2xl">
+                                    <div className="relative z-10 flex h-28 w-28 items-center justify-center rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-110 backdrop-blur-xl md:h-32 md:w-32">
                                         <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-blue-600 text-[10px] font-black italic flex items-center justify-center text-white ring-4 ring-[#050505]">
                                             {index + 1}
                                         </div>
@@ -83,10 +83,10 @@ export function GuideSection() {
                                     </div>
                                 </div>
 
-                                <h3 className="text-2xl font-bold mb-4 text-white font-display tracking-tight">
+                                <h3 className="mb-3 font-display text-xl font-bold tracking-tight text-white md:mb-4 md:text-2xl">
                                     {t(`steps.${step.key}.title`)}
                                 </h3>
-                                <p className="text-gray-400 text-lg leading-relaxed break-keep max-w-[280px] mx-auto">
+                                <p className="mx-auto max-w-[280px] break-keep text-base leading-7 text-gray-400 md:text-lg md:leading-relaxed">
                                     {t(`steps.${step.key}.description`)}
                                 </p>
                             </motion.div>
@@ -94,10 +94,10 @@ export function GuideSection() {
                     })}
                 </div>
 
-                <div className="mt-24 text-center">
+                <div className="mt-14 text-center md:mt-24">
                     <Link
                         href="/guide"
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all group"
+                        className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 md:px-8 md:py-4 md:text-base"
                     >
                         {t("viewFull")}
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-blue-500" />

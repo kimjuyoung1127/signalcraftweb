@@ -1,8 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Cpu, Activity, BarChart3, Shield, Globe, ArrowRight, Layers } from "lucide-react";
+import { Zap, Cpu, Activity, Shield, Globe, Layers } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+const waveformBars = Array.from({ length: 20 }, (_, index) => ({
+    key: index,
+    height: 48 + (index % 5) * 18,
+    duration: 1 + (index % 4) * 0.25,
+}));
 
 export function WhyUsDetailPage() {
     const t = useTranslations("WhyUs");
@@ -84,11 +90,11 @@ export function WhyUsDetailPage() {
                         </p>
                         <div className="pt-4 grid grid-cols-2 gap-8">
                             <div className="space-y-2">
-                                <div className="text-3xl font-bold text-white">20kHz - 100kHz</div>
+                                <div className="text-3xl font-bold text-white">24h</div>
                                 <div className="text-sm text-muted-foreground uppercase">{t("detail.specs.range")}</div>
                             </div>
                             <div className="space-y-2">
-                                <div className="text-3xl font-bold text-white">192kHz</div>
+                                <div className="text-3xl font-bold text-white">10s</div>
                                 <div className="text-sm text-muted-foreground uppercase">{t("detail.specs.rate")}</div>
                             </div>
                         </div>
@@ -98,11 +104,11 @@ export function WhyUsDetailPage() {
                         <div className="relative h-full w-full bg-muted/50 rounded-[3rem] border border-white/10 flex items-center justify-center overflow-hidden">
                             {/* Abstract Visualization */}
                             <div className="flex gap-1 items-end h-40">
-                                {[...Array(20)].map((_, i) => (
+                                {waveformBars.map((bar) => (
                                     <motion.div
-                                        key={i}
-                                        animate={{ height: [20, 60 + Math.random() * 80, 20] }}
-                                        transition={{ duration: 1 + Math.random(), repeat: Infinity }}
+                                        key={bar.key}
+                                        animate={{ height: [20, bar.height, 20] }}
+                                        transition={{ duration: bar.duration, repeat: Infinity }}
                                         className="w-2 bg-blue-500/40 rounded-full"
                                     />
                                 ))}
@@ -128,11 +134,11 @@ export function WhyUsDetailPage() {
                         <div className="pt-4 flex gap-12">
                             <div className="flex items-center gap-3">
                                 <Shield className="w-6 h-6 text-purple-500" />
-                                <span className="font-bold">Zero Data Leak</span>
+                                <span className="font-bold">Zero Config</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <Globe className="w-6 h-6 text-purple-500" />
-                                <span className="font-bold">Offline First</span>
+                                <span className="font-bold">Daily Brief</span>
                             </div>
                         </div>
                     </div>
@@ -152,19 +158,19 @@ export function WhyUsDetailPage() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
                         <div className="space-y-4">
                             <div className="text-muted-foreground text-sm uppercase font-bold tracking-widest">{t("detail.specs.range")}</div>
-                            <div className="text-2xl font-bold">1kHz - 100kHz</div>
+                            <div className="text-2xl font-bold">24 Hours</div>
                         </div>
                         <div className="space-y-4">
                             <div className="text-muted-foreground text-sm uppercase font-bold tracking-widest">{t("detail.specs.rate")}</div>
-                            <div className="text-2xl font-bold">192 kHz</div>
+                            <div className="text-2xl font-bold">10 sec</div>
                         </div>
                         <div className="space-y-4">
                             <div className="text-muted-foreground text-sm uppercase font-bold tracking-widest">{t("detail.specs.conn")}</div>
-                            <div className="text-2xl font-bold">Wi-Fi 6 / LTE</div>
+                            <div className="text-2xl font-bold">Push / Kakao</div>
                         </div>
                         <div className="space-y-4">
                             <div className="text-muted-foreground text-sm uppercase font-bold tracking-widest">{t("detail.specs.battery")}</div>
-                            <div className="text-2xl font-bold">3+ Years</div>
+                            <div className="text-2xl font-bold">Web PWA</div>
                         </div>
                     </div>
                 </div>

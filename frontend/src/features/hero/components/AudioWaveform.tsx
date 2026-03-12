@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -104,6 +104,14 @@ const fragmentShader = `
 function ElegantWaves({ count = 8000 }) {
     const meshRef = useRef<THREE.Points>(null!);
     const hoverValue = useRef(0);
+    const materialRef = useRef<THREE.ShaderMaterial>(null!);
+
+    const uniforms = useMemo(() => ({
+        uTime: { value: 0 },
+        uHover: { value: 0 },
+        uAmplitude: { value: 0.5 },
+        uPointSize: { value: 400.0 },
+    }), []);
 
     const { positions, scales, randoms } = useMemo(() => {
         const positions = new Float32Array(count * 3);
@@ -125,47 +133,41 @@ function ElegantWaves({ count = 8000 }) {
             positions[i * 3 + 1] = 0;
             positions[i * 3 + 2] = z;
 
-            scales[i] = Math.random();
-            randoms[i] = Math.random();
+            const seeded = (Math.sin(i * 12.9898) + 1) * 0.5;
+            const seededOffset = (Math.sin((i + 17) * 78.233) + 1) * 0.5;
+            scales[i] = seeded;
+            randoms[i] = seededOffset;
         }
         return { positions, scales, randoms };
     }, [count]);
 
-    const [hovered, setHover] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
-
-    const uniforms = useMemo(
-        () => ({
-            uTime: { value: 0 },
-            uHover: { value: 0 },
-            uAmplitude: { value: 0.5 },
-            uPointSize: { value: 400.0 },
-        }),
-        []
-    );
+    const hoveredRef = useRef(false);
 
     useFrame((state) => {
-        uniforms.uTime.value = state.clock.getElapsedTime();
-
-        // Responsive adjustment (only once or periodically)
         const mobile = state.size.width < 768;
-        if (mobile !== isMobile) {
-            setIsMobile(mobile);
+        const material = materialRef.current;
+        if (!material) {
+            return;
         }
 
-        uniforms.uAmplitude.value = mobile ? 0.8 : 0.5;
-        uniforms.uPointSize.value = mobile ? 800.0 : 400.0;
+        material.uniforms.uTime.value = state.clock.getElapsedTime();
+        material.uniforms.uAmplitude.value = mobile ? 0.8 : 0.5;
+        material.uniforms.uPointSize.value = mobile ? 800.0 : 400.0;
 
-        const targetHover = hovered ? 1 : 0;
+        const targetHover = hoveredRef.current ? 1 : 0;
         hoverValue.current = THREE.MathUtils.lerp(hoverValue.current, targetHover, 0.05);
-        uniforms.uHover.value = hoverValue.current;
+        material.uniforms.uHover.value = hoverValue.current;
     });
 
     return (
         <points
             ref={meshRef}
-            onPointerOver={() => setHover(true)}
-            onPointerOut={() => setHover(false)}
+            onPointerOver={() => {
+                hoveredRef.current = true;
+            }}
+            onPointerOut={() => {
+                hoveredRef.current = false;
+            }}
         >
             <bufferGeometry>
                 <bufferAttribute
@@ -191,6 +193,7 @@ function ElegantWaves({ count = 8000 }) {
                 />
             </bufferGeometry>
             <shaderMaterial
+                ref={materialRef}
                 depthWrite={false}
                 blending={THREE.AdditiveBlending}
                 vertexColors={false}

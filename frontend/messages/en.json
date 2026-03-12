@@ -1,15 +1,15 @@
 {
     "Index": {
-        "title": "Detect Mechanical Failures\nBefore They Happen",
-        "subtitle": "Reduce unplanned downtime by 85% with AI-powered acoustic monitoring.\nSimple installation, immediate results for smart factories.",
+        "title": "Turn the power on,\nand let AI monitor your facility",
+        "subtitle": "SignalCraft reads vibration and noise patterns to track equipment health, then sends you daily reports and anomaly alerts.",
         "cta": "Start Free Diagnosis",
         "loading": "Initializing Visualizer..."
     },
     "Hero": {
         "stats": {
-            "downtime": "Downtime Reduction",
-            "accuracy": "Anomaly Detection",
-            "monitoring": "24/7 Monitoring"
+            "downtime": "Initial Learning",
+            "accuracy": "Collection Cycle",
+            "monitoring": "Auto Report"
         }
     },
     "Header": {
@@ -27,13 +27,15 @@
         "title": "Latest Updates",
         "title_page": "Newsroom",
         "description": "Stay tuned with SignalCraft's journey.",
-        "description_page": "Latest updates, press releases, and technical insights from the SignalCraft team.",
+        "description_page": "News, press releases, and technical stories from the SignalCraft team.",
         "search_placeholder": "Search articles...",
         "load_more": "Load More Articles",
         "filters": {
             "all": "All",
             "press": "Press",
             "tech": "Technology",
+            "media": "Media",
+            "insight": "Insight",
             "case": "Case Study",
             "event": "Event"
         },
@@ -69,67 +71,67 @@
     },
     "WhyUs": {
         "title": "Why SignalCraft?",
-        "description": "The most reliable predictive maintenance solution, trusted by global industry leaders.",
+        "description": "Facility management that operators actually understand — no complex setup needed.",
         "learnMore": "Learn more",
         "features": {
             "precision": {
-                "title": "Detect Failures Weeks Early",
-                "description": "From micro-fractures in bearings to abnormal wear in gearboxes, we analyze ultrasonic frequencies beyond human hearing to detect signs of failure 2-4 weeks in advance. This prevents massive equipment costs and unplanned shutdowns."
+                "title": "24-hour automatic learning",
+                "description": "After installation, SignalCraft spends a day learning each machine's normal vibration and noise patterns, then sets its own baseline."
             },
             "edge": {
-                "title": "Self-Contained Edge AI",
-                "description": "Secure, real-time analysis without cloud dependency. Your data stays safe within your facility."
+                "title": "AI handles the judgment calls",
+                "description": "No manual threshold tuning. AI tells normal from abnormal on its own, so operators can focus on running the site."
             },
             "nonInvasive": {
-                "title": "Zero-Downtime Setup",
-                "description": "Deploy in seconds with non-invasive magnetic sensors. No production stops required."
+                "title": "Power on, scan QR, done",
+                "description": "Turn on the device, register it with a QR code, and the app connects. Learning starts right away."
             },
             "scalability": {
-                "title": "Seamless Scalability",
-                "description": "Easily expand from a single machine to an entire plant via wireless networks. Integrates perfectly with existing ERP/MES systems."
+                "title": "From reports to action in one place",
+                "description": "Live status, daily and weekly briefs, anomaly alerts, and maintenance logs — all in one view, ready to act on."
             }
         },
         "detail": {
-            "title": "The Technological Edge",
-            "subtitle": "Discover the innovation that sets SignalCraft apart from traditional monitoring.",
-            "beyondTitle": "Beyond Human Hearing",
-            "beyondDesc": "Mechanical friction creates ultrasonic waves (20kHz+) long before visible vibration damages occur. SignalCraft's sensors capture this early warning signal, giving you weeks of lead time instead of hours.",
-            "edgeTitle": "Real-time Edge Processing",
-            "edgeDesc": "We don't just send raw data to the cloud. Our proprietary neural engine runs directly on the gateway, filtering out background noise and extracting key insights. This ensures ultra-low latency and maximum data security.",
+            "title": "Why SignalCraft?",
+            "subtitle": "No complex graphs. Just clear equipment status anyone can understand.",
+            "beyondTitle": "It starts with learning what normal looks like",
+            "beyondDesc": "SignalCraft listens to each machine's sound and vibration for the first 24 hours and builds a baseline. That makes every alert and status check afterward more accurate and less noisy.",
+            "edgeTitle": "Reports that speak your language",
+            "edgeDesc": "Instead of raw frequency charts, you get simple statuses like 'Normal / Caution / Alert', daily summaries, and failure-sign highlights that anyone on the team can read.",
             "specs": {
                 "title": "Technical Specifications",
-                "range": "Frequency Range",
-                "rate": "Sampling Rate",
-                "conn": "Connectivity",
-                "battery": "Battery Life"
+                "range": "Initial Learning",
+                "rate": "Collection Cycle",
+                "conn": "Alert Channel",
+                "battery": "Operating Mode"
             }
         }
     },
     "Guide": {
-        "title": "Installation in 5 Minutes",
-        "description": "Zero downtime. Zero complex wiring. Just plug, play, and predict.",
+        "title": "Power on and let setup begin",
+        "description": "Register with QR, let it learn for a day, get your first report the next morning. That's it.",
         "steps": {
             "attach": {
-                "title": "1. Attach Sensor",
-                "description": "Simply attach the magnetic acoustic sensor to your equipment. No shutdown required."
+                "title": "1. Turn on the device",
+                "description": "Power on the installed device and check that it's running normally."
             },
             "connect": {
-                "title": "2. Auto-Connect",
-                "description": "The Edge Gateway automatically pairs and begins secure data transmission immediately."
+                "title": "2. Register with QR",
+                "description": "Scan the QR code to register the device. It links to your site and app instantly."
             },
             "appInstall": {
-                "title": "3. App & Device Setup",
-                "description": "Our engineer visits to map your Device ID and helps you install the management app."
+                "title": "3. 24-hour learning",
+                "description": "SignalCraft listens to the device's normal vibration and noise patterns and sets its baseline automatically."
             },
             "insight": {
-                "title": "4. Real-time Insight",
-                "description": "Access the dashboard to see live acoustic fingerprints and receive anomaly alerts."
+                "title": "4. Check reports and alerts",
+                "description": "Once learning is done, you start getting status cards, daily summaries, and anomaly alerts."
             }
         },
         "viewFull": "View Detailed Guide",
         "detail": {
             "title": "Detailed Installation Guide",
-            "subtitle": "From hardware setup to mobile app integration, here's how to get started.",
+            "subtitle": "From device registration through learning to your first report — just follow the steps.",
             "hardware": {
                 "title": "Hardware Installation",
                 "step1": "Attach the magnetic sensor to the flattest part of the compressor or motor.",
@@ -138,7 +140,7 @@
             },
             "app": {
                 "title": "App Installation & Setup",
-                "description": "Our field engineer will register your Device ID to the system and guide you through the mobile app installation.",
+                "description": "Our field engineer registers your Device ID and helps you install the mobile app on site.",
                 "features": {
                     "monitoring": "Remote Monitoring",
                     "notifications": "Instant Anomaly Alerts",
@@ -154,14 +156,14 @@
             },
             "support": {
                 "title": "Need help with installation?",
-                "description": "Our support team is available 24/7 to guide you through the process.",
+                "description": "The SignalCraft team can walk you through device registration, learning setup, and reporting.",
                 "cta": "Contact Support"
             }
         }
     },
     "Cases": {
         "title": "Proven Impact",
-        "description": "See how industry leaders secure their operations.",
+        "description": "See how SignalCraft works in the field through these real-world scenarios.",
         "viewAll": "View All Cases",
         "result": "Result",
         "stories": {
@@ -187,7 +189,7 @@
     },
     "Contact": {
         "title": "Get in <span>Touch</span>",
-        "description": "Join 50+ smart factories saving millions in downtime costs. Start your free acoustic diagnosis today.",
+        "description": "Want to know what's going on with your equipment? We make it simple to find out — no complicated setup required.",
         "cta": "Get Started Now",
         "sales": "Contact Sales",
         "info": {
@@ -235,11 +237,11 @@
             "title": "Frequently Asked Questions",
             "q1": {
                 "q": "Can I test before buying?",
-                "a": "Yes! We offer a 2-week pilot program for qualified enterprise clients."
+                "a": "Absolutely. We run a 2-week pilot so you can see it work in your environment first."
             },
             "q2": {
                 "q": "Does it work offline?",
-                "a": "Our Edge AI models run locally on the device, so you don't need constant internet connection for detection."
+                "a": "Yes — the Edge AI runs right on the device, so it keeps detecting anomalies even without an internet connection."
             }
         }
     },
@@ -247,7 +249,7 @@
         "sitemap": "Sitemap",
         "contact": "Contact",
         "mission": "Sound to Insight.",
-        "description": "Revolutionizing smart factory monitoring with AI audio analysis.",
+        "description": "AI reads your facility's condition and sends daily reports, so you spend less time worrying about maintenance.",
         "links": {
             "about": "About",
             "technology": "Technology",
@@ -263,30 +265,30 @@
         "title": "Frequently Asked Questions",
         "questions": {
             "installation": {
-                "q": "Do I need to stop production to install?",
-                "a": "No. Our magnetic sensors attach to the exterior of your equipment in seconds. No drilling or wiring is required, allowing for zero-downtime deployment."
+                "q": "Do I need to configure a lot up front?",
+                "a": "Nope. Plug it in, scan the QR code, and you're set. It learns the normal pattern on its own over the first 24 hours."
             },
             "accuracy": {
-                "q": "How accurate is the diagnostic AI?",
-                "a": "SignalCraft maintains 99% + accuracy. Our models specifically filter for high-frequency acoustic signatures of failure, ignoring common background factory noise."
+                "q": "When do alerts and reports start?",
+                "a": "Right after the learning period wraps up. You'll start seeing status cards, anomaly alerts, and daily summaries."
             },
             "security": {
-                "q": "Is my factory data secure?",
-                "a": "Yes. All audio analysis is performed on-site at the edge. Only processed diagnostic results are sent to the dashboard, ensuring raw audio never leaves your facility."
+                "q": "What data does SignalCraft use to judge status?",
+                "a": "Vibration and noise patterns, runtime data, and past anomaly events. It pulls all of that together into a condition summary and daily reports."
             },
             "environment": {
-                "q": "Does it work in high-noise environments?",
-                "a": "Absolutely. By focusing on ultrasonic frequencies physically separate from common industrial noise, we detect machine health regardless of ambient sound levels."
+                "q": "Can it be used beyond unmanned stores?",
+                "a": "Yes — it works just as well in small factories, building facilities, and other equipment environments."
             }
         }
     },
     "About": {
         "mission": "OUR MISSION",
         "vision": "We listen to the future of business through the <heartbeat>heartbeat of machines</heartbeat>.",
-        "description": "SignalCraft is setting the standard for Predictive Maintenance solutions by analyzing sound and vibration data from industrial sites using artificial intelligence to detect minute machine faults in advance.",
+        "description": "SignalCraft is a vibration-and-noise-based monitoring service that lets operators see equipment health at a glance — no complex graphs or heavy configuration needed.",
         "hero": {
             "title": "Until the silent machine starts to speak",
-            "subtitle": "We read the invisible flows, see the unheard signals, and prevent accidents before they happen."
+            "subtitle": "We read the invisible signals and catch problems before they become accidents."
         },
         "journey": {
             "title": "Acoustic Journey",
@@ -294,24 +296,24 @@
                 "2025": {
                     "year": "2025",
                     "title": "SignalCraft Founded",
-                    "desc": "Completed prototype development of an acoustic analysis-based AI engine."
+                    "desc": "Completed prototype of our acoustic-analysis AI engine."
                 },
                 "2026": {
                     "year": "2026",
                     "title": "National Industrial Cluster Network",
-                    "desc": "Established partnerships and completed technical validation across major industrial hubs in Seoul, Jeonnam, and Busan."
+                    "desc": "Partnered with major industrial hubs in Seoul, Jeonnam, and Busan and completed technical validation."
                 },
                 "2027": {
                     "year": "2027",
                     "title": "Global Standard",
-                    "desc": "Becoming the global standard for industrial AI diagnostic solutions."
+                    "desc": "Becoming the go-to standard for industrial AI diagnostics worldwide."
                 }
             }
         },
         "global": {
             "title": "National Partner Network",
-            "subtitle": "SignalCraft's ecosystem connecting major domestic industrial hubs.",
-            "description": "From data intelligence in Seoul to manufacturing sites in Jeonnam and Busan, we protect Korea's industrial infrastructure."
+            "subtitle": "SignalCraft's partner ecosystem across Korea.",
+            "description": "From data intelligence in Seoul to manufacturing floors in Jeonnam and Busan — we protect Korea's industrial infrastructure together."
         },
         "magi": {
             "title": "MAGI Engine",
@@ -323,20 +325,20 @@
                 },
                 "sound": {
                     "title": "Acoustic Analysis",
-                    "desc": "AI monitors ultrasonic ranges in real-time that are beyond human hearing."
+                    "desc": "AI tracks runtime changes through learned vibration and sound patterns in real time."
                 },
                 "vibration": {
                     "title": "3-Axis Vibration Analysis",
-                    "desc": "Captures mechanical imbalances and bearing defects without error within 0.01mm."
+                    "desc": "Catches mechanical imbalances and bearing defects within 0.01mm."
                 }
             }
         },
         "values": {
             "title": "Core Values",
             "list": {
-                "precision": "<strong>Precision:</strong> Perfectionists who never miss a 0.1% error.",
-                "edge": "<strong>Edge:</strong> Low-latency intelligent solutions computed instantly on-site.",
-                "human": "<strong>Human-Centric:</strong> Technology that prioritizes the safety of engineers."
+                "precision": "<strong>Precision:</strong> Obsessed with catching even a 0.1% deviation.",
+                "edge": "<strong>Edge:</strong> Instant, low-latency analysis right where it's needed — on site.",
+                "human": "<strong>Human-Centric:</strong> Engineer safety always comes first."
             }
         },
         "team": {
@@ -364,10 +366,10 @@
             }
         },
         "stats": {
-            "factories": "Partners",
-            "accuracy": "Detection Accuracy",
-            "data": "Data Analyzed"
+            "factories": "Initial Learning",
+            "accuracy": "Collection Cycle",
+            "data": "Report Flow"
         },
-        "trustedBy": "Global Partners"
+        "trustedBy": "Field Partners"
     }
 }

@@ -1,129 +1,304 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Calendar, Tag, Share2 } from "lucide-react";
-import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CalendarDays,
+  CirclePlay,
+  CheckCircle2,
+} from "lucide-react";
 import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import {
+  formatArticleDate,
+  getLocalizedText,
+  getNewsArticleBySlug,
+} from "@/content/news";
 
 interface NewsArticleViewProps {
-    id: string;
+  id: string;
+}
+
+const articleUi = {
+  ko: {
+    proofLabel: "관련 자료",
+    highlightsLabel: "핵심 포인트",
+    watchLabel: "인터뷰 영상 보기",
+    demoTitle: "더 궁금한 점이 있으신가요?",
+    demoBody:
+      "도입 방법, 파일럿 범위, 운영 데이터 활용 등 무엇이든 편하게 문의해 주세요.",
+    demoAction: "문의하기",
+    notFoundTitle: "기사를 찾을 수 없습니다.",
+    notFoundBody: "링크가 변경되었거나 더 이상 제공되지 않는 기사입니다.",
+    backToNews: "뉴스룸으로 돌아가기",
+  },
+  en: {
+    proofLabel: "Supporting material",
+    highlightsLabel: "Key points",
+    watchLabel: "Watch the interview",
+    demoTitle: "Want to learn more?",
+    demoBody:
+      "Whether it's deployment, pilot scope, or how the data fits your maintenance workflow — just ask.",
+    demoAction: "Contact us",
+    notFoundTitle: "Article not found.",
+    notFoundBody:
+      "This article may have moved or is no longer available.",
+    backToNews: "Back to newsroom",
+  },
+};
+
+function getYoutubeWatchUrl(embedUrl: string) {
+  return embedUrl.includes("embed/")
+    ? `https://www.youtube.com/watch?v=${embedUrl.split("embed/")[1]}`
+    : embedUrl;
 }
 
 export function NewsArticleView({ id }: NewsArticleViewProps) {
-    const t = useTranslations("News");
+  const locale = useLocale();
+  const t = useTranslations("News");
+  const ui = locale === "ko" ? articleUi.ko : articleUi.en;
+  const article = getNewsArticleBySlug(id);
 
-    // In a real app, you'd fetch based on ID. 
-    // Here we use the same key-based logic as the list.
-    const itemKey = `item${id}`;
-
+  if (!article) {
     return (
-        <div className="pt-32 pb-24 bg-background">
-            <article className="container mx-auto px-4 max-w-4xl">
-                <Link
-                    href="/news"
-                    className="inline-flex items-center text-muted-foreground hover:text-blue-500 mb-12 transition-colors font-medium group"
-                >
-                    <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
-                    {t("viewAll")}
-                </Link>
-
-                <header className="mb-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="space-y-6"
-                    >
-                        <div className="flex items-center gap-4">
-                            <span className="px-4 py-1.5 bg-blue-500/10 text-blue-500 rounded-full text-xs font-bold border border-blue-500/20">
-                                {t(`items.${itemKey}.tag`)}
-                            </span>
-                            <div className="flex items-center text-sm text-muted-foreground font-medium">
-                                <Calendar className="w-4 h-4 mr-2" />
-                                2025.12.15
-                            </div>
-                        </div>
-
-                        <h1 className="text-4xl md:text-6xl font-bold leading-tight font-display break-keep">
-                            {t(`items.${itemKey}.title`)}
-                        </h1>
-
-                        <p className="text-xl text-muted-foreground leading-relaxed break-keep">
-                            {t(`items.${itemKey}.excerpt`)}
-                        </p>
-                    </motion.div>
-                </header>
-
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="relative aspect-video rounded-3xl overflow-hidden mb-16 border border-white/10"
-                >
-                    {id === "1" ? (
-                        <Image
-                            src="/KOIIA.jpg"
-                            alt="News Cover"
-                            fill
-                            className="object-cover"
-                        />
-                    ) : (
-                        <div className="absolute inset-0 bg-muted flex items-center justify-center">
-                            <div className="w-20 h-20 rounded-full bg-blue-500/10 blur-3xl animate-pulse" />
-                        </div>
-                    )}
-                </motion.div>
-
-                <div className="flex flex-col md:flex-row gap-16">
-                    <div className="flex-1 prose prose-lg dark:prose-invert max-w-none text-muted-foreground leading-loose break-keep">
-                        {/* 
-                            This is a placeholder for actual content. 
-                            In a CMS-driven app, this would be rich text.
-                        */}
-                        <p>
-                            시그널크래프트(SignalCraft)가 산업통상자원부 산하 한국산업지능화협회(KOIIA)에서 주관하는
-                            <strong> 'AC 배치 프로그램 1기'</strong>에 최종 선정되었습니다.
-                            이번 프로그램은 팁스(TIPS) 운영사인 협회가 직접 유망 스타트업을 발굴하고 육성하기 위한 전문 액셀러레이팅 과정입니다.
-                        </p>
-                        <p>
-                            시그널크래프트는 독자적인 초음파 센싱 기술과 엣지 AI 분석 솔루션을 통해 제조업의
-                            디지털 전환(DX)을 선도하는 기술력을 인정받았습니다. 이번 선정을 통해 협회로부터
-                            직접 투자 및 후속 팁스 추천, 그리고 다양한 대중견기업과의 네트워킹 기회를 제공받게 됩니다.
-                        </p>
-                        <p>
-                            "산업 현장의 소리를 인사이트로 바꾸는 우리의 기술이 공신력 있는 기관을 통해
-                            검증받게 되어 기쁩니다." 시그널크래프트 관계자는 "이번 프로그램을 통해
-                            국내외 스마트 팩토리 시장에서의 점유율을 공격적으로 확대할 계획"이라고 밝혔습니다.
-                        </p>
-                    </div>
-
-                    <aside className="md:w-64 shrink-0 space-y-12">
-                        <div className="p-6 rounded-2xl bg-muted/30 border border-white/5">
-                            <h4 className="font-bold mb-4 flex items-center gap-2">
-                                <Share2 className="w-4 h-4 text-blue-500" /> Share
-                            </h4>
-                            <div className="flex gap-4">
-                                <div className="w-10 h-10 rounded-full bg-background border border-white/10 flex items-center justify-center hover:bg-muted transition-colors cursor-pointer text-xs font-bold">K</div>
-                                <div className="w-10 h-10 rounded-full bg-background border border-white/10 flex items-center justify-center hover:bg-muted transition-colors cursor-pointer text-xs font-bold">F</div>
-                                <div className="w-10 h-10 rounded-full bg-background border border-white/10 flex items-center justify-center hover:bg-muted transition-colors cursor-pointer text-xs font-bold">T</div>
-                            </div>
-                        </div>
-
-                        <div className="p-6 rounded-2xl bg-blue-600/5 border border-blue-500/10">
-                            <h4 className="font-bold mb-2">Need a Demo?</h4>
-                            <p className="text-sm text-muted-foreground mb-4">
-                                Experience the power of sound-based anomaly detection.
-                            </p>
-                            <Link
-                                href="/contact"
-                                className="inline-flex items-center text-blue-500 font-bold text-sm hover:underline"
-                            >
-                                Contact Sales <ArrowRight className="ml-1 w-4 h-4" />
-                            </Link>
-                        </div>
-                    </aside>
-                </div>
-            </article>
+      <div className="bg-background pb-24 pt-28">
+        <div className="container mx-auto max-w-3xl px-4 text-center">
+          <h1 className="font-display text-3xl font-bold">{ui.notFoundTitle}</h1>
+          <p className="mt-4 text-muted-foreground">{ui.notFoundBody}</p>
+          <Link
+            href="/news"
+            className="mt-8 inline-flex items-center text-sm font-semibold text-blue-500"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            {ui.backToNews}
+          </Link>
         </div>
+      </div>
     );
+  }
+
+  return (
+    <div className="bg-background pb-20 pt-24 md:pb-24 md:pt-28">
+      <article className="container mx-auto max-w-6xl px-4">
+        <Link
+          href="/news"
+          className="inline-flex items-center text-sm font-semibold text-muted-foreground transition-colors hover:text-blue-500"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          {t("viewAll")}
+        </Link>
+
+        <header className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_420px] lg:items-end">
+          <div>
+            <div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-blue-400">
+                {t(`filters.${article.category}`)}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <CalendarDays className="h-4 w-4" />
+                {formatArticleDate(article.publishedAt, locale)}
+              </span>
+            </div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-5 font-display text-3xl font-bold leading-tight md:text-5xl lg:text-6xl"
+            >
+              {getLocalizedText(article.title, locale)}
+            </motion.h1>
+
+            <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground md:text-xl md:leading-8">
+              {getLocalizedText(article.body.summary, locale)}
+            </p>
+
+            {article.body.highlights?.length ? (
+              <div className="mt-7">
+                <p className="mb-3 text-sm font-semibold text-foreground">
+                  {ui.highlightsLabel}
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {article.body.highlights.map((highlight) => (
+                    <div
+                      key={highlight.ko}
+                      className="inline-flex max-w-full items-start gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-muted-foreground"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" />
+                      <span>{getLocalizedText(highlight, locale)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+
+          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              SignalCraft
+            </div>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              {getLocalizedText(article.excerpt, locale)}
+            </p>
+            {article.youtubeUrl ? (
+              <a
+                href={getYoutubeWatchUrl(article.youtubeUrl)}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-500 transition-colors hover:text-blue-400"
+              >
+                <CirclePlay className="h-4 w-4" />
+                {ui.watchLabel}
+              </a>
+            ) : null}
+          </div>
+        </header>
+
+        <div className="relative mt-10 overflow-hidden rounded-[2rem] border border-white/10 bg-black">
+          <Image
+            src={article.heroMedia.src}
+            alt={getLocalizedText(article.heroMedia.alt, locale)}
+            width={1600}
+            height={900}
+            priority
+            sizes="(max-width: 1024px) 100vw, 1200px"
+            className="h-auto w-full object-cover"
+          />
+          {article.heroMedia.caption ? (
+            <div className="border-t border-white/10 bg-black/80 px-4 py-3 text-sm text-muted-foreground">
+              {getLocalizedText(article.heroMedia.caption, locale)}
+            </div>
+          ) : null}
+        </div>
+
+        <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="space-y-10">
+            {article.youtubeUrl ? (
+              <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-4 backdrop-blur-sm md:p-6">
+                <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <CirclePlay className="h-4 w-4 text-blue-500" />
+                  {ui.watchLabel}
+                </div>
+                <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
+                  <div className="relative aspect-video">
+                    <iframe
+                      src={article.youtubeUrl}
+                      title={getLocalizedText(article.title, locale)}
+                      className="absolute inset-0 h-full w-full"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              </section>
+            ) : null}
+
+            {article.body.sections.map((section, index) => (
+              <section key={section.heading?.ko ?? section.heading?.en ?? `${article.id}-${index}`}>
+                {section.heading ? (
+                  <h2 className="font-display text-2xl font-bold md:text-3xl">
+                    {getLocalizedText(section.heading, locale)}
+                  </h2>
+                ) : null}
+
+                <div className="mt-4 space-y-4 text-base leading-8 text-muted-foreground md:text-lg">
+                  {section.paragraphs?.map((paragraph) => (
+                    <p key={paragraph.ko}>{getLocalizedText(paragraph, locale)}</p>
+                  ))}
+                </div>
+
+                {section.bullets?.length ? (
+                  <ul className="mt-5 grid gap-3">
+                    {section.bullets.map((bullet) => (
+                      <li
+                        key={bullet.ko}
+                        className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-6 text-muted-foreground md:text-base"
+                      >
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-500" />
+                        <span>{getLocalizedText(bullet, locale)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </section>
+            ))}
+
+            {article.body.quote ? (
+              <blockquote className="rounded-[2rem] border border-blue-500/20 bg-blue-500/5 px-6 py-6">
+                <p className="text-lg font-medium leading-8 text-foreground">
+                  “{getLocalizedText(article.body.quote.text, locale)}”
+                </p>
+                {article.body.quote.attribution ? (
+                  <footer className="mt-3 text-sm text-muted-foreground">
+                    {getLocalizedText(article.body.quote.attribution, locale)}
+                  </footer>
+                ) : null}
+              </blockquote>
+            ) : null}
+
+            {article.gallery?.length ? (
+              <section className="space-y-4">
+                <h2 className="font-display text-2xl font-bold md:text-3xl">
+                  {ui.proofLabel}
+                </h2>
+                <div className="grid gap-5 md:grid-cols-2">
+                  {article.gallery.map((asset) => (
+                    <figure
+                      key={asset.src}
+                      className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03]"
+                    >
+                      <Image
+                        src={asset.src}
+                        alt={getLocalizedText(asset.alt, locale)}
+                        width={1200}
+                        height={900}
+                        sizes="(max-width: 767px) 100vw, 50vw"
+                        className="h-auto w-full object-cover"
+                      />
+                      {asset.caption ? (
+                        <figcaption className="px-4 py-3 text-sm text-muted-foreground">
+                          {getLocalizedText(asset.caption, locale)}
+                        </figcaption>
+                      ) : null}
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+          </div>
+
+          <aside className="space-y-5">
+            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                {t(`filters.${article.category}`)}
+              </div>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                {getLocalizedText(article.excerpt, locale)}
+              </p>
+              <p className="mt-4 text-sm font-medium text-foreground">
+                {formatArticleDate(article.publishedAt, locale)}
+              </p>
+            </div>
+
+            <div className="rounded-[2rem] border border-blue-500/20 bg-blue-500/5 p-6">
+              <h3 className="font-display text-xl font-bold">{ui.demoTitle}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                {ui.demoBody}
+              </p>
+              <Link
+                href="/contact"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-500 transition-colors hover:text-blue-400"
+              >
+                {ui.demoAction}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </div>
+  );
 }

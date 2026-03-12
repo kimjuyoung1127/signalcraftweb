@@ -14,13 +14,14 @@ frontend/
 │   │   │   ├── guide/       # Installation Guide
 │   │   │   ├── privacy/     # Privacy Policy
 │   │   │   └── terms/       # Terms of Service
+│   │   └── api/             # API Routes (Resend Email Handler)
 │   │   └── globals.css      # Global styles & Tailwind directives
 │   ├── components/
 │   │   ├── ui/              # Reusable base components (Button, Input, etc.)
 │   │   └── shared/          # Shared layout components (Header, Footer)
 │   ├── features/            # Feature-based modules
 │   │   ├── hero/            # Hero section with WebGL AudioWaveform
-│   │   ├── about/           # About section with Infinite Marquee
+│   │   ├── about/           # About section (Interactive Korea Map, Sonar Timeline)
 │   │   ├── why-us/          # Technology/Why Us section (Bento Grid)
 │   │   ├── cases/           # Case study components
 │   │   ├── news/            # News components
@@ -28,7 +29,7 @@ frontend/
 │   │   └── contact/         # Contact section & Floating Actions (FAB)
 │   └── i18n/                # Internationalization config & routing
 ├── messages/                # JSON translation files (en.json, ko.json)
-├── public/                  # Static assets (images, icons)
+├── public/                  # Static assets (images, korea-map.svg)
 └── docs/                    # Project documentation
 ```
 

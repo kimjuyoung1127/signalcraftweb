@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import { AnimatePresence, motion } from "framer-motion";
 
 export function Header() {
@@ -11,7 +11,6 @@ export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
-    const router = useRouter();
 
     // Scroll Listener
     useEffect(() => {
@@ -30,28 +29,6 @@ export function Header() {
         { key: "news", href: "/news" },
         { key: "contact", href: "/contact" },
     ];
-
-    const toggleLanguage = () => {
-        // usePathname from next-intl already returns the path without the locale prefix
-        // so we just need to switch the locale
-        const nextLocale = pathname.startsWith('/ko') ? 'en' : 'ko';
-        // NOTE: Actually usePathname from navigation wrapper returns cleaner path. 
-        // We need to inspect how next-intl handles current locale.
-        // A better way is to check the current locale from params or context, 
-        // but here let's assume we can derive it or just toggle.
-        // However, standard `usePathname` from `i18n` removes the locale prefix.
-        // So we can just push to the same pathname with different locale.
-
-        // Let's rely on a simpler toggle: 
-        // We know we are in [locale] layout. 
-        // Ideally we should get `locale` from params or hook.
-        // But for now, we can check document.cookie or just toggle based on URL if we used native hook.
-        // Since we use `usePathname()` from `navigation`, it returns `/about`.
-        // To toggle, we need to know current locale. 
-    };
-
-    // Correct approach for verify current locale with `useLocale` if available, or just Pass it as prop.
-    // But let's look at how we can implement language switcher properly.
 
     return (
         <header

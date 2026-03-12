@@ -7,13 +7,13 @@ import { Building2, Award, Users } from "lucide-react";
 export function AboutSection() {
     const t = useTranslations("About");
     const stats = [
-        { key: "factories", value: "50+", icon: Building2 },
-        { key: "accuracy", value: "99.8%", icon: Award },
-        { key: "data", value: "2M+", icon: Users },
+        { key: "factories", value: "24h", icon: Building2 },
+        { key: "accuracy", value: "10s", icon: Award },
+        { key: "data", value: "Daily", icon: Users },
     ];
 
     return (
-        <section id="about" className="pt-32 md:pt-48 pb-16 md:pb-24 bg-background">
+        <section id="about" className="bg-background pb-16 pt-24 md:pb-24 md:pt-40">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center">
                     {/* Text Content */}
@@ -67,9 +67,43 @@ export function AboutSection() {
                         viewport={{ once: true }}
                         className="flex-1 w-full"
                     >
-                        <div className="relative aspect-[4/3] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-black/40 border border-white/10 group shadow-2xl">
+                        <div className="group relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/40 shadow-2xl md:rounded-[2.5rem]">
                             {/* Backdrop VFX */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 to-purple-600/10 group-hover:opacity-50 transition-opacity" />
+
+                            <div className="absolute inset-0 flex flex-col justify-between p-6 md:hidden">
+                                <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80">
+                                    <span>Edge AI</span>
+                                    <span className="text-blue-400">Live signal</span>
+                                </div>
+                                <div className="grid grid-cols-3 gap-3">
+                                    {[65, 88, 52].map((value, index) => (
+                                        <div
+                                            key={value}
+                                            className="rounded-2xl border border-white/10 bg-black/30 p-3 text-center"
+                                        >
+                                            <div className="text-lg font-bold text-white">{value}%</div>
+                                            <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-gray-400">
+                                                S{index + 1}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="rounded-[1.5rem] border border-blue-500/20 bg-blue-500/10 p-4">
+                                    <div className="text-xs uppercase tracking-[0.2em] text-blue-300">
+                                        Acoustic diagnostics
+                                    </div>
+                                    <div className="mt-3 flex items-end gap-2">
+                                        {[28, 44, 36, 58, 42, 70, 48, 60].map((height) => (
+                                            <span
+                                                key={height}
+                                                className="w-full rounded-full bg-gradient-to-t from-blue-500 via-cyan-300 to-white/80"
+                                                style={{ height }}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
 
                             {/* Spline 3D Iframe */}
                             <iframe
@@ -77,7 +111,7 @@ export function AboutSection() {
                                 frameBorder='0'
                                 width='100%'
                                 height='100%'
-                                className="absolute inset-0 w-[150%] h-[150%] -left-[12%] -top-[25%] scale-[0.9] z-10 origin-center"
+                                className="absolute inset-0 z-10 hidden h-[140%] w-[140%] origin-center -left-[8%] -top-[18%] scale-[0.92] md:block"
                                 loading="lazy"
                             ></iframe>
 
@@ -88,7 +122,7 @@ export function AboutSection() {
                 </div>
 
                 {/* Trust Badges */}
-                <div className="mt-20 pt-10 border-t border-gray-800 dark:border-white/10 overflow-hidden">
+                <div className="mt-16 overflow-hidden border-t border-gray-800 pt-10 dark:border-white/10 md:mt-20">
                     <p className="text-center text-gray-500 dark:text-gray-400 mb-8 text-sm uppercase tracking-wider">
                         {t("trustedBy")}
                     </p>

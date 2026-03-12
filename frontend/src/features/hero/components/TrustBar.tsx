@@ -35,7 +35,7 @@ export function TrustBar() {
 
                 <div className="relative flex overflow-hidden select-none">
                     <motion.div
-                        className="flex shrink-0 items-center justify-around gap-16 min-w-full"
+                        className="flex min-w-full shrink-0 items-center justify-around gap-8 md:gap-16"
                         animate={{ x: "-100%" }}
                         transition={{
                             repeat: Infinity,
@@ -46,7 +46,7 @@ export function TrustBar() {
                         {LOGO_LIST.map((company, index) => (
                             <span
                                 key={`l1-${index}`}
-                                className="text-sm md:text-base font-bold text-gray-400/30 hover:text-gray-300 transition-colors whitespace-nowrap"
+                                className="whitespace-nowrap text-xs font-bold text-gray-400/30 transition-colors hover:text-gray-300 md:text-base"
                             >
                                 {company}
                             </span>
@@ -54,7 +54,7 @@ export function TrustBar() {
                     </motion.div>
                     {/* Duplicate for infinite loop */}
                     <motion.div
-                        className="flex shrink-0 items-center justify-around gap-16 min-w-full"
+                        className="flex min-w-full shrink-0 items-center justify-around gap-8 md:gap-16"
                         animate={{ x: "-100%" }}
                         transition={{
                             repeat: Infinity,
@@ -65,7 +65,7 @@ export function TrustBar() {
                         {LOGO_LIST.map((company, index) => (
                             <span
                                 key={`l2-${index}`}
-                                className="text-sm md:text-base font-bold text-gray-400/30 hover:text-gray-300 transition-colors whitespace-nowrap"
+                                className="whitespace-nowrap text-xs font-bold text-gray-400/30 transition-colors hover:text-gray-300 md:text-base"
                             >
                                 {company}
                             </span>
