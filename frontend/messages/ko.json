@@ -196,7 +196,7 @@
             "title": "연락처 정보",
             "address": {
                 "label": "본사 주소",
-                "value": "서울시 마포구 성지길 25-11 3층"
+                "value": "13f, 78, Digital-ro 10-gil, Geumcheon-gu, Seoul, 08517, Rep. of KOREA"
             },
             "email": {
                 "label": "이메일 문의",
@@ -204,12 +204,8 @@
             },
             "phone": {
                 "label": "전화 문의",
-                "value": "010-8533-6898",
+                "value": "01024186897",
                 "sub": "평일 오전 9시 - 오후 6시"
-            },
-            "ceo": {
-                "label": "대표",
-                "value": "김선범"
             }
         },
         "form": {

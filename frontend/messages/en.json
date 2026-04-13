@@ -196,7 +196,7 @@
             "title": "Contact Information",
             "address": {
                 "label": "Headquarters",
-                "value": "3F, 25-11, Seongji-gil, Mapo-gu\nSeoul, Republic of Korea"
+                "value": "13f, 78, Digital-ro 10-gil, Geumcheon-gu, Seoul, 08517, Rep. of KOREA"
             },
             "email": {
                 "label": "Email Us",
@@ -204,12 +204,8 @@
             },
             "phone": {
                 "label": "Call Us",
-                "value": "+82 10-8533-6898",
+                "value": "01024186897",
                 "sub": "Mon-Fri from 9am to 6pm KST"
-            },
-            "ceo": {
-                "label": "CEO",
-                "value": "Kim Seon-beom"
             }
         },
         "form": {
