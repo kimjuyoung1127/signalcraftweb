@@ -6,6 +6,16 @@ import { CaseStories } from "@/features/case-studies/CaseStories";
 import { NewsSection } from "@/features/news/NewsSection";
 import { FAQSection } from "@/features/faq/FAQSection";
 import { ContactSection } from "@/features/contact/ContactSection";
+import { generateStaticPageMetadata } from "./metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return generateStaticPageMetadata("home", locale);
+}
 
 export default function Home() {
   return (

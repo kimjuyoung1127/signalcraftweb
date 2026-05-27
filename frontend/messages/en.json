@@ -206,6 +206,10 @@
                 "label": "Call Us",
                 "value": "01024186897",
                 "sub": "Mon-Fri from 9am to 6pm KST"
+            },
+            "ceo": {
+                "label": "CEO",
+                "value": "Jason"
             }
         },
         "form": {

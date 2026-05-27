@@ -1,3 +1,14 @@
+import { generateStaticPageMetadata } from "../metadata";
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await params;
+    return generateStaticPageMetadata("privacy", locale);
+}
+
 export default function PrivacyPage() {
     return (
         <div className="pt-32 pb-20 min-h-screen">

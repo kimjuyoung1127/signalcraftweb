@@ -8,7 +8,8 @@ import { Link } from "@/i18n/routing";
 type FeatureCard = {
     key: string;
     icon: typeof Activity;
-    colSpan: string;
+    layout: string;
+    minHeight: string;
     bg: string;
     iconColor: string;
 };
@@ -17,28 +18,32 @@ const features: FeatureCard[] = [
     {
         key: "precision",
         icon: Activity,
-        colSpan: "md:col-span-2 md:row-span-2",
+        layout: "md:col-span-3 xl:col-span-3",
+        minHeight: "min-h-[300px] md:min-h-[360px]",
         bg: "bg-blue-500/10",
         iconColor: "text-blue-500",
     },
     {
         key: "edge",
         icon: Cpu,
-        colSpan: "md:col-span-1 md:row-span-1",
+        layout: "md:col-span-3 xl:col-span-3",
+        minHeight: "min-h-[260px] md:min-h-[320px]",
         bg: "bg-purple-500/10",
         iconColor: "text-purple-500",
     },
     {
         key: "nonInvasive",
         icon: Wifi,
-        colSpan: "md:col-span-1 md:row-span-1",
+        layout: "md:col-span-3 xl:col-span-2",
+        minHeight: "min-h-[260px] md:min-h-[300px]",
         bg: "bg-emerald-500/10",
         iconColor: "text-emerald-500",
     },
     {
         key: "scalability",
         icon: Layers,
-        colSpan: "md:col-span-3 md:row-span-1",
+        layout: "md:col-span-3 xl:col-span-4",
+        minHeight: "min-h-[280px] md:min-h-[300px]",
         bg: "bg-orange-500/10",
         iconColor: "text-orange-500",
     },
@@ -73,7 +78,7 @@ export function WhyBentoGrid() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-x-6 gap-y-7 auto-rows-min md:grid-cols-3 md:gap-x-7 md:gap-y-8 md:auto-rows-[292px] lg:gap-x-8 lg:gap-y-10">
+                <div className="grid grid-cols-1 items-stretch gap-5 md:grid-cols-6 md:gap-6 lg:gap-7">
                     {features.map((feature, index) => (
                         <BentoCard key={feature.key} feature={feature} index={index} />
                     ))}
@@ -88,34 +93,34 @@ function BentoCard({ feature, index }: { feature: FeatureCard; index: number }) 
     const Icon = feature.icon;
 
     return (
-        <Link href="/why-us" className={`${feature.colSpan} block h-full`}>
+        <Link href="/why-us" className={`${feature.layout} block h-full`}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className={`w-full min-h-full group relative rounded-[1.5rem] md:rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-md p-6 md:p-10 flex flex-col justify-between overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300`}
+                className={`w-full h-full ${feature.minHeight} group relative rounded-[1.5rem] md:rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-md p-6 sm:p-7 md:p-8 lg:p-9 flex flex-col justify-between overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300`}
             >
                 {/* Dynamic Background */}
                 <div className={`absolute inset-0 ${feature.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                 {/* Icon 3D Effect */}
                 <div className="relative z-10">
-                    <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl ${feature.bg} flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-300 ring-1 ring-white/10`}>
-                        <Icon className={`w-6 h-6 md:w-8 md:h-8 ${feature.iconColor}`} />
+                    <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl ${feature.bg} flex items-center justify-center mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-300 ring-1 ring-white/10`}>
+                        <Icon className={`w-6 h-6 md:w-7 md:h-7 ${feature.iconColor}`} />
                     </div>
 
-                    <h3 className="text-xl md:text-3xl font-bold mb-3 md:mb-4 text-white font-display tracking-tight break-keep">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 text-white font-display tracking-tight break-keep leading-tight">
                         {t(`features.${feature.key}.title`)}
                     </h3>
-                    <p className="text-gray-400 text-sm md:text-lg leading-relaxed break-keep mb-8 md:mb-0">
+                    <p className="text-gray-400 text-sm md:text-base lg:text-lg leading-relaxed break-keep">
                         {t(`features.${feature.key}.description`)}
                     </p>
                 </div>
 
                 {/* Hover Action */}
-                <div className="relative z-10 flex items-center text-xs md:text-sm font-medium text-primary opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 transform translate-y-0 md:translate-y-2 md:group-hover:translate-y-0 mt-4 md:mt-0">
+                <div className="relative z-10 mt-7 flex items-center text-xs md:text-sm font-medium text-primary opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 transform translate-y-0 md:translate-y-2 md:group-hover:translate-y-0">
                     {t("learnMore")} <ArrowRight className="ml-2 w-3 h-3 md:w-4 md:h-4" />
                 </div>
 

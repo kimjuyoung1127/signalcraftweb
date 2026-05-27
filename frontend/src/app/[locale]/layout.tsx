@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Outfit, Geist_Mono, Space_Grotesk, Noto_Sans_KR } from "next/font/google";
 import "@/app/globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -9,31 +8,31 @@ import { Footer } from "@/components/shared/layout/Footer";
 import { FloatingActions } from "@/features/contact/FloatingActions";
 import { notFound } from 'next/navigation';
 import { routing } from "@/i18n/routing";
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-});
-
-const koreanSans = Noto_Sans_KR({
-  display: "swap",
-  variable: "--font-pretendard",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { JsonLd } from "@/components/shared/JsonLd";
+import { absoluteUrl, defaultSeo, normalizeLocale, siteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "SignalCraft",
-  description: "Sound to Insight - Smart Factory Solution",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultSeo.title.ko,
+    template: "%s | SignalCraft",
+  },
+  description: defaultSeo.description.ko,
+  applicationName: "SignalCraft",
+  authors: [{ name: "SignalCraft" }],
+  creator: "SignalCraft",
+  publisher: "SignalCraft",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export function generateStaticParams() {
@@ -48,6 +47,31 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const normalizedLocale = normalizeLocale(locale);
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "SignalCraft",
+    url: siteUrl,
+    logo: absoluteUrl("/KOIIA.jpg"),
+    email: "sndercer@gmail.com",
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: "sndercer@gmail.com",
+        telephone: "+82-10-2418-6897",
+        availableLanguage: ["ko", "en"],
+      },
+    ],
+  };
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "SignalCraft",
+    url: siteUrl,
+    inLanguage: normalizedLocale === "ko" ? "ko-KR" : "en-US",
+  };
 
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
@@ -61,8 +85,10 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${outfit.variable} ${spaceGrotesk.variable} ${koreanSans.variable} ${geistMono.variable} ${locale === 'ko' ? 'font-pretendard' : 'font-outfit'} antialiased bg-background text-foreground transition-colors duration-300 overflow-x-hidden break-keep`}
+        className={`${locale === 'ko' ? 'font-pretendard' : 'font-outfit'} antialiased bg-background text-foreground transition-colors duration-300 overflow-x-hidden break-keep`}
       >
+        <JsonLd data={organizationJsonLd} />
+        <JsonLd data={websiteJsonLd} />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"

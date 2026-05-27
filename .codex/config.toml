@@ -1,0 +1,7 @@
+# Codex local config starter
+# Add project-specific MCP servers only after they are actually needed.
+
+# Example:
+# [mcp_servers.code-review-graph]
+# command = "uvx"
+# args = ["code-review-graph", "serve"]

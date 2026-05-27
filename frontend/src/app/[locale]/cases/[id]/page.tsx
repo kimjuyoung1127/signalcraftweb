@@ -1,8 +1,10 @@
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
-import { getCaseStudyBySlug } from "@/content/cases";
+import { caseStudies, getCaseStudyBySlug } from "@/content/cases";
 import { getLocalizedText } from "@/content/news";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { absoluteUrl, buildPageMetadata, localizedPath, normalizeLocale } from "@/lib/seo";
 
 const detailUi = {
     ko: {
@@ -27,6 +29,39 @@ const detailUi = {
     },
 };
 
+export function generateStaticParams() {
+    return caseStudies.flatMap((caseStudy) => [
+        { locale: "ko", id: caseStudy.slug },
+        { locale: "en", id: caseStudy.slug },
+    ]);
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string; id: string }>;
+}) {
+    const { locale, id } = await params;
+    const normalizedLocale = normalizeLocale(locale);
+    const caseStudy = getCaseStudyBySlug(id);
+
+    if (!caseStudy) {
+        return buildPageMetadata({
+            locale: normalizedLocale,
+            path: "/cases",
+            title: normalizedLocale === "ko" ? "사례를 찾을 수 없습니다" : "Case not found",
+        });
+    }
+
+    return buildPageMetadata({
+        locale: normalizedLocale,
+        path: `/cases/${caseStudy.slug}`,
+        title: getLocalizedText(caseStudy.title, normalizedLocale),
+        description: getLocalizedText(caseStudy.summary, normalizedLocale),
+        type: "article",
+    });
+}
+
 export default async function CaseDetailPage({
     params,
 }: {
@@ -39,9 +74,54 @@ export default async function CaseDetailPage({
     if (!caseStudy) {
         notFound();
     }
+    const normalizedLocale = normalizeLocale(locale);
+    const pagePath = localizedPath(normalizedLocale, `/cases/${caseStudy.slug}`);
+    const caseJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: getLocalizedText(caseStudy.title, normalizedLocale),
+        description: getLocalizedText(caseStudy.summary, normalizedLocale),
+        mainEntityOfPage: absoluteUrl(pagePath),
+        author: {
+            "@type": "Organization",
+            name: "SignalCraft",
+        },
+        publisher: {
+            "@type": "Organization",
+            name: "SignalCraft",
+        },
+        about: getLocalizedText(caseStudy.industry, normalizedLocale),
+        inLanguage: normalizedLocale === "ko" ? "ko-KR" : "en-US",
+    };
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            {
+                "@type": "ListItem",
+                position: 1,
+                name: "SignalCraft",
+                item: absoluteUrl(localizedPath(normalizedLocale)),
+            },
+            {
+                "@type": "ListItem",
+                position: 2,
+                name: normalizedLocale === "ko" ? "활용 사례" : "Use Cases",
+                item: absoluteUrl(localizedPath(normalizedLocale, "/cases")),
+            },
+            {
+                "@type": "ListItem",
+                position: 3,
+                name: getLocalizedText(caseStudy.title, normalizedLocale),
+                item: absoluteUrl(pagePath),
+            },
+        ],
+    };
 
     return (
         <div className="min-h-screen bg-background pb-20 pt-24">
+            <JsonLd data={caseJsonLd} />
+            <JsonLd data={breadcrumbJsonLd} />
             <div className="container mx-auto max-w-5xl px-4">
                 <Link
                     href="/cases"

@@ -14,8 +14,9 @@ frontend/
 │   │   │   ├── guide/       # Installation Guide
 │   │   │   ├── privacy/     # Privacy Policy
 │   │   │   └── terms/       # Terms of Service
-│   │   └── api/             # API Routes (Resend Email Handler)
+│   │   └── api/             # API Routes (contact form email handler)
 │   │   └── globals.css      # Global styles & Tailwind directives
+│   ├── proxy.ts             # Next.js 16 proxy for locale routing
 │   ├── components/
 │   │   ├── ui/              # Reusable base components (Button, Input, etc.)
 │   │   └── shared/          # Shared layout components (Header, Footer)
@@ -40,10 +41,21 @@ We organize code by feature rather than type. Each folder in `src/features` cont
 - **Hero**: Contains the 3D Audio Visualizer (`AudioWaveform.tsx`) using React Three Fiber.
 - **Contact**: Includes the `FloatingActions` FAB for quick diagnosis.
 
+### Contact Form
+- Primary endpoint: `src/app/api/contact/route.ts`
+- Legacy compatibility endpoint: `src/app/api/ContactDetailPage/route.ts`
+- Uses Resend in production and supports `CONTACT_FORM_DRY_RUN=true` for local smoke tests.
+- Required production env keys are documented in `frontend/.env.local.example`.
+
+### SEO
+- Global metadata is generated in `src/app/[locale]/layout.tsx`.
+- `src/app/sitemap.ts` emits localized static, case-study, and news URLs.
+- `src/app/robots.ts` exposes the sitemap and allows crawling.
+
 ### Internationalization
 - Uses `next-intl` for routing and translations.
 - Routes are prefixed with `/[locale]` (e.g., `/en`, `/ko`).
-- Configuration is in `src/i18n`.
+- Configuration is in `src/i18n` and `src/proxy.ts`.
 
 ### Styling & Theme
 - **Tailwind CSS**: Utility-first styling.
