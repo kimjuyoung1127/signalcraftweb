@@ -53,7 +53,7 @@ export default async function RootLayout({
     "@type": "Organization",
     name: "SignalCraft",
     url: siteUrl,
-    logo: absoluteUrl("/KOIIA.jpg"),
+    logo: absoluteUrl("/signalcraft-logo.png"),
     email: "sndercer@gmail.com",
     contactPoint: [
       {

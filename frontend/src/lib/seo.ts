@@ -16,7 +16,7 @@ export const defaultSeo = {
     ko: "시그널크래프트는 소음과 진동 패턴을 읽어 설비 상태를 모니터링하고, 매일 리포트와 이상 알림으로 운영자가 빠르게 대응하도록 돕습니다.",
     en: "SignalCraft reads vibration and noise patterns to monitor equipment health, then delivers daily reports and anomaly alerts for operators.",
   },
-  image: "/media/news/acoustic-insight-card.jpg",
+  image: "/og",
 };
 
 export function normalizeLocale(locale: string): AppLocale {

@@ -85,7 +85,7 @@ export const caseStudies: CaseStudy[] = [
         },
         paragraphs: [
           {
-            ko: "무인 매장에서는 냉동고를 계속 지켜볼 사람이 없습니다. 가동 시간이 길어지거나 진동이 바뀌어도 한참 뒤에야 알게 되는 경우가 많습니다.",
+            ko: "무인 매장에는 냉동고를 지켜볼 사람이 없습니다. 가동 시간이 길어지거나 진동이 바뀌어도 한참 뒤에야 알게 됩니다.",
             en: "Nobody's watching the freezer around the clock in an unmanned store. Longer runtimes or shifting vibration patterns can go unnoticed until it's too late.",
           },
         ],
@@ -171,7 +171,7 @@ export const caseStudies: CaseStudy[] = [
         },
         paragraphs: [
           {
-            ko: "공장 설비는 겉으로는 멀쩡해 보여도, 가동 시간이 슬쩍 늘거나 미세한 진동이 바뀌는 것부터 문제가 시작됩니다. 현장에서는 이 변화를 빨리 읽고 점검 순서를 정하는 게 중요합니다.",
+            ko: "공장 설비는 겉으로는 멀쩡해 보여도 가동 시간이 늘거나 미세한 진동이 바뀌면서 문제가 시작됩니다. 현장에서는 이 신호를 빨리 읽고 점검 순서를 정하는 게 중요합니다.",
             en: "Equipment can look fine on the outside while runtime slowly creeps up or vibration shifts subtly. On the floor, reading those early signs and deciding what to check first is what keeps things running.",
           },
         ],
@@ -219,7 +219,7 @@ export const caseStudies: CaseStudy[] = [
       en: "Checking all your devices across sites — in one daily page",
     },
     summary: {
-      ko: "매장이나 설비가 늘어날수록 하나하나 확인하기 어려워집니다. 매일 요약 리포트로 어디가 먼저 신경 써야 하는지 바로 파악할 수 있습니다.",
+      ko: "매장이나 설비가 늘어날수록 하나하나 확인하기 어렵습니다. 매일 요약 리포트로 어디가 먼저 신경 써야 하는지 바로 알 수 있습니다.",
       en: "The more sites and devices you manage, the harder it gets to check each one. A daily summary tells you which location needs attention first.",
     },
     result: {
@@ -257,7 +257,7 @@ export const caseStudies: CaseStudy[] = [
         },
         paragraphs: [
           {
-            ko: "관리하는 매장이나 기기가 많아지면 '오늘 어디부터 봐야 하지?'가 가장 큰 고민이 됩니다. 실시간 그래프보다 하루 단위 요약이 실제 의사결정에 더 도움이 됩니다.",
+            ko: "관리하는 매장이나 기기가 많아지면 '오늘 어디부터 봐야 할까?'가 가장 큰 고민입니다. 실시간 그래프보다 하루 요약이 실제 의사결정에 훨씬 도움됩니다.",
             en: "When you manage many locations, the biggest question is 'where do I look first today?' A daily summary beats staring at real-time charts when it comes to making actual decisions.",
           },
         ],

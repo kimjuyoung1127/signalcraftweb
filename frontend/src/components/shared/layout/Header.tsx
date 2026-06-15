@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -39,8 +40,18 @@ export function Header() {
         >
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="text-2xl font-bold tracking-tighter text-foreground">
-                    Signal<span className="text-blue-500">Craft</span>
+                <Link href="/" className="flex items-center gap-2">
+                    <Image
+                        src="/signalcraft-logo.png"
+                        alt="SignalCraft"
+                        width={32}
+                        height={32}
+                        priority
+                        className="rounded-full"
+                    />
+                    <span className="text-2xl font-bold tracking-tighter text-foreground">
+                        Signal<span className="text-blue-500">Craft</span>
+                    </span>
                 </Link>
 
                 {/* Desktop Nav */}

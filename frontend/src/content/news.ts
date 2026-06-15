@@ -108,11 +108,11 @@ export const newsArticles: NewsArticle[] = [
           },
           paragraphs: [
             {
-              ko: "이번 서류합격은 시그널크래프트의 AI 기반 소음·진동 모니터링 접근이 초기 창업 육성 프로그램에서도 경쟁력을 인정받았다는 뜻입니다.",
+              ko: "이번 서류합격은 시그널크래프트의 AI 기반 소음·진동 모니터링이 초기 창업 프로그램에서도 경쟁력이 인정받았다는 뜻입니다.",
               en: "Passing the screening shows that our noise-and-vibration monitoring approach is competitive even in the context of early-stage venture programs.",
             },
             {
-              ko: "특히 부산권 제조·중공업 현장과의 접점을 넓히는 시점에서, 이런 지역 프로그램 참여는 실증과 시장 검증의 좋은 발판이 됩니다.",
+              ko: "부산권 제조·중공업 현장과의 연결을 넓히려는 시점에서, 지역 프로그램 참여는 실증과 시장 검증의 좋은 발판입니다.",
               en: "With SignalCraft looking to expand into Busan's manufacturing and heavy-industry scene, joining a region-backed program opens doors for pilots and real-world testing.",
             },
           ],
@@ -124,7 +124,7 @@ export const newsArticles: NewsArticle[] = [
           },
           paragraphs: [
             {
-              ko: "시그널크래프트는 이 결과를 바탕으로 부산 제조·산업 현장과의 접점을 넓히고, 실제 현장에서 바로 쓸 수 있는 모니터링 경험을 더 구체화할 계획입니다.",
+              ko: "시그널크래프트는 부산 제조·산업 현장과의 연결을 넓히고, 실제 현장에서 바로 쓸 수 있는 모니터링 경험을 구체화할 계획입니다.",
               en: "We plan to build on this by strengthening ties with Busan's industrial ecosystem and refining our monitoring product for real operational environments.",
             },
           ],
@@ -218,7 +218,7 @@ export const newsArticles: NewsArticle[] = [
           },
           paragraphs: [
             {
-              ko: "영상에서는 설치 후 바로 쓸 수 있는 AI 모니터링, 소음·진동으로 기준을 잡는 방식, 그리고 운영자가 복잡한 그래프 대신 상태 요약과 리포트를 받는 경험을 이야기합니다.",
+              ko: "영상에서는 설치 후 바로 작동하는 AI 모니터링, 소음·진동으로 기준을 정하는 방식, 운영자가 복잡한 그래프 대신 상태 요약과 리포트를 받는 경험을 다룹니다.",
               en: "The interview walks through how SignalCraft's AI monitoring works right after installation, how it learns a baseline from noise and vibration, and how operators get simple status summaries instead of complex charts.",
             },
           ],
@@ -244,7 +244,7 @@ export const newsArticles: NewsArticle[] = [
           },
           paragraphs: [
             {
-              ko: "함께 공개한 현장 사진은 AW 2026 AI Factory Stage IR 피칭 장면입니다. 시그널크래프트가 산업 현장, 투자자, 파트너들에게 어떤 메시지를 전하고 있는지 보여주는 순간입니다.",
+              ko: "공개한 현장 사진은 AW 2026 AI Factory Stage IR 피칭 장면입니다. 시그널크래프트가 현장, 투자자, 파트너들에게 어떤 메시지를 전하는지 보여주는 순간입니다.",
               en: "The on-site photos capture the IR pitch at the AW 2026 AI Factory Stage — showing how SignalCraft is presenting itself to operators, partners, and investors in the industry.",
             },
           ],
@@ -281,7 +281,7 @@ export const newsArticles: NewsArticle[] = [
     },
     body: {
       summary: {
-        ko: "SignalCraft는 설치 후 첫 24시간 동안 평소 소음과 진동을 익혀서 기기마다 기준을 잡습니다. 이 글에서는 그 과정이 왜 중요한지 설명합니다.",
+        ko: "SignalCraft는 설치 후 첫 24시간 동안 평소 소음과 진동을 익혀 기기마다 기준을 잡습니다. 이 글에서는 그 과정이 왜 중요한지 설명합니다.",
         en: "SignalCraft spends the first 24 hours learning each machine's normal sound and vibration pattern. This article explains why that step makes the rest of the product actually useful.",
       },
       sections: [
@@ -292,7 +292,7 @@ export const newsArticles: NewsArticle[] = [
           },
           paragraphs: [
             {
-              ko: "같은 설비라도 위치, 주변 소음, 사용 습관, 전원 환경에 따라 '정상'이 다릅니다. 첫날부터 고정된 수치로 판단하면 오탐이 많아집니다. 먼저 기준을 잡아야 이후 알림과 리포트가 의미 있어집니다.",
+              ko: "같은 설비라도 위치, 주변 소음, 사용 습관, 전원 환경에 따라 정상 기준이 다릅니다. 첫날부터 고정 수치로 판단하면 오탐이 늡니다. 기준을 먼저 정해야 알림과 리포트가 의미 있습니다.",
               en: "Even identical equipment sounds different depending on where it is, what's around it, how it's used, and the power setup. Judging from a fixed threshold on day one leads to noisy alerts. Learning the baseline first makes every alert and report afterward actually meaningful.",
             },
           ],
